@@ -3,7 +3,8 @@
         "cicada/cicada": "@stable",
         "php-activerecord/php-activerecord": "^1.2",
         "robmorgan/phinx": "^0.9.2",
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.0",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
         "psr-4": {

@@ -3,7 +3,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class NewsMigration extends AbstractMigration
+class UserMigration extends AbstractMigration
 {
     /**
      * Change Method.
@@ -28,13 +28,10 @@ class NewsMigration extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('news');
-        $table->addColumn('title', 'text')
-            ->addColumn('content', 'text')
-            ->addColumn('image', 'text')
-            ->addColumn('category', 'enum', ['values' => ['projekt' ,'blog' ,'vest']])
-            ->addColumn('language', 'enum', ['values' => ['serbian', 'english']])
-            ->addColumn('created', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+        $table = $this->table('user');
+        $table->addColumn('name', 'text')
+            ->addColumn('email', 'text')
+            ->addColumn('password', 'text', ['null' => true])
             ->create();
     }
 }

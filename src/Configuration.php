@@ -16,4 +16,8 @@ class Configuration {
     public function getDbConfig() {
         return $this->config['database'];
     }
+
+    public function getImgurClientConfig() {
+        return $this->config['imgur'];
+    }
 }

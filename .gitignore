@@ -1,4 +1,9 @@
+./vendor
+./vendor/*
 /vendor
+/vendor/*
+./phinx.yml
+phinx.yml
+.phinx.yml
 /.idea
 .idea
-

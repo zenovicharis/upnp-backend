@@ -3,15 +3,24 @@
 namespace Upnp;
 
 use Twig_SimpleFunction;
+use Upnp\Clients\ImgurClient;
 use Upnp\Services\NewsService;
+use Upnp\Services\UserService;
+use Upnp\Middleware\Authentication;
 
 class Application extends \Cicada\Application
 {
+    /**
+     * Application constructor.
+     * @param $configPath
+     */
     public function __construct($configPath){
         parent::__construct();
         $this->configure($configPath);
 
         $this->configureDatabase();
+        $this->configureMiddleware();
+        $this->configureClients();
         $this->setUpServices();
         $this->setupTwig();
     }
@@ -22,12 +31,28 @@ class Application extends \Cicada\Application
         };
     }
 
+    protected function configureMiddleware() {
+        $this['middleware'] = function () {
+            return new Authentication();
+        };
+    }
+
     private function setUpServices(){
         $this['newsService'] = function(){
             return new NewsService();
         };
+
+        $this['userService'] = function(){
+            return new UserService();
+        };
     }
 
+    protected function configureClients() {
+        $imgurConfig = $this['config']->getImgurClientConfig();
+        $this['imgur'] = function () use ($imgurConfig) {
+            return new ImgurClient($imgurConfig);
+        };
+    }
     protected function configureDatabase()
     {
         $dbConfig = $this['config']->getDbConfig();

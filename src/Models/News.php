@@ -11,7 +11,7 @@ class News extends Model
     public function serialize(){
         return $this->to_array([
             'include' =>
-                [ 'news']
+                [ 'news', "images"]
         ]);
     }
 }
