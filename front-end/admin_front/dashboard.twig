@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/front-end/admin_front/admin-style.css">
+</head>
+<body>
+
+<div class="container-fluid">
+    {% include 'admin_front/parts/header.twig' %}
+    <!-- navbar -->
+
+    {% if deleteMessage is defined %}
+        <div {{ deleteMessage ? 'class="alert alert-success"' : 'class="alert alert-danger"' }} role="alert">
+            <strong>Uporozenje!</strong> {{ deleteMessage ? 'Vest je uspesno izbrisana' : 'Vest nije uspesno izbrisana' }}
+        </div>
+    {% endif %}
+
+    {% if updateMessage is defined %}
+        <div {{ updateMessage ? 'class="alert alert-success"' : 'class="alert alert-danger"' }} role="alert">
+            <strong>Uporozenje!</strong> {{ updateMessage ? 'Vest je uspesno izmenjena' : 'Vest nije uspesno izmenjena' }}
+        </div>
+    {% endif %}
+
+    <!-- table -->
+    <div class="container">
+        <div class="jumbotron jumbotron headingForm">
+            <div class="container">
+                <h1>Vesti</h1>
+                <p>Ovde se nalaze sve vesti sa sajta</p>
+            </div>
+        </div>
+        <table class="table table-hover table-light">
+            {% for oneNews in news %}
+            <thead>
+            <tr>
+                <th scope="col" class="admin-buttons">
+                    <form action="/news/delete/{{ oneNews.id }}" method="post">
+                        <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
+                    </form>
+                    <a href="/news/edit/{{ oneNews.id }}" class="btn btn-primary float-right" role="button">Edit</a>
+                    <a href="/news/{{ oneNews.id }}" class="btn btn-success float-right" role="button">Info</a>
+                    <span>{{ oneNews.title }}</span>
+                    <img src="{{ oneNews.image }}" alt="">
+                    <span class="float-right" style="margin-right:5px;">{{ oneNews.created|date("M/d/Y") }}</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td scope="row">{{ oneNews.content }}</td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <!-- end table -->
+
+</div>
+
+</body>
+</html>
