@@ -4,11 +4,13 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require 'vendor/autoload.php';
+
+
+use Upnp\Application;
+use Upnp\Controllers\MainController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Upnp\Application;
-use Upnp\Controllers\MainController;
 
 $app = new Application($_SERVER['HOME']);
 
@@ -36,6 +38,7 @@ $newsRouteCollection->get('/edit/{id}',     [$mainController, "editNews"]); //do
 $newsRouteCollection->get('/{id}',          [$mainController, "singleNews"]); // done show only one news
 
 
+
 $app->post('/volountieer/create', [$mainController, "CreateVolountieer"]); // done create volountieer
 $app->get('/volountieers', [$mainController, "getVolountieers"]); //   done read all volountieer JSON
 
@@ -56,5 +59,6 @@ $app->post('/login',        [$mainController, "loginValidate"])->before(
     });
 
 $app->addRouteCollection($newsRouteCollection);
+
 
 $app->run();

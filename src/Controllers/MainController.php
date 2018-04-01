@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+
 class MainController
 {
     /** @var NewsService $newsService * */
@@ -118,7 +119,6 @@ class MainController
     }
 
     //private functions
-
     private function extractNews(Request $request)
     {
         $title = $request->request->get("title");
@@ -171,4 +171,3 @@ class MainController
         return new RedirectResponse('/login');
     }
 }
-

@@ -15,7 +15,6 @@ class Application extends \Cicada\Application
      * @param $configPath
      */
     public function __construct($configPath){
-
         parent::__construct();
         $this->configure($configPath);
 
@@ -24,7 +23,6 @@ class Application extends \Cicada\Application
         $this->configureClients();
         $this->setUpServices();
         $this->setupTwig();
-
     }
 
     protected function configure($configPath) {
@@ -38,7 +36,6 @@ class Application extends \Cicada\Application
             return new Authentication();
         };
     }
-
 
     private function setUpServices(){
         $this['newsService'] = function(){
@@ -56,8 +53,6 @@ class Application extends \Cicada\Application
             return new ImgurClient($imgurConfig);
         };
     }
-
-
     protected function configureDatabase()
     {
         $dbConfig = $this['config']->getDbConfig();
