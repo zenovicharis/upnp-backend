@@ -46,6 +46,11 @@ class MainController
         return $this->twig->render('admin/create-news.twig');
     }
 
+    public function update()
+    {
+        return $this->twig->render('admin/update-news.twig');
+    }
+
     public function login(Application $app, Request $request)
     {
         $isRedirected = $request->query->get("continue");

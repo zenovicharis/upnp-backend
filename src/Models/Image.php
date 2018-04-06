@@ -8,21 +8,19 @@
 
 namespace Upnp\Models;
 
-use ActiveRecord\Model;
-
+//use ActiveRecord\Model;
+use \Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
-    static $table_name = 'images';
-    static $belongs_to = [
-        [
-            'news',
-            'className' => 'News',
-            'class_name' => 'News',
-            'foreign_key' => 'image_id'
-        ]
-    ];
+    protected $table = "images";
 
-    public function serialize(){
-        return $this->to_array();
+    public function news()
+    {
+        return $this->hasOne('Upnp\Models\News', 'image_id', 'id');
+
     }
+
+//    public function serialize(){
+//        return $this->to_array();
+//    }
 }

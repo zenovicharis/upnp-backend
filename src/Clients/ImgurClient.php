@@ -45,7 +45,6 @@ class ImgurClient
        } catch (\Exception $e){
 
        }
-
         $content = $response->getBody()->getContents();
         $image = json_decode($content); */
 
