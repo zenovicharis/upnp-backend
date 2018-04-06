@@ -3,9 +3,11 @@
 namespace Upnp\Services;
 
 use Upnp\Models\News;
+use Upnp\Models\Image;
 use Upnp\Models\Volountieer;
 use Upnp\EntityModels\NewsEntityModel;
 use Upnp\EntityModels\VolountieerEntityModel;
+use Upnp\EntityModels\ImageEntityModel;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class NewsService
@@ -19,7 +21,7 @@ class NewsService
             $news = News::create([
                 "title" => $entityModel->title,
                 "content" => $entityModel->content,
-                "image" => $entityModel->image,
+                "image_id" => $entityModel->image_id,
                 "category" => $entityModel->category,
                 "language" => $entityModel->language
             ]);
@@ -54,13 +56,28 @@ class NewsService
         }
     }
 
+    public function createImage($imageObj){
+        try{
+            $image = Image::create([
+                "imgur_id" => $imageObj->id,
+                "delete_hash" => $imageObj->deletehash,
+                "url" => $imageObj->link,
+            ]);
+            return $image;
+        } catch (Exception $e){
+            return false;
+        }
+    }
+
     public function readNews(){
         try{
-            $news = News::find('all',array('order' => 'created desc'));
+//            var_dump(News::connection()->last_query);
+            /** @var News[] $news */
+            $news = News::find('all');
             $newsInArray = $this->toNewsArray($news);
             return $newsInArray;
         } catch (Exception $e){
-            return false;
+            var_dump($e->getMessage());die();
         }
     }
 

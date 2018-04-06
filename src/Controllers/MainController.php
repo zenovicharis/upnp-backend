@@ -8,7 +8,9 @@ use Upnp\Services\NewsService;
 use Upnp\EntityModels\NewsEntityModel;
 use Upnp\EntityModels\ImageEntityModel;
 use Upnp\EntityModels\VolountieerEntityModel;
+use Upnp\Libraries\ValidationLibrary;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -21,11 +23,14 @@ class MainController
     private $imgurClient;
     /** @var  \Twig_Environment $twig */
     public $twig;
+    /** @var ValidationLibrary $validationLibrary * */
+    public $validationLibrary;
 
-    public function __construct($newsService, $userService, $imgurClient, $twig)
+    public function __construct($newsService, $userService, $imgurClient, $twig, $validationLibrary)
     {
         $this->twig = $twig;
         $this->newsService = $newsService;
+        $this->validationLibrary = $validationLibrary;
         $this->userService = $userService;
         $this->imgurClient = $imgurClient;
     }
@@ -33,7 +38,7 @@ class MainController
     public function dashboard()
     {
         $news = $this->newsService->readNews();
-        return $this->twig->render("admin/dashboard.twig", ['news' => $news]);
+        return $this->twig->render('admin/dashboard.twig', ['news' => $news]);
     }
 
     public function create()
@@ -58,11 +63,12 @@ class MainController
     public function createNews(Request $request)
     {
         $image = $request->files->get("image");
-        if(!empty($image)){
+
+        if (!empty($image)) {
             /** @var ImageEntityModel $imageObj */
-            $imageObj= $this->imgurClient->uploadImage($image);
+            $imageObj = $this->imgurClient->uploadImage($image);
             $imageSavedEntity = $this->newsService->createImage($imageObj);
-            $request->set("image_id", $imageSavedEntity->id);
+            $request->request->set('image_id', $imageSavedEntity->id);
         }
         $news = $this->extractNews($request);
         $successfull = $this->newsService->createNews($news);
@@ -101,12 +107,18 @@ class MainController
 
     public function CreateVolountieer(Request $request)
     {
-        $volountieer = $this->extractVolountieer($request);
-        $successfull = $this->newsService->createVolountieer($volountieer);
-        if ($successfull == false) {
-            return new JsonResponse('', 500);
-        };
-        return new JsonResponse($successfull, 201);
+        $isValid = $this->validationLibrary->volountieerRules($request);
+        if ($isValid->validate()) {
+            $volountieer = $this->extractVolountieer($request);
+            $successfull = $this->newsService->createVolountieer($volountieer);
+            if ($successfull == false) {
+                return new JsonResponse('', 500);
+            };
+            return new JsonResponse($successfull, 201);
+
+        }
+        $errors = $isValid->errors();
+        return new JsonResponse($errors, JsonResponse::HTTP_EXPECTATION_FAILED);
     }
 
     public function getVolountieers()
@@ -126,6 +138,7 @@ class MainController
         $category = $request->request->get("category");
         $language = $request->request->get("language");
         $image_id = $request->request->get("image_id");
+        //image_id table, reference to image table with images
         // TODO: Implement validation for News
         $news = new NewsEntityModel($title, $content, $category, $image_id, $language);
         return $news;
@@ -148,7 +161,6 @@ class MainController
         $nedeljni_sati = $request->request->get('nedeljni_sati');
         $vreme = $request->request->get('vreme');
         $dodatna_obuka = $request->request->get('dodatna_obuka');
-        // TODO: Implement validation for Volountieer
         $volountieer = new VolountieerEntityModel($ime_prezime, $datum, $adresa, $grad, $telefon, $email, $str_sprema, $zanimanje, $hobi, $iskustvo, $podrucje_rada, $poslovi, $nedeljni_sati, $vreme, $dodatna_obuka);
         return $volountieer;
     }

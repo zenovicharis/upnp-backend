@@ -8,10 +8,19 @@
 
 namespace Upnp\Models;
 
+use ActiveRecord\Model;
 
-class Image
+class Image extends Model
 {
     static $table_name = 'images';
+    static $belongs_to = [
+        [
+            'news',
+            'className' => 'News',
+            'class_name' => 'News',
+            'foreign_key' => 'image_id'
+        ]
+    ];
 
     public function serialize(){
         return $this->to_array();
