@@ -20,6 +20,9 @@ $(document).ready(function () {
             },
             content: {
                 required: true
+            },
+            image: {
+                required: true
             }
         }
     });

@@ -13,7 +13,7 @@ use Valitron;
 class ValidationLibrary extends Valitron\Validator
 {
     const NEWS_RULE = [
-        'title', 'content', 'category', 'language', 'image_id'
+        'title', 'content', 'category', 'language'
     ];
 
     const VOLOUNTIEER_RULE = [
