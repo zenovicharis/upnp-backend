@@ -62,17 +62,26 @@ class MainController
 
     public function createNews(Request $request)
     {
-        $image = $request->files->get("image");
-
-        if (!empty($image)) {
-            /** @var ImageEntityModel $imageObj */
-            $imageObj = $this->imgurClient->uploadImage($image);
-            $imageSavedEntity = $this->newsService->createImage($imageObj);
-            $request->request->set('image_id', $imageSavedEntity->id);
+        $isValid = $this->validationLibrary->newsRules($request);
+        if ($isValid->validate()) {
+            $image = $request->files->get("image");
+            if (!empty($image)) {
+                /** @var ImageEntityModel $imageObj */
+                $imageObj = $this->imgurClient->uploadImage($image);
+                $imageSavedEntity = $this->newsService->createImage($imageObj);
+                $request->request->set('image_id', $imageSavedEntity->id);
+            }else {
+                return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
+            }
+            $news = $this->extractNews($request);
+            $successfull = $this->newsService->createNews($news);
+            return $this->twig->render('admin/create-news.twig', ['message' => $successfull]);
         }
-        $news = $this->extractNews($request);
-        $successfull = $this->newsService->createNews($news);
-        return $this->twig->render('admin/create-news.twig', ['message' => $successfull]);
+        $errors = $isValid->errors();
+        $error_string = array_reduce($errors,function($v1, $v2){
+            return $v1 .$v2[0].'  ';
+        });
+        return $this->twig->render('admin/create-news.twig', ['error_message' => $error_string]);
     }
 
     public function editNews(Request $request, $id)

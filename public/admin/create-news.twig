@@ -13,6 +13,12 @@
         </div>
     {% endif %}
 
+    {% if error_message is defined %}
+        <div   class="alert alert-danger"  role="alert">
+            <strong>Uporozenje!</strong> {{ error_message }}
+        </div>
+    {% endif %}
+
     <!-- form -->
     <div class="container">
         <div class="col-md-7 offset-2">
