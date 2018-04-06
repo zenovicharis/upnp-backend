@@ -69,7 +69,7 @@ class Application extends \Cicada\Application
 
     private function setupTwig() {
         $this['twig'] = function() {
-            $loader = new \Twig_Loader_Filesystem('front-end');
+            $loader = new \Twig_Loader_Filesystem('public');
             $twig = new  \Twig_Environment($loader, array(//
 //                'cache' => 'cache',
                 'debug' => true

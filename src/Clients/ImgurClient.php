@@ -37,6 +37,7 @@ class ImgurClient
             ],
             'headers' => $header
         ]);
+        var_dump($response);die();
         $content = $response->getBody()->getContents();
         $image = json_decode($content);
 

@@ -33,26 +33,26 @@ class MainController
     public function dashboard()
     {
         $news = $this->newsService->readNews();
-        return $this->twig->render("admin_front/dashboard.twig", ['news' => $news]);
+        return $this->twig->render("admin/dashboard.twig", ['news' => $news]);
     }
 
     public function create()
     {
-        return $this->twig->render('admin_front/create-news.twig');
+        return $this->twig->render('admin/create-news.twig');
     }
 
     public function update()
     {
-        return $this->twig->render('admin_front/update-news.twig');
+        return $this->twig->render('admin/update-news.twig');
     }
 
     public function login(Application $app, Request $request)
     {
         $isRedirected = $request->query->get("continue");
         if (!empty($isRedirected)) {
-            return $this->twig->render('admin_front/login.twig', ['message' => true]);
+            return $this->twig->render('admin/login.twig', ['message' => true]);
         }
-        return $this->twig->render('admin_front/login.twig');
+        return $this->twig->render('admin/login.twig');
     }
 
     public function createNews(Request $request)
@@ -66,20 +66,20 @@ class MainController
         }
         $news = $this->extractNews($request);
         $successfull = $this->newsService->createNews($news);
-        return $this->twig->render('admin_front/create-news.twig', ['message' => $successfull]);
+        return $this->twig->render('admin/create-news.twig', ['message' => $successfull]);
     }
 
     public function editNews(Request $request, $id)
     {
         $news = $this->newsService->NewsById($id);
-        return $this->twig->render('admin_front/update-news.twig', ['news' => $news]);
+        return $this->twig->render('admin/update-news.twig', ['news' => $news]);
     }
 
     public function deleteNews(Request $request, $id)
     {
         $successfull = $this->newsService->deleteNews($id);
         $news = $this->newsService->readNews();
-        return $this->twig->render("admin_front/dashboard.twig", ['news' => $news, 'deleteMessage' => $successfull]);
+        return $this->twig->render("admin/dashboard.twig", ['news' => $news, 'deleteMessage' => $successfull]);
         //return new RedirectResponse("/dashboard");
     }
 
@@ -88,14 +88,14 @@ class MainController
         $news = $this->extractNews($request);
         $successfull = $this->newsService->updateNews($news, $id);
         $news = $this->newsService->readNews();
-        return $this->twig->render("admin_front/dashboard.twig", ['updateMessage' => $successfull, 'news' => $news]);
+        return $this->twig->render("admin/dashboard.twig", ['updateMessage' => $successfull, 'news' => $news]);
         //return new RedirectResponse("/dashboard");
     }
 
     public function singleNews(Request $request, $id)
     {
         $news = $this->newsService->NewsById($id);
-        return $this->twig->render("admin_front/single-news.twig", ['news' => $news]);
+        return $this->twig->render("admin/single-news.twig", ['news' => $news]);
 
     }
 
