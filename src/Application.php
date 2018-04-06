@@ -8,6 +8,7 @@ use Upnp\Services\UserService;
 use Upnp\Clients\ImgurClient;
 use Upnp\Middleware\Authentication;
 use Upnp\Libraries\ValidationLibrary;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Application extends \Cicada\Application
 {
@@ -19,7 +20,8 @@ class Application extends \Cicada\Application
         parent::__construct();
         $this->configure($configPath);
         $this->setupLibraries();
-        $this->configureDatabase();
+//        $this->configureDatabase();
+        $this->configureEloquentDatabase();
         $this->configureMiddleware();
         $this->configureClients();
         $this->setUpServices();
@@ -73,6 +75,24 @@ class Application extends \Cicada\Application
             $cfg->set_default_connection('main');
         });
     }
+
+    protected function configureEloquentDatabase()
+    {
+        $dbConfig = $this['config']->getDbConfig();
+        $capsule = new Capsule;
+        $capsule->addConnection([
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'database'  => 'upnp',
+        'username'  => 'root',
+        'password'  => 'root',
+        'charset'   => 'utf8',
+        'collation' => 'utf8_general_ci',
+        'prefix'    => '',
+        ]);
+        $capsule->bootEloquent();
+    }
+
 
     private function setupTwig() {
         $this['twig'] = function() {

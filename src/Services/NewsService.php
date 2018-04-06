@@ -25,6 +25,7 @@ class NewsService
                 "category" => $entityModel->category,
                 "language" => $entityModel->language
             ]);
+
             return (int)$news->id;
         } catch (Exception $e){
             return false;
@@ -71,10 +72,13 @@ class NewsService
 
     public function readNews(){
         try{
+//            var_dump('hey');die();
 //            var_dump(News::connection()->last_query);
             /** @var News[] $news */
-            $news = News::find('all');
-            $newsInArray = $this->toNewsArray($news);
+            $news = News::get_images_with_news();
+
+//            $newsInArray = $this->toNewsArray($news);
+            var_dump($news);die();
             return $newsInArray;
         } catch (Exception $e){
             var_dump($e->getMessage());die();
@@ -117,20 +121,19 @@ class NewsService
         }
     }
 
-    public function NewsById($id){
-        try{
-            $news = News::find($id);
-            return $news->serialize();
-        } catch (Exception $e){
-            return $e;
-        }
-    }
-
-    protected function toNewsArray($news){
-        $array = array();
-        foreach($news as $new){
-            $array[] = $new->to_array();
-        }
-        return $array;
-    }
+//    public function NewsById($id){
+//        try{
+//            $news = News::find($id);
+//            return $news->serialize();
+//        } catch (Exception $e){
+//            return $e;
+//        }
+//    }
+//    protected function toNewsArray($news){
+//        $array = array();
+//        foreach($news as $new){
+//            $array[] = $new->to_array();
+//        }
+//        return $array;
+//    }
 }
