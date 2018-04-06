@@ -9,6 +9,8 @@ class News extends Model
 {
     protected $table = "news";
 
+    protected $fillable = ["title" , "content", "category", "language", "image_id"];
+    public $timestamps = false;
     public function images()
     {
         return $this->belongsTo('Upnp\Models\Image', 'image_id')->withDefault([

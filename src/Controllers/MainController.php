@@ -64,6 +64,7 @@ class MainController
     {
         $isValid = $this->validationLibrary->newsRules($request);
         if ($isValid->validate()) {
+
             $image = $request->files->get("image");
             if (!empty($image)) {
                 /** @var ImageEntityModel $imageObj */
@@ -74,8 +75,10 @@ class MainController
                 return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
             }
             $news = $this->extractNews($request);
+
             $successfull = $this->newsService->createNews($news);
-            return $this->twig->render('admin/create-news.twig', ['message' => $successfull]);
+            return new RedirectResponse('/news/'.$successfull);
+//            return $this->twig->render('admin/single-news.twig', ['message' => $successfull]);
         }
         $errors = $isValid->errors();
         $error_string = array_reduce($errors,function($v1, $v2){
@@ -102,8 +105,9 @@ class MainController
     {
         $news = $this->extractNews($request);
         $successfull = $this->newsService->updateNews($news, $id);
-        $news = $this->newsService->readNews();
-        return $this->twig->render("admin/dashboard.twig", ['updateMessage' => $successfull, 'news' => $news]);
+//        var_dump($successfull);die();
+//        $news = $this->newsService->readNews();
+        return new RedirectResponse('/news/'.$id);
         //return new RedirectResponse("/dashboard");
     }
 
@@ -179,7 +183,7 @@ class MainController
         $user = $request->request->get('user');
         $password = $request->request->get('password');
         if (password_verify($password, $user->password)) {
-            $_SESSION['user'] = $user->to_array();
+            $_SESSION['user'] = $user->toArray();
             return new RedirectResponse('/dashboard');
         }
         return new RedirectResponse('/login?continue=failed');

@@ -48,7 +48,9 @@ $app->get('/logout',        [$mainController, "logout"]);
 $app->get('/login',         [$mainController, "login"]);
 $app->post('/login',        [$mainController, "loginValidate"])->before(
     function(Application $app, Request $request) use ($middleware){
+
         $user = $middleware->checkCredentials($app, $request);
+
         if(empty($user)){
             $continue = $request->getPathInfo();
             return new RedirectResponse('/login?continue='.$continue);

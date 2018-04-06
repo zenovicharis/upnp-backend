@@ -2,12 +2,14 @@
 
 namespace Upnp\Services;
 
+use Illuminate\Support\Facades\DB;
 use Upnp\Models\News;
 use Upnp\Models\Image;
 use Upnp\Models\Volountieer;
 use Upnp\EntityModels\NewsEntityModel;
 use Upnp\EntityModels\VolountieerEntityModel;
 use Upnp\EntityModels\ImageEntityModel;
+use \Illuminate\Database\Eloquent;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class NewsService
@@ -25,7 +27,6 @@ class NewsService
                 "category" => $entityModel->category,
                 "language" => $entityModel->language
             ]);
-
             return (int)$news->id;
         } catch (Exception $e){
             return false;
@@ -57,7 +58,7 @@ class NewsService
         }
     }
 
-    public function createImage($imageObj){
+    public function createImage(ImageEntityModel $imageObj){
         try{
             $image = Image::create([
                 "imgur_id" => $imageObj->id,
@@ -65,21 +66,16 @@ class NewsService
                 "url" => $imageObj->link,
             ]);
             return $image;
-        } catch (Exception $e){
-            return false;
+        } catch (\Exception $e){
+            var_dump($e->getMessage());die();
         }
     }
 
     public function readNews(){
         try{
-//            var_dump('hey');die();
-//            var_dump(News::connection()->last_query);
             /** @var News[] $news */
             $news = News::get_images_with_news();
-
-//            $newsInArray = $this->toNewsArray($news);
-            var_dump($news);die();
-            return $newsInArray;
+            return $news;
         } catch (Exception $e){
             var_dump($e->getMessage());die();
         }
@@ -107,28 +103,28 @@ class NewsService
 
     public function updateNews(NewsEntityModel $entityModel, $id){
         try{
-            $news = News::find($id);
-            $news->update_attributes([
+            $news = News::find($id)->update([
                 "title" => $entityModel->title,
                 "content" => $entityModel->content,
-                "image" => $entityModel->image,
                 "category" => $entityModel->category,
                 "language" => $entityModel->language
             ]);
-            return true;
+            return $news;
         } catch (Exception $e){
+            var_dump($e->getMessage());die();
             return false;
         }
     }
 
-//    public function NewsById($id){
-//        try{
-//            $news = News::find($id);
-//            return $news->serialize();
-//        } catch (Exception $e){
-//            return $e;
-//        }
-//    }
+    public function NewsById($id){
+        try{
+            $news = News::find($id);
+
+            return $news->toArray();
+        } catch (Exception $e){
+            return $e;
+        }
+    }
 //    protected function toNewsArray($news){
 //        $array = array();
 //        foreach($news as $new){

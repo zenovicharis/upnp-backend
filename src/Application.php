@@ -82,10 +82,10 @@ class Application extends \Cicada\Application
         $capsule = new Capsule;
         $capsule->addConnection([
         'driver'    => 'mysql',
-        'host'      => 'localhost',
-        'database'  => 'upnp',
-        'username'  => 'root',
-        'password'  => 'root',
+        'host'      => $dbConfig['host'],
+        'database'  => $dbConfig['name'],
+        'username'  => $dbConfig['user'],
+        'password'  => $dbConfig['password'],
         'charset'   => 'utf8',
         'collation' => 'utf8_general_ci',
         'prefix'    => '',

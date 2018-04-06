@@ -2,10 +2,10 @@
 
 namespace Upnp\Models;
 
-use ActiveRecord\Model;
-
+//use ActiveRecord\Model;
+use \Illuminate\Database\Eloquent\Model;
 class Volountieer extends Model
 {
-    static $table_name = 'volountieer';
+    protected $table = 'volountieer';
 
 }

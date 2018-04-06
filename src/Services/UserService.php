@@ -18,8 +18,9 @@ class UserService
     }
 
     public function getUserByEmail($email){
+
         try{
-            $user = User::find_by_email($email);
+            $user = User::where('email', $email)->first();
             return $user;
         } catch (Exception $e){
             return false;

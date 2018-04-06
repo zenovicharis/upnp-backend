@@ -8,14 +8,14 @@
 
 namespace Upnp\Models;
 
-use ActiveRecord\Model;
-
+//use ActiveRecord\Model;
+use \Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
-    static $table_name = 'user';
+    protected $table = "user";
 
-    public function serialize()
-    {
-        return $this->to_array();
-    }
+//    public function serialize()
+//    {
+//        return $this->to_array();
+//    }
 }
