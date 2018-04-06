@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Dashboard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/public/admin/admin-style.css">
-</head>
+    {% include 'admin/parts/head.twig' %}
 <body>
 
 <div class="container-fluid">
-    {% include 'admin_front/parts/header.twig' %}
+    {% include 'admin/parts/header.twig' %}
     <!-- navbar -->
 
     <!-- table -->
@@ -26,7 +17,7 @@
                         <form action="/news/delete/{{ news.id }}" method="post">
                             <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
                         </form>
-                        <a href="/news/{{ news.id }}" class="btn btn-primary float-right" role="button">Edit</a>
+                        <a href="/news/edit/{{ news.id }}" class="btn btn-primary float-right" role="button">Edit</a>
                         <span>{{ news.title }}</span>
                         <span class="float-right" style="margin-right:5px;">{{ news.created|date("M/d/Y") }}</span>
                     </th>

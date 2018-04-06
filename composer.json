@@ -4,12 +4,14 @@
         "php-activerecord/php-activerecord": "^1.2",
         "robmorgan/phinx": "^0.9.2",
         "twig/twig": "^2.0",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "vlucas/valitron": "^1.4"
     },
     "autoload": {
         "psr-4": {
             "Upnp\\": "src/",
             "UpnpTest\\": "tests/"
-        }
+        },
+        "files": ["vendor/vlucas/valitron/src/Valitron/Validator.php"]
     }
 }

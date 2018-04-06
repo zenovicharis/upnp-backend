@@ -7,6 +7,7 @@
  */
 
 namespace Upnp\Services;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 use Upnp\Models\User;
 

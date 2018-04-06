@@ -23,4 +23,12 @@
     margin-bottom: 1%;
 }
 
+.title {
+    text-decoration: underline;
+}
+
+.date {
+    margin-right:5px;
+}
+
 

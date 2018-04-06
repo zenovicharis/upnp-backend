@@ -3,10 +3,11 @@
 namespace Upnp;
 
 use Twig_SimpleFunction;
-use Upnp\Clients\ImgurClient;
 use Upnp\Services\NewsService;
 use Upnp\Services\UserService;
+use Upnp\Clients\ImgurClient;
 use Upnp\Middleware\Authentication;
+use Upnp\Libraries\ValidationLibrary;
 
 class Application extends \Cicada\Application
 {
@@ -17,7 +18,7 @@ class Application extends \Cicada\Application
     public function __construct($configPath){
         parent::__construct();
         $this->configure($configPath);
-
+        $this->setupLibraries();
         $this->configureDatabase();
         $this->configureMiddleware();
         $this->configureClients();
@@ -34,6 +35,12 @@ class Application extends \Cicada\Application
     protected function configureMiddleware() {
         $this['middleware'] = function () {
             return new Authentication();
+        };
+    }
+
+    protected function setupLibraries(){
+        $this['validationLibrary'] = function () {
+            return new ValidationLibrary();
         };
     }
 
@@ -69,7 +76,7 @@ class Application extends \Cicada\Application
 
     private function setupTwig() {
         $this['twig'] = function() {
-            $loader = new \Twig_Loader_Filesystem('front-end');
+            $loader = new \Twig_Loader_Filesystem('public');
             $twig = new  \Twig_Environment($loader, array(//
 //                'cache' => 'cache',
                 'debug' => true

@@ -3,7 +3,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class NewsMigration extends AbstractMigration
+class ImageForeignKeyMigration extends AbstractMigration
 {
     /**
      * Change Method.
@@ -29,11 +29,10 @@ class NewsMigration extends AbstractMigration
     public function change()
     {
         $table = $this->table('news');
-        $table->addColumn('title', 'text')
-            ->addColumn('content', 'text')
-            ->addColumn('category', 'enum', ['values' => ['projekt' ,'blog' ,'vest']])
-            ->addColumn('language', 'enum', ['values' => ['serbian', 'english']])
-            ->addColumn('created', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
-            ->create();
+        $table->addColumn('image_id', 'integer')
+            ->addForeignKey('image_id', 'images', 'id', [
+                'delete'=> 'CASCADE',
+                'update'=> 'CASCADE'
+            ])->save();
     }
 }
