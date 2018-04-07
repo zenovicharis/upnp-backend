@@ -143,6 +143,23 @@ class MainController
         return new JsonResponse($successfull, 201);
     }
 
+    public function createAlbum(){
+        return $this->twig->render("admin/album/create.twig");
+    }
+
+    public function infoAlbum(){
+        return $this->twig->render("admin/album/info.twig");
+    }
+
+    public function editAlbum(){
+        return $this->twig->render("admin/album/edit.twig");
+    }
+
+    public function albums(){
+        return $this->twig->render("admin/album/albums.twig");
+    }
+
+
     //private functions
     private function extractNews(Request $request)
     {

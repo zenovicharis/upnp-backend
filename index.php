@@ -57,7 +57,11 @@ $app->post('/login',        [$mainController, "loginValidate"])->before(
         }
         $request->request->set('user', $user);
     });
-
+// albums routes
+$app->get('/album/create', [$mainController, 'createAlbum']);
+$app->get('/album/info', [$mainController, 'infoAlbum']);
+$app->get('/album/edit', [$mainController, 'editAlbum']);
+$app->get('/album/albums', [$mainController, 'albums']);
 
 $app->addRouteCollection($newsRouteCollection);
 $app->run();
