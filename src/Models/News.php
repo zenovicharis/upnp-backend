@@ -20,7 +20,7 @@ class News extends Model
 
     public static function get_images_with_news(){
 
-        $news = News::with('images')->get()->toArray();
+        $news = News::orderByDesc('created')->with('images')->get()->toArray();
         return $news;
     }
 

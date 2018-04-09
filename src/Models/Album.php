@@ -20,10 +20,13 @@ class Album extends Model
 
     public function images()
     {
-        return $this->hasOne('Upnp\Models\Image', 'image_id', 'id');
+        return $this->hasMany('Upnp\Models\Image', 'album_id', 'id');
     }
 
-//    public function serialize(){
-//        return $this->to_array();
-//    }
+    public static function get_album_with_images(){
+
+        $albums = Album::with('images')->get()->toArray();
+        return $albums;
+    }
+
 }

@@ -14,13 +14,20 @@ use \Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     protected $table = "images";
-    protected $fillable = ["imgur_id" , "delete_hash", "url"];
+    protected $fillable = ["imgur_id" , "delete_hash", "url", "album_id"];
 //    protected $guarded = ["updated_at", "created_at"];
     public $timestamps = false;
 
     public function news()
     {
         return $this->hasOne('Upnp\Models\News', 'image_id', 'id');
+    }
+
+    public function albums()
+    {
+        return $this->belongsTo('Upnp\Models\Album', 'album_id')->withDefault([
+            'name' => 'album',
+        ]);
     }
 
 //    public function serialize(){

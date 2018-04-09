@@ -16,7 +16,8 @@ use Cicada\Routing\RouteCollection;
 $app = new Application($_SERVER['HOME']);
 
 
-$mainController = new MainController($app['newsService'], $app['userService'], $app['imgur'], $app['twig'], $app['validationLibrary']);
+$mainController = new MainController($app['newsService'], $app['userService'], $app['imgur'], $app['twig'], $app['validationLibrary']
+,$app['albumService']);
 $middleware = $app['middleware'];
 
 /** @var RouteCollection $newsRouteCollection */
@@ -59,6 +60,7 @@ $app->post('/login',        [$mainController, "loginValidate"])->before(
     });
 // albums routes
 $app->get('/album/create', [$mainController, 'createAlbum']);
+$app->post('/album/create', [$mainController, 'createAlbumPost']);
 $app->get('/album/info', [$mainController, 'infoAlbum']);
 $app->get('/album/edit', [$mainController, 'editAlbum']);
 $app->get('/album/albums', [$mainController, 'albums']);

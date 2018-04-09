@@ -81,6 +81,16 @@ class NewsService
         }
     }
 
+    public function NewsById($id){
+        try{
+            $news = News::where('id', $id)->with('images')->get()->toArray();
+            //$news = News::find($id)->with('images')->get()->toArray();
+            return $news;
+        } catch (Exception $e){
+            return $e;
+        }
+    }
+
     public function readVolountieers(){
         try{
             $volountieers = Volountieer::find('all');
@@ -116,15 +126,6 @@ class NewsService
         }
     }
 
-    public function NewsById($id){
-        try{
-            $news = News::find($id);
-
-            return $news->toArray();
-        } catch (Exception $e){
-            return $e;
-        }
-    }
 //    protected function toNewsArray($news){
 //        $array = array();
 //        foreach($news as $new){
