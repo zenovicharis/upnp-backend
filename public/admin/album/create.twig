@@ -22,7 +22,7 @@
             <a class="navbar-brand" href="#">upnp</a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">News</a>
+                    <a class="nav-link" href="/news/news">News</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/album/albums">Albums</a>
@@ -54,7 +54,7 @@
     <!-- form -->
     <div class="container">
         <div class="col-md-7 offset-2">
-            <a href="/album/albums" class="btn btn-light go-back" role="button">Go Back</a>
+            <a href="/album/albums" class="btn btn-light go-back" role="button">Albums</a>
             <!-- form  -->
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
@@ -62,14 +62,16 @@
                 </div>
                 <!--card body-->
                 <div class="card-body">
-                    <form class="form" action="/album/create" method="POST" id="createForm" enctype="multipart/form-data">
+                    <form class="form" action="/album/create" method="POST" id="createForm"
+                          enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">Unesi Naslov</label>
-                            <input type="text" class="form-control" name="title" >
+                            <input type="text" class="form-control" name="title">
                         </div>
                         <div class="form-group">
                             <label for="image">Unesi Sliku</label>
-                            <input type="file" class="form-control" name="image" accept="image/jpeg,image/png,image/jpg">
+                            <input type="file" class="form-control" name="image"
+                                   accept="image/jpeg,image/png,image/jpg">
                         </div>
                         <button type="submit" class="btn btn-success btn-lg float-right" id="btnCreate">Kreiraj</button>
                     </form>

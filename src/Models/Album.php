@@ -11,6 +11,7 @@ namespace Upnp\Models;
 //use ActiveRecord\Model;
 use Upnp\EntityModels\ImageEntityModel;
 use \Illuminate\Database\Eloquent\Model;
+
 class Album extends Model
 {
     protected $table = "albums";
@@ -23,7 +24,8 @@ class Album extends Model
         return $this->hasMany('Upnp\Models\Image', 'album_id', 'id');
     }
 
-    public static function get_album_with_images(){
+    public static function get_album_with_images()
+    {
 
         $albums = Album::with('images')->get()->toArray();
         return $albums;

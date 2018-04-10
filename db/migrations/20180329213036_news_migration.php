@@ -31,7 +31,7 @@ class NewsMigration extends AbstractMigration
         $table = $this->table('news');
         $table->addColumn('title', 'text')
             ->addColumn('content', 'text')
-            ->addColumn('category', 'enum', ['values' => ['projekt' ,'blog' ,'vest']])
+            ->addColumn('category', 'enum', ['values' => ['projekt', 'blog', 'vest']])
             ->addColumn('language', 'enum', ['values' => ['serbian', 'english']])
             ->addColumn('created', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->create();

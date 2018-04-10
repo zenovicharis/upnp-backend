@@ -22,7 +22,7 @@
             <a class="navbar-brand" href="#">upnp</a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">News</a>
+                    <a class="nav-link" href="/news/news">News</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/album/albums">Albums</a>
@@ -54,7 +54,7 @@
     <!-- form -->
     <div class="container">
         <div class="col-md-10 offset-1">
-            <a href="/dashboard" class="btn btn-light go-back" role="button">Go Back</a>
+            <a href="/album/albums" class="btn btn-light go-back" role="button">Albums</a>
             <!-- form  -->
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
@@ -64,57 +64,24 @@
                 <div class="card-body">
                     <form class="form" action="/album/edit" method="POST" id="createForm" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="title">Title Album</label>
+                            <label for="title">Naslov: {{ album.title }}</label>
                         </div>
                         <div class="row mb-2 ">
+                            {% for image in album.images %}
                             <div class="col-md-4 my-2">
                                 <div class="thumbnail">
-                                    <a href="https://i.imgur.com/KOLbQBX.png">
-                                        <img src="https://i.imgur.com/KOLbQBX.png" alt="Lights" style="width:100%">
+                                    <a href="">
+                                        <img src="{{ image.url }}" alt="Lights" style="width:100%">
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-4 my-2">
-                                <div class="thumbnail">
-                                    <a href="https://i.imgur.com/KOLbQBX.png">
-                                        <img src="https://i.imgur.com/KOLbQBX.png" alt="Nature" style="width:100%">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-2">
-                                <div class="thumbnail">
-                                    <a href="https://i.imgur.com/KOLbQBX.png">
-                                        <img src="https://i.imgur.com/KOLbQBX.png" alt="Fjords" style="width:100%">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-2">
-                                <div class="thumbnail">
-                                    <a href="https://i.imgur.com/KOLbQBX.png">
-                                        <img src="https://i.imgur.com/KOLbQBX.png" alt="Fjords" style="width:100%">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-2">
-                                <div class="thumbnail">
-                                    <a href="https://i.imgur.com/KOLbQBX.png">
-                                        <img src="https://i.imgur.com/KOLbQBX.png" alt="Fjords" style="width:100%">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-2">
-                                <div class="thumbnail">
-                                    <a href="https://i.imgur.com/KOLbQBX.png">
-                                        <img src="https://i.imgur.com/KOLbQBX.png" alt="Fjords" style="width:100%">
-                                    </a>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                         <div class="admin-buttons">
-                        {#<form action="#" method="post">
-                            <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
-                        </form>#}
-                        <a href="#" class="btn btn-primary float-right" role="button">Edit</a>
+                            {#<form action="#" method="post">
+                                <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
+                            </form>#}
+                            <a href="/album/edit/{{ album.id }}" class="btn btn-primary float-right" role="button">Edit</a>
                         </div>
                     </form>
                 </div>

@@ -11,10 +11,11 @@ namespace Upnp\Models;
 //use ActiveRecord\Model;
 use Upnp\EntityModels\ImageEntityModel;
 use \Illuminate\Database\Eloquent\Model;
+
 class Image extends Model
 {
     protected $table = "images";
-    protected $fillable = ["imgur_id" , "delete_hash", "url", "album_id"];
+    protected $fillable = ["imgur_id", "delete_hash", "url", "album_id"];
 //    protected $guarded = ["updated_at", "created_at"];
     public $timestamps = false;
 

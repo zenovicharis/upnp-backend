@@ -5,12 +5,14 @@ namespace Upnp\Models;
 //use ActiveRecord\Model;
 
 use \Illuminate\Database\Eloquent\Model;
+
 class News extends Model
 {
     protected $table = "news";
 
-    protected $fillable = ["title" , "content", "category", "language", "image_id"];
+    protected $fillable = ["title", "content", "category", "language", "image_id"];
     public $timestamps = false;
+
     public function images()
     {
         return $this->belongsTo('Upnp\Models\Image', 'image_id')->withDefault([
@@ -18,7 +20,8 @@ class News extends Model
         ]);
     }
 
-    public static function get_images_with_news(){
+    public static function get_images_with_news()
+    {
 
         $news = News::orderByDesc('created')->with('images')->get()->toArray();
         return $news;

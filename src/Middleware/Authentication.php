@@ -13,11 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Authentication
 {
-    public function __construct(){
+    public function __construct()
+    {
         session_start();
     }
 
-    public function isLoggedIn(){
+    public function isLoggedIn()
+    {
         if (!isset($_SESSION['user'])) {
             return false;
         } else {
@@ -25,7 +27,8 @@ class Authentication
         }
     }
 
-    public function checkCredentials(Application $app, Request $request){
+    public function checkCredentials(Application $app, Request $request)
+    {
         $email = $request->request->get('email');
         return $app['userService']->getUserByEmail($email);
     }

@@ -27,9 +27,9 @@
                      <td scope="row">{{ news.content }}</td>
                  </tr>
                  </tbody>
-         </table>#}{% for oneNew in news %}
+         </table>#}{% for oneNews in news %}
         <div class="col-md-7 offset-2">
-            <a href="/dashboard" class="btn btn-light go-back" role="button">Go Back</a>
+            <a href="/news/news" class="btn btn-light go-back" role="button">News</a>
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
                     <h3 class="mb-0 headingForm">Detalji Vesti</h3>
@@ -37,29 +37,33 @@
                 <!--card body-->
                 <div class="card-body">
                     <div class="form-group">
-                        <img src="{{ oneNew.images.url }}" class="w-100" alt="picture">
+                        <img src="{{ oneNews.images.url }}" class="w-100" alt="picture">
                     </div>
                     <div class="form-group">
                         <p><b>Naslov:</b></p>
-                        <p>{{ oneNew.title }}<span class="float-right">{{ oneNew.created|date("M/d/Y") }}</span></p>
+                        <p>{{ oneNews.title }}<span class="float-right">{{ oneNews.created|date("M/d/Y") }}</span></p>
                     </div>
-                    <div class="form-group"><hr>
+                    <div class="form-group">
+                        <hr>
                         <p><b>Tekst:</b></p>
-                        <p>{{ oneNew.content }}</p>
+                        <p>{{ oneNews.content }}</p>
                     </div>
-                    <div class="form-group"><hr>
+                    <div class="form-group">
+                        <hr>
                         <p><b>Kategorija:</b></p>
-                        <p>{{ oneNew.category }}</p>
+                        <p>{{ oneNews.category }}</p>
                     </div>
-                    <div class="form-group"><hr>
+                    <div class="form-group">
+                        <hr>
                         <p><b>Jezik:</b></p>
-                        <p>{{ oneNew.language }}</p>
+                        <p>{{ oneNews.language }}</p>
                     </div>
-                    <div class="admin-buttons"><hr>
-                        <form action="/news/delete/{{ oneNew.id }}" method="post">
+                    <div class="admin-buttons">
+                        <hr>
+                        <form action="/news/delete/{{ oneNews.id }}" method="post">
                             <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
                         </form>
-                        <a href="/news/edit/{{ oneNew.id }}" class="btn btn-primary float-right" role="button">Edit</a>
+                        <a href="/news/edit/{{ oneNews.id }}" class="btn btn-primary float-right" role="button">Edit</a>
                     </div>
                 </div>{% endfor %}
                 <!--/card-body-->

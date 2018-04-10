@@ -43,12 +43,12 @@ class MainController
     public function dashboard()
     {
         $news = $this->newsService->readNews();
-
         return $this->twig->render('admin/dashboard.twig', ['news' => $news]);
     }
 
     public function create()
-    {   $albums = $this->albumService->readAlbums();
+    {
+        $albums = $this->albumService->readAlbums();
         return $this->twig->render('admin/create-news.twig', ['albums' => $albums]);
     }
 
@@ -77,18 +77,18 @@ class MainController
                 $imageObj = $this->imgurClient->uploadImage($image);
                 $imageSavedEntity = $this->newsService->createImage($imageObj);
                 $request->request->set('image_id', $imageSavedEntity->id);
-            }else {
+            } else {
                 return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
             }
             $news = $this->extractNews($request);
 
             $successfull = $this->newsService->createNews($news);
-            return new RedirectResponse('/news/'.$successfull);
+            return new RedirectResponse('/news/' . $successfull);
 //            return $this->twig->render('admin/single-news.twig', ['message' => $successfull]);
         }
         $errors = $isValid->errors();
-        $error_string = array_reduce($errors,function($v1, $v2){
-            return $v1 .$v2[0].'  ';
+        $error_string = array_reduce($errors, function ($v1, $v2) {
+            return $v1 . $v2[0] . '  ';
         });
         return $this->twig->render('admin/create-news.twig', ['error_message' => $error_string]);
     }
@@ -113,7 +113,7 @@ class MainController
         $successfull = $this->newsService->updateNews($news, $id);
 //        var_dump($successfull);die();
 //        $news = $this->newsService->readNews();
-        return new RedirectResponse('/news/'.$id);
+        return new RedirectResponse('/news/' . $id);
         //return new RedirectResponse("/dashboard");
     }
 
@@ -149,39 +149,79 @@ class MainController
         return new JsonResponse($successfull, 201);
     }
 
-    public function createAlbum(){
+    public function createAlbum()
+    {
         return $this->twig->render("admin/album/create.twig");
     }
 
-    public function createAlbumPost(Request $request){
+    public function createAlbumPost(Request $request)
+    {
+        $title = $request->request->get("title");
+        $createdAlbumObject = $this->albumService->createAlbum($title);
+        // $request->request->set('album_id', $createdAlbumObject->id);
+
         $image = $request->files->get("image");
         if (!empty($image)) {
             /** @var ImageEntityModel $imageObj */
             $imageObj = $this->imgurClient->uploadImage($image);
-            $imageSavedEntity = $this->newsService->createImage($imageObj);
-            $request->request->set('album_id', $imageSavedEntity->id);
-        }else {
+            $imageSavedEntity = $this->newsService->createImage($imageObj, $createdAlbumObject->id);
+            //$request->request->set('image_id', $imageSavedEntity->id);
+        } else {
             return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
         }
-        $album = $this->extractAlbum($request);
-        $successfull = $this->albumService->createAlbum($album);
-        var_dump($successfull);die();
 
         // redirect na info, kad ga napravimo.
-        //return new RedirectResponse('/album/info/'.$successfull);
+        return new RedirectResponse('/album/info/' . $createdAlbumObject->id);
 
     }
 
-    public function infoAlbum(){
-        return $this->twig->render("admin/album/info.twig");
+    public function infoAlbum(Request $request, $id)
+    {
+        $album = $this->albumService->readAlbumById($id);
+
+        return $this->twig->render("admin/album/info.twig", ['album' => $album]);
     }
 
-    public function editAlbum(){
-        return $this->twig->render("admin/album/edit.twig");
+    public function deleteAlbumImage(Request $request, $id)
+    {
+        $album = $this->albumService->deleteAlbumImage($id);
     }
 
-    public function albums(){
-       // $albums = $this->albumService->readAlbums();
+    public function updateAlbum(Request $request, $id)
+    {
+        $title = $request->request->get("title");
+        $updatedAlbum = $this->albumService->updateAlbum($title, $id);
+        if ($updatedAlbum) {
+            return new RedirectResponse("/album/info/" . $id);
+        } else {
+            //implement message
+        }
+
+        //return $this->twig->render("admin/album/info.twig", ['album'=> $updatedAlbum]);
+    }
+
+    public function uploadImageToAlbum(Request $request, $id)
+    {
+        $image = $request->files->get("image");
+        if (!empty($image)) {
+            /** @var ImageEntityModel $imageObj */
+            $imageObj = $this->imgurClient->uploadImage($image);
+            $imageSavedEntity = $this->newsService->createImage($imageObj, $id);
+        } else {
+            return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
+        }
+        return new RedirectResponse("/album/edit/" . $id);
+    }
+
+    public function editAlbum(Request $request, $id)
+    {
+        $album = $this->albumService->readAlbumById($id);
+        return $this->twig->render("admin/album/edit.twig", ['album' => $album]);
+    }
+
+    public function albums()
+    {
+        // $albums = $this->albumService->readAlbums();
         $albums = $this->albumService->readAlbumswithImages();
         return $this->twig->render("admin/album/albums.twig", ['albums' => $albums]);
     }
@@ -201,12 +241,12 @@ class MainController
         return $news;
     }
 
-    private  function extractAlbum(Request $request)
+    /*private function extractAlbum(Request $request)
     {
         $title = $request->request->get("title");
         $album = new AlbumEntityModel($title);
         return $album;
-    }
+    }*/
 
     private function extractVolountieer(Request $request)
     {
@@ -235,11 +275,10 @@ class MainController
         $password = $request->request->get('password');
         if (password_verify($password, $user->password)) {
             $_SESSION['user'] = $user->toArray();
-            return new RedirectResponse('/dashboard');
+            return new RedirectResponse('/news/news');
         }
         return new RedirectResponse('/login?continue=failed');
     }
-
 
     public function logout()
     {

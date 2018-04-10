@@ -17,7 +17,8 @@ class Application extends \Cicada\Application
      * Application constructor.
      * @param $configPath
      */
-    public function __construct($configPath){
+    public function __construct($configPath)
+    {
         parent::__construct();
         $this->configure($configPath);
         $this->setupLibraries();
@@ -29,44 +30,50 @@ class Application extends \Cicada\Application
         $this->setupTwig();
     }
 
-    protected function configure($configPath) {
+    protected function configure($configPath)
+    {
         $this['config'] = function () use ($configPath) {
             return new Configuration($configPath);
         };
     }
 
-    protected function configureMiddleware() {
+    protected function configureMiddleware()
+    {
         $this['middleware'] = function () {
             return new Authentication();
         };
     }
 
-    protected function setupLibraries(){
+    protected function setupLibraries()
+    {
         $this['validationLibrary'] = function () {
             return new ValidationLibrary();
         };
     }
 
-    private function setUpServices(){
-        $this['newsService'] = function(){
+    private function setUpServices()
+    {
+        $this['newsService'] = function () {
             return new NewsService();
         };
 
-        $this['userService'] = function(){
+        $this['userService'] = function () {
             return new UserService();
         };
 
-        $this['albumService'] = function(){
+        $this['albumService'] = function () {
             return new AlbumService();
         };
     }
 
-    protected function configureClients() {
+    protected function configureClients()
+    {
         $imgurConfig = $this['config']->getImgurClientConfig();
         $this['imgur'] = function () use ($imgurConfig) {
             return new ImgurClient($imgurConfig);
         };
     }
+
     protected function configureDatabase()
     {
         $dbConfig = $this['config']->getDbConfig();
@@ -86,21 +93,22 @@ class Application extends \Cicada\Application
         $dbConfig = $this['config']->getDbConfig();
         $capsule = new Capsule;
         $capsule->addConnection([
-        'driver'    => 'mysql',
-        'host'      => $dbConfig['host'],
-        'database'  => $dbConfig['name'],
-        'username'  => $dbConfig['user'],
-        'password'  => $dbConfig['password'],
-        'charset'   => 'utf8',
-        'collation' => 'utf8_general_ci',
-        'prefix'    => '',
+            'driver' => 'mysql',
+            'host' => $dbConfig['host'],
+            'database' => $dbConfig['name'],
+            'username' => $dbConfig['user'],
+            'password' => $dbConfig['password'],
+            'charset' => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'prefix' => '',
         ]);
         $capsule->bootEloquent();
     }
 
 
-    private function setupTwig() {
-        $this['twig'] = function() {
+    private function setupTwig()
+    {
+        $this['twig'] = function () {
             $loader = new \Twig_Loader_Filesystem('public');
             $twig = new  \Twig_Environment($loader, array(//
 //                'cache' => 'cache',

@@ -18,8 +18,9 @@ class NewsService
     {
     }
 
-    public function createNews(NewsEntityModel $entityModel){
-        try{
+    public function createNews(NewsEntityModel $entityModel)
+    {
+        try {
             $news = News::create([
                 "title" => $entityModel->title,
                 "content" => $entityModel->content,
@@ -28,13 +29,14 @@ class NewsService
                 "language" => $entityModel->language
             ]);
             return (int)$news->id;
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
 
-    public function createVolountieer(VolountieerEntityModel $entityModel){
-        try{
+    public function createVolountieer(VolountieerEntityModel $entityModel)
+    {
+        try {
             $volountieer = Volountieer::create([
                 "ime_prezime" => $entityModel->ime_prezime,
                 "datum" => $entityModel->datum,
@@ -53,66 +55,75 @@ class NewsService
                 "dodatna_obuka" => $entityModel->dodatna_obuka
             ]);
             return (int)$volountieer->id;
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
 
-    public function createImage(ImageEntityModel $imageObj){
-        try{
+    public function createImage(ImageEntityModel $imageObj, $createdAlbumObject = null)
+    {
+        try {
             $image = Image::create([
                 "imgur_id" => $imageObj->id,
                 "delete_hash" => $imageObj->deletehash,
                 "url" => $imageObj->link,
+                "album_id" => $createdAlbumObject
             ]);
             return $image;
-        } catch (\Exception $e){
-            var_dump($e->getMessage());die();
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());
+            die();
         }
     }
 
-    public function readNews(){
-        try{
+    public function readNews()
+    {
+        try {
             /** @var News[] $news */
             $news = News::get_images_with_news();
             return $news;
-        } catch (Exception $e){
-            var_dump($e->getMessage());die();
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
         }
     }
 
-    public function NewsById($id){
-        try{
+    public function NewsById($id)
+    {
+        try {
             $news = News::where('id', $id)->with('images')->get()->toArray();
             //$news = News::find($id)->with('images')->get()->toArray();
             return $news;
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
     }
 
-    public function readVolountieers(){
-        try{
+    public function readVolountieers()
+    {
+        try {
             $volountieers = Volountieer::find('all');
             $volountieersInArray = $this->toNewsArray($volountieers);
             return $volountieersInArray;
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
 
-    public function deleteNews($id){
-        try{
+    public function deleteNews($id)
+    {
+        try {
             $news = News::find($id);
             $news->delete();
             return true;
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
 
-    public function updateNews(NewsEntityModel $entityModel, $id){
-        try{
+    public function updateNews(NewsEntityModel $entityModel, $id)
+    {
+        try {
             $news = News::find($id)->update([
                 "title" => $entityModel->title,
                 "content" => $entityModel->content,
@@ -120,8 +131,9 @@ class NewsService
                 "language" => $entityModel->language
             ]);
             return $news;
-        } catch (Exception $e){
-            var_dump($e->getMessage());die();
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
             return false;
         }
     }

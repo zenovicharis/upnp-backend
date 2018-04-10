@@ -31,8 +31,8 @@ class AlbumsForeignKeyMigration extends AbstractMigration
         $table = $this->table('images');
         $table->addColumn('album_id', 'integer', ['null' => true])
             ->addForeignKey('album_id', 'albums', 'id', [
-                'delete'=> 'CASCADE',
-                'update'=> 'CASCADE'
+                'delete' => 'CASCADE',
+                'update' => 'CASCADE'
             ])->save();
     }
 }

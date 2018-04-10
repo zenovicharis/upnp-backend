@@ -16,11 +16,12 @@ use GuzzleHttp\Exception;
 
 class ImgurClient
 {
-    /** @var  Client  $client */
+    /** @var  Client $client */
     private $client;
     private $clientId;
     private $clientSecretId;
     private $baseUrl = 'https://api.imgur.com/';
+
     public function __construct($config)
     {
         $this->clientId = $config['clientId'];
@@ -31,23 +32,24 @@ class ImgurClient
         ]);
     }
 
-    public function uploadImage($image){
-       /* $rawImage = file_get_contents($image->getRealPath());
-        $header = ['Authorization' => 'Client-ID '.$this->clientId];
-       try {
-           $response = $this->client->post('/3/image', [
-               'form_params' => [
-                   'image' => base64_encode($rawImage)
-               ],
-               'headers' => $header
-           ]);
-       } catch (\Exception $e){
-           var_dump($e->getMessage());die();
-       }
-        $content = $response->getBody()->getContents();
-        $image = json_decode($content);*/
+    public function uploadImage($image)
+    {
+        /* $rawImage = file_get_contents($image->getRealPath());
+         $header = ['Authorization' => 'Client-ID '.$this->clientId];
+        try {
+            $response = $this->client->post('/3/image', [
+                'form_params' => [
+                    'image' => base64_encode($rawImage)
+                ],
+                'headers' => $header
+            ]);
+        } catch (\Exception $e){
+            var_dump($e->getMessage());die();
+        }
+         $content = $response->getBody()->getContents();
+         $image = json_decode($content);*/
 
-      //  return new ImageEntityModel($image->data->id, $image->data->deletehash,  $image->data->link);
-        return new ImageEntityModel('KOLbQBX', 'oqyIsRzBwK1qXs4',  'https://i.imgur.com/VdxpZLe.jpg');
+        //  return new ImageEntityModel($image->data->id, $image->data->deletehash,  $image->data->link);
+        return new ImageEntityModel('KOLbQBX', 'oqyIsRzBwK1qXs4', 'https://i.imgur.com/VdxpZLe.jpg');
     }
 }

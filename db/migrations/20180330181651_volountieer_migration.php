@@ -45,7 +45,6 @@ class VolountieerMigration extends AbstractMigration
             ->addColumn('nedeljni_sati', 'text')
             ->addColumn('vreme', 'text')
             ->addColumn('dodatna_obuka', 'text')
-
             ->create();
     }
 }

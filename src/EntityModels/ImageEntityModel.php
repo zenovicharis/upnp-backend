@@ -14,13 +14,14 @@ class ImageEntityModel
     public $id;
     public $deletehash;
     public $link;
+
     //public $album_id;
 
     public function __construct($id, $deletehash, $link/*, $album_id*/)
     {
         $this->id = $id;
-        $this->deletehash= $deletehash;
+        $this->deletehash = $deletehash;
         $this->link = $link;
-       // $this->album_id = $album_id;
+        // $this->album_id = $album_id;
     }
 }
