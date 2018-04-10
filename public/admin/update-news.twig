@@ -19,12 +19,16 @@
                 </div>
                 <!--card body-->
                 <div class="card-body">
-                    <form action="#" method="post">
+                    <form action="/image/delete/{{ oneNew.images.id }}" method="post">
                         <div class="form-group">
+
                             <img src="{{ oneNew.images.url }}" class="w-100" alt="">
+
                         </div>
                         <div class="col-12 text-center mb-4">
+
                             <button type="submit" class="btn btn-danger" role="button">Delete</button>
+
                         </div>
                     </form>
                     <form class="form" action="/news/update/{{ oneNew.id }}" method="POST" id="news-form">

@@ -29,9 +29,9 @@ class ImageForeignKeyMigration extends AbstractMigration
     public function change()
     {
         $table = $this->table('news');
-        $table->addColumn('image_id', 'integer')
+        $table->addColumn('image_id', 'integer', ['null' => true])
             ->addForeignKey('image_id', 'images', 'id', [
-                'delete'=> 'CASCADE',
+                'delete'=> 'NO_ACTION',
                 'update'=> 'CASCADE'
             ])->save();
     }
