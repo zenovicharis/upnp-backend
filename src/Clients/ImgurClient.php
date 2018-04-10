@@ -34,7 +34,6 @@ class ImgurClient
     public function uploadImage($image){
         $rawImage = file_get_contents($image->getRealPath());
         $header = ['Authorization' => 'Client-ID '.$this->clientId];
-
        try {
            $response = $this->client->post('/3/image', [
                'form_params' => [
@@ -46,6 +45,7 @@ class ImgurClient
            var_dump($e->getMessage());die();
        }
         $content = $response->getBody()->getContents();
+
         $image = json_decode($content);
 
         return new ImageEntityModel($image->data->id, $image->data->deletehash,  $image->data->link);

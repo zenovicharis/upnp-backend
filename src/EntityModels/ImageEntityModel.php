@@ -12,15 +12,15 @@ namespace Upnp\EntityModels;
 class ImageEntityModel
 {
     public $id;
-   // public $imgurId;
     public $deletehash;
     public $link;
+    //public $album_id;
 
-    public function __construct($id, $deletehash, $link)
+    public function __construct($id, $deletehash, $link/*, $album_id*/)
     {
         $this->id = $id;
-       // $this->imgurId = $imgurId;
         $this->deletehash= $deletehash;
         $this->link = $link;
+       // $this->album_id = $album_id;
     }
 }

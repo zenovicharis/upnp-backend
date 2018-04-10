@@ -6,6 +6,8 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Upnp\Application;
 use Upnp\Clients\ImgurClient;
 use Upnp\Models\Image;
+use Upnp\EntityModels\AlbumEntityModel;
+use Upnp\Services\AlbumService;
 use Upnp\Services\NewsService;
 use Upnp\EntityModels\NewsEntityModel;
 use Upnp\EntityModels\ImageEntityModel;
@@ -22,6 +24,8 @@ class MainController
 {
     /** @var NewsService $newsService * */
     private $newsService;
+    /** @var AlbumService $albumService * */
+    private $albumService;
     /** @var ImgurClient $imgurClient * */
     private $imgurClient;
     /** @var  \Twig_Environment $twig */
@@ -29,15 +33,18 @@ class MainController
     /** @var ValidationLibrary $validationLibrary * */
     public $validationLibrary;
 
+
     /** @var VolountieerService $volountieerService * */
     public $volountieerService;
 
-    public function __construct($newsService, $userService, $volountieerService, $imgurClient, $twig, $validationLibrary)
+    public function __construct($newsService, $userService, $volountieerService, $imgurClient, $twig, $validationLibrary, $albumService)
+
     {
         $this->twig = $twig;
         $this->imgurClient = $imgurClient;
         $this->userService = $userService;
         $this->newsService = $newsService;
+        $this->albumService = $albumService;
         $this->validationLibrary = $validationLibrary;
         $this->volountieerService = $volountieerService;
     }
@@ -45,12 +52,13 @@ class MainController
     public function dashboard()
     {
         $news = $this->newsService->readNews();
+
         return $this->twig->render('admin/dashboard.twig', ['news' => $news]);
     }
 
     public function create()
-    {
-        return $this->twig->render('admin/create-news.twig');
+    {   $albums = $this->albumService->readAlbums();
+        return $this->twig->render('admin/create-news.twig', ['albums' => $albums]);
     }
 
     public function update()
@@ -152,6 +160,44 @@ class MainController
         return new JsonResponse($successfull, 201);
     }
 
+    public function createAlbum(){
+        return $this->twig->render("admin/album/create.twig");
+    }
+
+    public function createAlbumPost(Request $request){
+        $image = $request->files->get("image");
+        if (!empty($image)) {
+            /** @var ImageEntityModel $imageObj */
+            $imageObj = $this->imgurClient->uploadImage($image);
+            $imageSavedEntity = $this->newsService->createImage($imageObj);
+            $request->request->set('album_id', $imageSavedEntity->id);
+        }else {
+            return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
+        }
+        $album = $this->extractAlbum($request);
+        $successfull = $this->albumService->createAlbum($album);
+        var_dump($successfull);die();
+
+        // redirect na info, kad ga napravimo.
+        //return new RedirectResponse('/album/info/'.$successfull);
+
+    }
+
+    public function infoAlbum(){
+        return $this->twig->render("admin/album/info.twig");
+    }
+
+    public function editAlbum(){
+        return $this->twig->render("admin/album/edit.twig");
+    }
+
+    public function albums(){
+       // $albums = $this->albumService->readAlbums();
+        $albums = $this->albumService->readAlbumswithImages();
+        return $this->twig->render("admin/album/albums.twig", ['albums' => $albums]);
+    }
+
+
     //private functions
     private function extractNews(Request $request)
     {
@@ -164,6 +210,13 @@ class MainController
         // TODO: Implement validation for News
         $news = new NewsEntityModel($title, $content, $category, $image_id, $language);
         return $news;
+    }
+
+    private  function extractAlbum(Request $request)
+    {
+        $title = $request->request->get("title");
+        $album = new AlbumEntityModel($title);
+        return $album;
     }
 
     private function extractVolountieer(Request $request)

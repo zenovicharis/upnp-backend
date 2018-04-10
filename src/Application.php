@@ -3,6 +3,7 @@
 namespace Upnp;
 
 use Twig_SimpleFunction;
+use Upnp\Services\AlbumService;
 use Upnp\Services\NewsService;
 use Upnp\Services\UserService;
 use Upnp\Clients\ImgurClient;
@@ -59,6 +60,10 @@ class Application extends \Cicada\Application
 
         $this['volountieerService'] = function(){
             return new VolountieerService();
+        };
+      
+        $this['albumService'] = function(){
+            return new AlbumService();
         };
     }
 
