@@ -5,6 +5,7 @@ namespace Upnp;
 use Twig_SimpleFunction;
 use Upnp\Services\AlbumService;
 use Upnp\Services\NewsService;
+use Upnp\Services\PublicService;
 use Upnp\Services\UserService;
 use Upnp\Clients\ImgurClient;
 use Upnp\Middleware\Authentication;
@@ -71,6 +72,10 @@ class Application extends \Cicada\Application
       
         $this['albumService'] = function(){
             return new AlbumService();
+        };
+
+        $this['publicService'] = function(){
+            return new PublicService();
         };
     }
 

@@ -8,6 +8,7 @@ require 'vendor/autoload.php';
 header("Access-Control-Allow-Origin: *");
 use Upnp\Application;
 use Upnp\Controllers\MainController;
+use Upnp\Controllers\PublicController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,7 +17,7 @@ use Cicada\Routing\RouteCollection;
 $app = new Application($_SERVER['HOME']);
 
 
-
+$publicController = new PublicController($app['publicService']);
 
 
 $mainController = new MainController($app['newsService'], $app['userService'], $app['volountieerService'], $app['imgur'], $app['twig'], $app['validationLibrary'], $app['albumService']);
@@ -68,7 +69,11 @@ $app->get('/volountieers', [$mainController, "getVolountieers"]);
 
 $app->post('/image/delete/{id}',  [$mainController, "deleteImage"]);
 
-$app->get('/dashboard',     [$mainController, "dashboard"]);
+$app->get('/news', [$publicController, "getNews"]);
+$app->get('/albums', [$publicController, "getAlbums"]);
+
+
+//$app->get('/dashboard',     [$mainController, "dashboard"]);
 $app->get('/logout',        [$mainController, "logout"]);
 $app->get('/login',         [$mainController, "login"]);
 $app->post('/login',        [$mainController, "loginValidate"])->before(

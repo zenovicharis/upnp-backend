@@ -92,7 +92,7 @@ class MainController
             $news = $this->extractNews($request);
 
             $successfull = $this->newsService->createNews($news);
-            return new RedirectResponse('/news/' . $successfull);
+            return new RedirectResponse('/news/' . $successfull. '?message=Vest je uspesno kreirana!');
 //            return $this->twig->render('admin/single-news.twig', ['message' => $successfull]);
         }
         $errors = $isValid->errors();
@@ -130,10 +130,11 @@ class MainController
     public function singleNews(Request $request, $id)
     {
         $news = $this->newsService->NewsById($id);
-//        var_dump($news);die();
-//        var_dump($news);die();
+        $message = $request->query->get("message");
+        if(!empty($message)){
+            return $this->twig->render("admin/single-news.twig", ['news' => $news, 'message' => $message]);
+        }
         return $this->twig->render("admin/single-news.twig", ['news' => $news]);
-
     }
 
     public function CreateVolountieer(Request $request)

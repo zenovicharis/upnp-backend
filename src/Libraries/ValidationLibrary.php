@@ -12,13 +12,16 @@ use Valitron;
 
 class ValidationLibrary extends Valitron\Validator
 {
-    const   NEWS_RULE = [
-        'title', 'content', 'category', 'language'
-    ];
+  //  private static NEWS_RULE = ['title', 'content', 'category', 'language'];
+    private function NEWS_RULE(){
+        return ['title', 'content', 'category', 'language'];
+    }
 
-    const VOLOUNTIEER_RULE = [
-        'ime_prezime', 'datum', 'adresa', 'grad', 'telefon', 'email', 'str_sprema', 'zanimanje', 'hobi', 'iskustvo', 'podrucje_rada', 'poslovi', 'nedeljni_sati', 'vreme', 'dodatna_obuka'
-    ];
+    private function VOLOUNTIEER_RULE(){
+        return ['ime_prezime', 'datum', 'adresa', 'grad', 'telefon', 'email', 'str_sprema', 'zanimanje', 'hobi', 'iskustvo', 'podrucje_rada', 'poslovi', 'nedeljni_sati', 'vreme', 'dodatna_obuka'];
+    }
+
+/*    private static VOLOUNTIEER_RULE = ['ime_prezime', 'datum', 'adresa', 'grad', 'telefon', 'email', 'str_sprema', 'zanimanje', 'hobi', 'iskustvo', 'podrucje_rada', 'poslovi', 'nedeljni_sati', 'vreme', 'dodatna_obuka'];*/
 
     public function __construct(array $data = array(), array $fields = array(), $lang = null, $langDir = null)
     {
@@ -29,7 +32,7 @@ class ValidationLibrary extends Valitron\Validator
     {
         $dataArray = $request->request->all();
         $val = $this->withData($dataArray);
-        return $val->rule("required", ValidationLibrary::NEWS_RULE)
+        return $val->rule("required", $this->NEWS_RULE())
             ->message("'{field} is required'");
     }
 
@@ -37,7 +40,7 @@ class ValidationLibrary extends Valitron\Validator
     {
         $dataArray = $request->request->all();
         $val = $this->withData($dataArray);
-        return $val->rule("required", ValidationLibrary::VOLOUNTIEER_RULE)
+        return $val->rule("required", $this->VOLOUNTIEER_RULE())
             ->message("'{field} is required'");
     }
 }
