@@ -9,6 +9,7 @@ use Upnp\Services\UserService;
 use Upnp\Clients\ImgurClient;
 use Upnp\Middleware\Authentication;
 use Upnp\Libraries\ValidationLibrary;
+use Upnp\Services\VolountieerService;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Application extends \Cicada\Application
@@ -51,17 +52,24 @@ class Application extends \Cicada\Application
         };
     }
 
-    private function setUpServices()
-    {
-        $this['newsService'] = function () {
-            return new NewsService();
+
+
+    private function setUpServices(){
+        $imgurClient = $this['imgur'];
+        $this['newsService'] = function() use ($imgurClient) {
+            return new NewsService($imgurClient);
         };
 
         $this['userService'] = function () {
             return new UserService();
         };
 
-        $this['albumService'] = function () {
+
+        $this['volountieerService'] = function(){
+            return new VolountieerService();
+        };
+      
+        $this['albumService'] = function(){
             return new AlbumService();
         };
     }

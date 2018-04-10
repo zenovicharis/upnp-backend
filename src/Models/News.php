@@ -4,7 +4,9 @@ namespace Upnp\Models;
 
 //use ActiveRecord\Model;
 
+
 use \Illuminate\Database\Eloquent\Model;
+
 
 class News extends Model
 {
@@ -27,6 +29,13 @@ class News extends Model
         return $news;
     }
 
+
+    public static function get_news_with_id($id)
+    {
+
+        $news = News::with('images')->find($id);
+        return $news;
+    }
 //    static $table_name = 'news';
 //    static $has_only = [
 //        [

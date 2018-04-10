@@ -29,10 +29,17 @@
                  </tbody>
          </table>#}{% for oneNews in news %}
         <div class="col-md-7 offset-2">
-            <a href="/news/news" class="btn btn-light go-back" role="button">News</a>
-            <div class="card card-outline-secondary NewsForm">
-                <div class="card-header">
-                    <h3 class="mb-0 headingForm">Detalji Vesti</h3>
+            <a href="/dashboard" class="btn btn-light go-back" role="button">Go Back</a>
+
+        <div class="card card-outline-secondary NewsForm">
+            <div class="card-header">
+                <h3 class="mb-0 headingForm">Detalji Vesti</h3>
+            </div>
+            <!--card body-->
+            <div class="card-body">
+                <div class="form-group">
+                    <img src="{{ oneNews.images.url }}" class="w-100" alt="">
+
                 </div>
                 <!--card body-->
                 <div class="card-body">
