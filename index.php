@@ -64,12 +64,7 @@ $newsRouteCollection->get('/{id}', [$mainController, "singleNews"]);
 $app->post('/volountieer/create', [$mainController, "CreateVolountieer"]);
 $app->get('/volountieers', [$mainController, "getVolountieers"]);
 
-<<<<<<< HEAD
-$app->get('/logout', [$mainController, "logout"]);
-$app->get('/login', [$mainController, "login"]);
-$app->post('/login', [$mainController, "loginValidate"])->before(
-    function (Application $app, Request $request) use ($middleware) {
-=======
+
 
 $app->post('/image/delete/{id}',  [$mainController, "deleteImage"]);
 
@@ -78,7 +73,6 @@ $app->get('/logout',        [$mainController, "logout"]);
 $app->get('/login',         [$mainController, "login"]);
 $app->post('/login',        [$mainController, "loginValidate"])->before(
     function(Application $app, Request $request) use ($middleware){
->>>>>>> 784659eb2a85c1f2d34d86134940f2d5e8973326
 
         $user = $middleware->checkCredentials($app, $request);
 

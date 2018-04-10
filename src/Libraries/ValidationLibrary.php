@@ -12,7 +12,7 @@ use Valitron;
 
 class ValidationLibrary extends Valitron\Validator
 {
-    const NEWS_RULE = [
+    const   NEWS_RULE = [
         'title', 'content', 'category', 'language'
     ];
 
@@ -29,12 +29,13 @@ class ValidationLibrary extends Valitron\Validator
     {
         $dataArray = $request->request->all();
         $val = $this->withData($dataArray);
-        return  $val->rule("required", ValidationLibrary::NEWS_RULE)
+        return $val->rule("required", ValidationLibrary::NEWS_RULE)
             ->message("'{field} is required'");
     }
 
     public function volountieerRules($request)
-    {   $dataArray = $request->request->all();
+    {
+        $dataArray = $request->request->all();
         $val = $this->withData($dataArray);
         return $val->rule("required", ValidationLibrary::VOLOUNTIEER_RULE)
             ->message("'{field} is required'");
