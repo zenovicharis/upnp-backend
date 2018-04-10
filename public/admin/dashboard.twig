@@ -54,7 +54,7 @@
         {% for oneNews in news %}
         <div class="col-4">
             <div class="card">
-                <img class="card-img-top" src="https://i.imgur.com/KOLbQBX.png" alt=".">
+                <img class="card-img-top" src="{{ oneNews.images.url }}" alt=".">
                 <div class="card-body">
                     <h5 class="card-title">{{ oneNews.title }}<span class="float-right date" >{{ oneNews.created|date("M/d/Y") }}</span></h5>
                     <p class="card-text">{{ oneNews.content|slice(0,70) }}</p>

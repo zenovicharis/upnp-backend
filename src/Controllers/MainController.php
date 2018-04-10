@@ -2,13 +2,16 @@
 
 namespace Upnp\Controllers;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Upnp\Application;
 use Upnp\Clients\ImgurClient;
+use Upnp\Models\Image;
 use Upnp\Services\NewsService;
 use Upnp\EntityModels\NewsEntityModel;
 use Upnp\EntityModels\ImageEntityModel;
 use Upnp\EntityModels\VolountieerEntityModel;
 use Upnp\Libraries\ValidationLibrary;
+use Upnp\Services\VolountieerService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,13 +29,17 @@ class MainController
     /** @var ValidationLibrary $validationLibrary * */
     public $validationLibrary;
 
-    public function __construct($newsService, $userService, $imgurClient, $twig, $validationLibrary)
+    /** @var VolountieerService $volountieerService * */
+    public $volountieerService;
+
+    public function __construct($newsService, $userService, $volountieerService, $imgurClient, $twig, $validationLibrary)
     {
         $this->twig = $twig;
+        $this->imgurClient = $imgurClient;
+        $this->userService = $userService;
         $this->newsService = $newsService;
         $this->validationLibrary = $validationLibrary;
-        $this->userService = $userService;
-        $this->imgurClient = $imgurClient;
+        $this->volountieerService = $volountieerService;
     }
 
     public function dashboard()
@@ -105,8 +112,6 @@ class MainController
     {
         $news = $this->extractNews($request);
         $successfull = $this->newsService->updateNews($news, $id);
-//        var_dump($successfull);die();
-//        $news = $this->newsService->readNews();
         return new RedirectResponse('/news/'.$id);
         //return new RedirectResponse("/dashboard");
     }
@@ -114,16 +119,20 @@ class MainController
     public function singleNews(Request $request, $id)
     {
         $news = $this->newsService->NewsById($id);
+//        var_dump($news);die();
+//        var_dump($news);die();
         return $this->twig->render("admin/single-news.twig", ['news' => $news]);
 
     }
 
     public function CreateVolountieer(Request $request)
     {
-        $isValid = $this->validationLibrary->volountieerRules($request);
-        if ($isValid->validate()) {
+//        var_dump("hello");die();
+//        $isValid = $this->validationLibrary->volountieerRules($request);
+//        if ($isValid->validate()) {
+        if (true) {
             $volountieer = $this->extractVolountieer($request);
-            $successfull = $this->newsService->createVolountieer($volountieer);
+            $successfull = $this->volountieerService->createVolountieer($volountieer);
             if ($successfull == false) {
                 return new JsonResponse('', 500);
             };
@@ -194,5 +203,29 @@ class MainController
     {
         session_destroy();
         return new RedirectResponse('/login');
+    }
+
+
+    public function deleteImage($id) {
+        /** @var Image $image */
+        $image = $this->newsService->getImageById($id);
+
+//        var_dump($image);die();
+
+//        $image->news->detach($id);
+//        $image->detach($newsId);
+//        $image->news->detach($id);
+//        $success = $this->imgurClient->deleteImage($image->delete_hash);
+        try{
+            $image->news()->detach($id);
+//            $image->delete();
+//            $success = $this->newsService->deleteImage($newsId);
+        }catch(Exception $e){
+            var_dump($e->getMessage());die();
+        }
+//        if($success) {
+//            return new RedirectResponse('/news/'.$newsId);
+//        }
+//        return
     }
 }

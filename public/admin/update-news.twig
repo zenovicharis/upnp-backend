@@ -21,12 +21,14 @@
                 </div>
                 <!--card body-->
                 <div class="card-body">
-                    <form action="#" method="post">
+                    <form action="/image/delete/{{ news.images.id }}" method="post">
                         <div class="form-group">
-                            <img src="https://i.imgur.com/KOLbQBX.png" class="w-100" alt="">
+                            <img src="{{  news.images.url }}" class="w-100" alt="">
                         </div>
                         <div class="col-12 text-center mb-4">
+
                             <button type="submit" class="btn btn-danger" role="button">Delete</button>
+
                         </div>
                     </form>
                     <form class="form" action="/news/update/{{ news.id }}" method="POST" id="news-form">

@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require 'vendor/autoload.php';
 
-
+header("Access-Control-Allow-Origin: *");
 use Upnp\Application;
 use Upnp\Controllers\MainController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +16,7 @@ use Cicada\Routing\RouteCollection;
 $app = new Application($_SERVER['HOME']);
 
 
-$mainController = new MainController($app['newsService'], $app['userService'], $app['imgur'], $app['twig'], $app['validationLibrary']);
+$mainController = new MainController($app['newsService'], $app['userService'], $app['volountieerService'], $app['imgur'], $app['twig'], $app['validationLibrary']);
 $middleware = $app['middleware'];
 
 /** @var RouteCollection $newsRouteCollection */
@@ -42,6 +42,9 @@ $newsRouteCollection->get('/{id}',          [$mainController, "singleNews"]);
 
 $app->post('/volountieer/create', [$mainController, "CreateVolountieer"]);
 $app->get('/volountieers',        [$mainController, "getVolountieers"]);
+
+
+$app->post('/image/delete/{id}',  [$mainController, "deleteImage"]);
 
 $app->get('/dashboard',     [$mainController, "dashboard"]);
 $app->get('/logout',        [$mainController, "logout"]);

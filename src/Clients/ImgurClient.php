@@ -32,7 +32,7 @@ class ImgurClient
     }
 
     public function uploadImage($image){
-       /* $rawImage = file_get_contents($image->getRealPath());
+        $rawImage = file_get_contents($image->getRealPath());
         $header = ['Authorization' => 'Client-ID '.$this->clientId];
 
        try {
@@ -43,12 +43,27 @@ class ImgurClient
                'headers' => $header
            ]);
        } catch (\Exception $e){
-
+           var_dump($e->getMessage());die();
        }
         $content = $response->getBody()->getContents();
-        $image = json_decode($content); */
+        $image = json_decode($content);
 
-        //return new ImageEntityModel($image->data->id, $image->data->deletehash,  $image->data->link);
-        return new ImageEntityModel('KOLbQBX', 'oqyIsRzBwK1qXs4',  'https://i.imgur.com/KOLbQBX.png');
+        return new ImageEntityModel($image->data->id, $image->data->deletehash,  $image->data->link);
+//        return new ImageEntityModel('KOLbQBX', 'oqyIsRzBwK1qXs4',  'https://i.imgur.com/KOLbQBX.png');
+    }
+
+    public function deleteImage($id) {
+        $header = ['Authorization' => 'Client-ID '.$this->clientId];
+        try {
+            $response = $this->client->delete("/3/image/". $id, [
+               'headers' => $header
+           ]);
+
+        }catch (\Exception $e) {
+            var_dump($e->getMessage());die();
+        }
+        $content = $response->getBody()->getContents();
+        $data = json_decode($content);
+        return $data['success'];
     }
 }
