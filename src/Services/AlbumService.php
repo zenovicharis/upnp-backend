@@ -4,16 +4,16 @@ namespace Upnp\Services;
 
 use Upnp\Models\Album;
 use Upnp\Models\Image;
-use Upnp\EntityModels\AlbumEntityModel;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class AlbumService
 {
-    public function createAlbum($title)
+    public function createAlbum($title, $english_title)
     {
         try {
             $album = Album::create([
-                "title" => $title
+                "title" => $title,
+                "english_title" => $english_title
             ]);
             return $album;
         } catch (Exception $e) {
@@ -21,11 +21,12 @@ class AlbumService
         }
     }
 
-    public function updateAlbum($title, $id)
+    public function updateAlbum($title, $english_title, $id)
     {
         try {
             $album = Album::find($id)->update([
-                "title" => $title
+                "title" => $title,
+                "english_title" => $english_title
             ]);
             return $album;
         } catch (Exception $e) {

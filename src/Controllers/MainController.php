@@ -6,7 +6,6 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Upnp\Application;
 use Upnp\Clients\ImgurClient;
 use Upnp\Models\Image;
-use Upnp\EntityModels\AlbumEntityModel;
 use Upnp\Services\AlbumService;
 use Upnp\Services\NewsService;
 use Upnp\EntityModels\NewsEntityModel;
@@ -49,30 +48,30 @@ class MainController
         $this->volountieerService = $volountieerService;
     }
 
-    public function dashboard()
+    public function news()
     {
         $news = $this->newsService->readNews();
-        return $this->twig->render('admin/dashboard.twig', ['news' => $news]);
+        return $this->twig->render('admin/news/news.twig', ['news' => $news]);
     }
 
     public function create()
     {
         $albums = $this->albumService->readAlbums();
-        return $this->twig->render('admin/create-news.twig', ['albums' => $albums]);
+        return $this->twig->render('admin/news/create.twig', ['albums' => $albums]);
     }
 
     public function update()
     {
-        return $this->twig->render('admin/update-news.twig');
+        return $this->twig->render('admin/news/edit.twig');
     }
 
     public function login(Application $app, Request $request)
     {
         $isRedirected = $request->query->get("continue");
         if (!empty($isRedirected)) {
-            return $this->twig->render('admin/login.twig', ['message' => true]);
+            return $this->twig->render('admin/news/login.twig', ['message' => true]);
         }
-        return $this->twig->render('admin/login.twig');
+        return $this->twig->render('admin/news/login.twig');
     }
 
     public function createNews(Request $request)
@@ -92,27 +91,27 @@ class MainController
             $news = $this->extractNews($request);
 
             $successfull = $this->newsService->createNews($news);
-            return new RedirectResponse('/news/' . $successfull. '?message=Vest je uspesno kreirana!');
-//            return $this->twig->render('admin/single-news.twig', ['message' => $successfull]);
+            return new RedirectResponse('/news/' . $successfull . '?message=Vest je uspesno kreirana!');
+//            return $this->twig->render('admin/info.twig', ['message' => $successfull]);
         }
         $errors = $isValid->errors();
         $error_string = array_reduce($errors, function ($v1, $v2) {
             return $v1 . $v2[0] . '  ';
         });
-        return $this->twig->render('admin/create-news.twig', ['error_message' => $error_string]);
+        return $this->twig->render('admin/news/create.twig', ['error_message' => $error_string]);
     }
 
     public function editNews(Request $request, $id)
     {
         $news = $this->newsService->NewsById($id);
-        return $this->twig->render('admin/update-news.twig', ['news' => $news]);
+        return $this->twig->render('admin/news/edit.twig', ['news' => $news]);
     }
 
     public function deleteNews(Request $request, $id)
     {
         $successfull = $this->newsService->deleteNews($id);
         $news = $this->newsService->readNews();
-        return $this->twig->render("admin/dashboard.twig", ['news' => $news, 'deleteMessage' => $successfull]);
+        return $this->twig->render("admin/news/news.twig", ['news' => $news, 'deleteMessage' => $successfull]);
         //return new RedirectResponse("/dashboard");
     }
 
@@ -131,10 +130,10 @@ class MainController
     {
         $news = $this->newsService->NewsById($id);
         $message = $request->query->get("message");
-        if(!empty($message)){
-            return $this->twig->render("admin/single-news.twig", ['news' => $news, 'message' => $message]);
+        if (!empty($message)) {
+            return $this->twig->render("admin/news/info.twig", ['news' => $news, 'message' => $message]);
         }
-        return $this->twig->render("admin/single-news.twig", ['news' => $news]);
+        return $this->twig->render("admin/news/info.twig", ['news' => $news]);
     }
 
     public function CreateVolountieer(Request $request)
@@ -172,7 +171,9 @@ class MainController
     public function createAlbumPost(Request $request)
     {
         $title = $request->request->get("title");
-        $createdAlbumObject = $this->albumService->createAlbum($title);
+        $english_title = $request->request->get("english_title");
+
+        $createdAlbumObject = $this->albumService->createAlbum($title, $english_title);
         // $request->request->set('album_id', $createdAlbumObject->id);
 
         $image = $request->files->get("image");
@@ -205,7 +206,9 @@ class MainController
     public function updateAlbum(Request $request, $id)
     {
         $title = $request->request->get("title");
-        $updatedAlbum = $this->albumService->updateAlbum($title, $id);
+        $english_title = $request->request->get("english_title");
+        $updatedAlbum = $this->albumService->updateAlbum($title, $english_title, $id);
+
         if ($updatedAlbum) {
             return new RedirectResponse("/album/info/" . $id);
         } else {
@@ -290,7 +293,7 @@ class MainController
         $password = $request->request->get('password');
         if (password_verify($password, $user->password)) {
             $_SESSION['user'] = $user->toArray();
-            return new RedirectResponse('/news/news');
+            return new RedirectResponse('/news/');
         }
         return new RedirectResponse('/login?continue=failed');
     }
@@ -301,8 +304,8 @@ class MainController
         return new RedirectResponse('/login');
     }
 
-
-    public function deleteImage($id) {
+    public function deleteImage($id)
+    {
         /** @var Image $image */
         $image = $this->newsService->getImageById($id);
 
@@ -312,12 +315,13 @@ class MainController
 //        $image->detach($newsId);
 //        $image->news->detach($id);
 //        $success = $this->imgurClient->deleteImage($image->delete_hash);
-        try{
+        try {
             $image->news()->detach($id);
 //            $image->delete();
 //            $success = $this->newsService->deleteImage($newsId);
-        }catch(Exception $e){
-            var_dump($e->getMessage());die();
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
         }
 //        if($success) {
 //            return new RedirectResponse('/news/'.$newsId);

@@ -91,11 +91,12 @@ class NewsService
         }
     }
 
-    public function readVolountieers(){
-        try{
+    public function readVolountieers()
+    {
+        try {
             $volountieers = Volountieer::all()->get();
             return $volountieers;
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -128,36 +129,41 @@ class NewsService
         }
     }
 
-    public function NewsById($id){
-        try{
+    public function NewsById($id)
+    {
+        try {
             $news = News::get_news_with_id($id);
 //            var_dump($news);die();
 
             return $news->toArray();
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
     }
 
-    public function getImageById($id) {
-        try{
+    public function getImageById($id)
+    {
+        try {
             $image = Image::with("News")->find($id);
 
             return $image;
-        } catch ( Exception $e) {
-            var_dump($e->getMessage());die();
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
         }
     }
 
-    public function deleteImage($id){
+    public function deleteImage($id)
+    {
         try {
             /** @var Image $image */
             $image = Image::find($id);
 //            var_dump($image);die();
             $image->delete();
             return true;
-        } catch ( Exception $e) {
-            var_dump($e->getMessage());die();
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
         }
     }
 }

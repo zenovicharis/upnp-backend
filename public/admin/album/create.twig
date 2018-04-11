@@ -1,60 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Dashboard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/public/admin/assets/css/admin-style.css">
-    <script src="/public/admin/assets/js/additional-methods.min.js"></script>
-    <script src="/public/admin/assets/js/jquery.validate.min.js"></script>
-</head>
+{% include 'admin/news/parts/head.twig' %}
 <body>
 
 <div class="container-fluid">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container">
-
-            <!-- Brand -->
-            <a class="navbar-brand" href="#">upnp</a>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/news/news">News</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/album/albums">Albums</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/news/create">Create News</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/album/create">Create Album</a>
-                </li>
-            </ul>
-            <!-- Links -->
-            <div class="navbar-collapse justify-content-end" id="nav-content">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Welcome admin
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    {% include 'admin/news/parts/header.twig' %}
     <!-- navbar -->
 
     <!-- form -->
     <div class="container">
         <div class="col-md-7 offset-2">
-            <a href="/album/albums" class="btn btn-light go-back" role="button">Albums</a>
+            <a href="/album/" class="btn btn-light go-back" role="button">Albums</a>
             <!-- form  -->
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
@@ -67,6 +23,10 @@
                         <div class="form-group">
                             <label for="title">Unesi Naslov</label>
                             <input type="text" class="form-control" name="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="english_title">Unesi Naslov Na Engleskom</label>
+                            <input type="text" class="form-control" name="english_title">
                         </div>
                         <div class="form-group">
                             <label for="image">Unesi Sliku</label>

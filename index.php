@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 require 'vendor/autoload.php';
 
 header("Access-Control-Allow-Origin: *");
+
 use Upnp\Application;
 use Upnp\Controllers\MainController;
 use Upnp\Controllers\PublicController;
@@ -46,7 +47,7 @@ $albumRouteCollection->post('/create', [$mainController, 'createAlbumPost']);
 $albumRouteCollection->get('/create', [$mainController, 'createAlbum']);
 $albumRouteCollection->get('/info/{id}', [$mainController, 'infoAlbum']);
 $albumRouteCollection->get('/edit/{id}', [$mainController, 'editAlbum']);
-$albumRouteCollection->get('/albums', [$mainController, 'albums']);
+$albumRouteCollection->get('/', [$mainController, 'albums']);
 $albumRouteCollection->delete('/image/{id}', [$mainController, 'deleteAlbumImage']);
 $albumRouteCollection->post('/update/{id}', [$mainController, 'updateAlbum']);
 $albumRouteCollection->post('/upload/{id}', [$mainController, 'uploadImageToAlbum']);
@@ -56,7 +57,7 @@ $albumRouteCollection->post('/upload/{id}', [$mainController, 'uploadImageToAlbu
 $newsRouteCollection->post('/create', [$mainController, "createNews"]);
 $newsRouteCollection->post('/update/{id}', [$mainController, "updateNews"]);
 $newsRouteCollection->post('/delete/{id}', [$mainController, "deleteNews"]);
-$newsRouteCollection->get('/news', [$mainController, "dashboard"]);
+$newsRouteCollection->get('/', [$mainController, "news"]);
 $newsRouteCollection->get('/create', [$mainController, "create"]);
 $newsRouteCollection->get('/edit/{id}', [$mainController, "editNews"]);
 $newsRouteCollection->get('/{id}', [$mainController, "singleNews"]);
@@ -66,18 +67,17 @@ $app->post('/volountieer/create', [$mainController, "CreateVolountieer"]);
 $app->get('/volountieers', [$mainController, "getVolountieers"]);
 
 
-
-$app->post('/image/delete/{id}',  [$mainController, "deleteImage"]);
+$app->post('/image/delete/{id}', [$mainController, "deleteImage"]);
 
 $app->get('/news', [$publicController, "getNews"]);
 $app->get('/albums', [$publicController, "getAlbums"]);
 
 
 //$app->get('/dashboard',     [$mainController, "dashboard"]);
-$app->get('/logout',        [$mainController, "logout"]);
-$app->get('/login',         [$mainController, "login"]);
-$app->post('/login',        [$mainController, "loginValidate"])->before(
-    function(Application $app, Request $request) use ($middleware){
+$app->get('/logout', [$mainController, "logout"]);
+$app->get('/login', [$mainController, "login"]);
+$app->post('/login', [$mainController, "loginValidate"])->before(
+    function (Application $app, Request $request) use ($middleware) {
 
         $user = $middleware->checkCredentials($app, $request);
 

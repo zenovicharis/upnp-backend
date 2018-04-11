@@ -16,7 +16,7 @@ $(document).ready(function () {
     $("#createForm").validate({
         rules: {
             title: {
-                required: true,
+                required: true
             },
             content: {
                 required: true

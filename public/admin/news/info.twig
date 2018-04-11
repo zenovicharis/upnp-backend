@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'admin/news/parts/head.twig' %}
+<body>
+
+<div class="container-fluid">
+    {% include 'admin/news/parts/header.twig' %}
+    <!-- navbar -->
+
+    <!-- table -->
+    <div class="container">
+        {% if message is defined %}
+            <div class="alert alert-success" role="alert">
+                <strong>Uporozenje!</strong> {{ message }}
+            </div>
+        {% endif %}
+        <div class="col-md-7 offset-2">
+            <a href="/news/" class="btn btn-light go-back" role="button">News</a>
+
+            <div class="card card-outline-secondary NewsForm">
+                <div class="card-header">
+                    <h3 class="mb-0 headingForm">Detalji Vesti</h3>
+                </div>
+                <!--card body-->
+                <div class="card-body">
+                    <div class="form-group">
+                        <img src="{{ news.images.url }}" class="w-100" alt="picture">
+                    </div>
+                    <div class="form-group">
+                        <p><b>Naslov:</b></p>
+                        <p>{{ news.title }}<span class="float-right">{{ news.created|date("M/d/Y") }}</span></p>
+                    </div>
+                    <div class="form-group">
+                        <hr>
+                        <p><b>Tekst:</b></p>
+                        <p>{{ news.content }}</p>
+                    </div>
+                    <div class="form-group">
+                        <hr>
+                        <p><b>Kategorija:</b></p>
+                        <p>{{ news.category }}</p>
+                    </div>
+                    <div class="form-group">
+                        <hr>
+                        <p><b>Jezik:</b></p>
+                        <p>{{ news.language }}</p>
+                    </div>
+                    <div class="admin-buttons">
+                        <hr>
+                        <form action="/news/delete/{{ news.id }}" method="post">
+                            <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
+                        </form>
+                        <a href="/news/edit/{{ news.id }}" class="btn btn-primary float-right" role="button">Edit</a>
+                    </div>
+                </div>
+                <!--/card-body-->
+            </div>
+            <!--/card-body-->
+        </div>
+    </div>
+    <!-- end table -->
+
+</div>
+
+</body>
+</html>

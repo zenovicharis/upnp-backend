@@ -15,7 +15,7 @@ use \Illuminate\Database\Eloquent\Model;
 class Album extends Model
 {
     protected $table = "albums";
-    protected $fillable = ["title"];
+    protected $fillable = ["title", "english_title"];
 //    protected $guarded = ["updated_at", "created_at"];
     public $timestamps = false;
 
