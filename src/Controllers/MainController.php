@@ -2,22 +2,23 @@
 
 namespace Upnp\Controllers;
 
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Upnp\Application;
 use Upnp\Clients\ImgurClient;
 use Upnp\Models\Image;
 use Upnp\Services\AlbumService;
 use Upnp\Services\NewsService;
+use Upnp\Services\VolountieerService;
+use Upnp\Services\ImageService;
 use Upnp\EntityModels\NewsEntityModel;
 use Upnp\EntityModels\ImageEntityModel;
 use Upnp\EntityModels\VolountieerEntityModel;
 use Upnp\Libraries\ValidationLibrary;
-use Upnp\Services\VolountieerService;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class MainController
 {
@@ -25,6 +26,10 @@ class MainController
     private $newsService;
     /** @var AlbumService $albumService * */
     private $albumService;
+    /** @var VolountieerService $volountieerService * */
+    private $volountieerService;
+    /** @var ImageService $imageService * */
+    private $imageService;
     /** @var ImgurClient $imgurClient * */
     private $imgurClient;
     /** @var  \Twig_Environment $twig */
@@ -32,11 +37,7 @@ class MainController
     /** @var ValidationLibrary $validationLibrary * */
     public $validationLibrary;
 
-
-    /** @var VolountieerService $volountieerService * */
-    public $volountieerService;
-
-    public function __construct($newsService, $userService, $volountieerService, $imgurClient, $twig, $validationLibrary, $albumService)
+    public function __construct($newsService, $userService, $volountieerService, $imgurClient, $twig, $validationLibrary, $albumService, $imageService)
 
     {
         $this->twig = $twig;
@@ -46,6 +47,7 @@ class MainController
         $this->albumService = $albumService;
         $this->validationLibrary = $validationLibrary;
         $this->volountieerService = $volountieerService;
+        $this->imageService = $imageService;
     }
 
     public function news()
@@ -83,7 +85,7 @@ class MainController
             if (!empty($image)) {
                 /** @var ImageEntityModel $imageObj */
                 $imageObj = $this->imgurClient->uploadImage($image);
-                $imageSavedEntity = $this->newsService->createImage($imageObj);
+                $imageSavedEntity = $this->imageService->createImage($imageObj);
                 $request->request->set('image_id', $imageSavedEntity->id);
             } else {
                 return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
@@ -115,17 +117,6 @@ class MainController
         //return new RedirectResponse("/dashboard");
     }
 
-    public function updateNews(Request $request, $id)
-    {
-        $news = $this->extractNews($request);
-        $successfull = $this->newsService->updateNews($news, $id);
-//        var_dump($successfull);die();
-//        $news = $this->newsService->readNews();
-        return new RedirectResponse('/news/' . $id);
-
-        //return new RedirectResponse("/dashboard");
-    }
-
     public function singleNews(Request $request, $id)
     {
         $news = $this->newsService->NewsById($id);
@@ -138,25 +129,26 @@ class MainController
 
     public function CreateVolountieer(Request $request)
     {
-//        var_dump("hello");die();
-//        $isValid = $this->validationLibrary->volountieerRules($request);
-//        if ($isValid->validate()) {
-        if (true) {
-            $volountieer = $this->extractVolountieer($request);
-            $successfull = $this->volountieerService->createVolountieer($volountieer);
-            if ($successfull == false) {
-                return new JsonResponse('', 500);
-            };
-            return new JsonResponse($successfull, 201);
 
+        $isValid = $this->validationLibrary->volountieerRules($request);
+        if ($isValid->validate()) {
+            if (true) {
+                $volountieer = $this->extractVolountieer($request);
+                $successfull = $this->volountieerService->createVolountieer($volountieer);
+                if ($successfull == false) {
+                    return new JsonResponse('', 500);
+                };
+                return new JsonResponse($successfull, 201);
+            }
+            $errors = $isValid->errors();
+            return new JsonResponse($errors, JsonResponse::HTTP_EXPECTATION_FAILED);
         }
-        $errors = $isValid->errors();
-        return new JsonResponse($errors, JsonResponse::HTTP_EXPECTATION_FAILED);
     }
 
     public function getVolountieers()
     {
-        $successfull = $this->newsService->readVolountieers();
+        $successfull = $this->volountieerService->getValountieers();
+        //var_dump($successfull);die();
         if ($successfull == false) {
             return new JsonResponse('', 500);
         };
@@ -180,22 +172,26 @@ class MainController
         if (!empty($image)) {
             /** @var ImageEntityModel $imageObj */
             $imageObj = $this->imgurClient->uploadImage($image);
-            $imageSavedEntity = $this->newsService->createImage($imageObj, $createdAlbumObject->id);
+            $imageSavedEntity = $this->imageService->createImage($imageObj, $createdAlbumObject->id);
             //$request->request->set('image_id', $imageSavedEntity->id);
         } else {
             return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
         }
 
         // redirect na info, kad ga napravimo.
-        return new RedirectResponse('/album/info/' . $createdAlbumObject->id);
+        return new RedirectResponse('/album/info/' . $createdAlbumObject->id . '?message=Album je uspesno kreiran!');
 
     }
 
     public function infoAlbum(Request $request, $id)
     {
         $album = $this->albumService->readAlbumById($id);
-
+        $message = $request->query->get("message");
+        if (!empty($message)) {
+            return $this->twig->render("admin/album/info.twig", ['album' => $album, 'message' => $message]);
+        }
         return $this->twig->render("admin/album/info.twig", ['album' => $album]);
+
     }
 
     public function deleteAlbumImage(Request $request, $id)
@@ -224,7 +220,7 @@ class MainController
         if (!empty($image)) {
             /** @var ImageEntityModel $imageObj */
             $imageObj = $this->imgurClient->uploadImage($image);
-            $imageSavedEntity = $this->newsService->createImage($imageObj, $id);
+            $imageSavedEntity = $this->imageService->createImage($imageObj, $id);
         } else {
             return new JsonResponse('image not uploaded', JsonResponse::HTTP_EXPECTATION_FAILED);
         }
@@ -307,7 +303,7 @@ class MainController
     public function deleteImage($id)
     {
         /** @var Image $image */
-        $image = $this->newsService->getImageById($id);
+        $image = $this->imageService->getImageById($id);
 
 //        var_dump($image);die();
 

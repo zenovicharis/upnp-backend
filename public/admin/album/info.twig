@@ -2,16 +2,18 @@
 <html lang="en">
 {% include 'admin/news/parts/head.twig' %}
 <body>
-
 <div class="container-fluid">
     {% include 'admin/news/parts/header.twig' %}
-    <!-- navbar -->
-
-    <!-- form -->
     <div class="container">
+
+        {% if message is defined %}
+            <div class="alert alert-success" role="alert">
+                <strong>Uporozenje!</strong> {{ message }}
+            </div>
+        {% endif %}
+
         <div class="col-md-10 offset-1">
             <a href="/album/" class="btn btn-light go-back" role="button">Albums</a>
-            <!-- form  -->
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
                     <h3 class="mb-0 headingForm">Album Info</h3>
@@ -30,16 +32,13 @@
                                 <div class="col-md-4 my-2">
                                     <div class="thumbnail">
                                         <a href="">
-                                            <img src="{{ image.url }}" alt="Lights" style="width:100%">
+                                            <img src="{{ image.url }}" alt="picture" style="width:100%">
                                         </a>
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
                         <div class="admin-buttons">
-                            {#<form action="#" method="post">
-                                <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
-                            </form>#}
                             <a href="/album/edit/{{ album.id }}" class="btn btn-primary float-right"
                                role="button">Edit</a>
                         </div>
@@ -47,11 +46,8 @@
                 </div>
                 <!--/card-body-->
             </div>
-            <!-- /form -->
         </div>
     </div>
-    <!-- end form -->
-
 </div>
 </body>
 <script src="/public/admin/assets/validation.js"></script>

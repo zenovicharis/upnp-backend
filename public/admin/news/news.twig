@@ -2,56 +2,29 @@
 <html lang="en">
 {% include 'admin/news/parts/head.twig' %}
 <body>
-
 <div class="container-fluid">
     {% include 'admin/news/parts/header.twig' %}
-    <!-- navbar -->
-
-    {% if deleteMessage is defined %}
-        <div {{ deleteMessage ? 'class="alert alert-success"' : 'class="alert alert-danger"' }} role="alert">
-            <strong>Uporozenje!</strong> {{ deleteMessage ? 'Vest je uspesno izbrisana' : 'Vest nije uspesno izbrisana' }}
-        </div>
-    {% endif %}
-
-    {% if updateMessage is defined %}
-        <div {{ updateMessage ? 'class="alert alert-success"' : 'class="alert alert-danger"' }} role="alert">
-            <strong>Uporozenje!</strong> {{ updateMessage ? 'Vest je uspesno izmenjena' : 'Vest nije uspesno izmenjena' }}
-        </div>
-    {% endif %}
-
-    <!-- table -->
     <div class="container">
+
+        {% if deleteMessage is defined %}
+            <div {{ deleteMessage ? 'class="alert alert-success"' : 'class="alert alert-danger"' }} role="alert">
+                <strong>Uporozenje!</strong> {{ deleteMessage ? 'Vest je uspesno izbrisana' : 'Vest nije uspesno izbrisana' }}
+            </div>
+        {% endif %}
+
+        {% if updateMessage is defined %}
+            <div {{ updateMessage ? 'class="alert alert-success"' : 'class="alert alert-danger"' }} role="alert">
+                <strong>Uporozenje!</strong> {{ updateMessage ? 'Vest je uspesno izmenjena' : 'Vest nije uspesno izmenjena' }}
+            </div>
+        {% endif %}
+
         <div class="jumbotron jumbotron headingForm">
             <div class="container">
                 <h1>Vesti</h1>
                 <p>Ovde se nalaze sve vesti sa sajta</p>
             </div>
         </div>
-        {#<table class="table table-hover table-light">
-            {% for oneNews in news %}
-            <thead>
-            <tr>
-                <th scope="col" class="admin-buttons">
-                    <form action="/news/delete/{{ oneNews.id }}" method="post">
-                        <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
-                    </form>
-                    <a href="/news/edit/{{ oneNews.id }}" class="btn btn-primary float-right" role="button">Edit</a>
-                    <a href="/news/{{ oneNews.id }}" class="btn btn-success float-right" role="button">Info</a>
-                    <span class="title"><i>{{ oneNews.title }}</i></span>
-                    <span><img src="" alt="" width="100px" height="100px"></span>
-                    <span class="float-right date" >{{ oneNews.created|date("M/d/Y") }}</span>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td scope="row">{{ oneNews.content }}</td>
-            </tr>
-            </tbody>
-            {% endfor %}
-        </table>#}
         <div class="row">
-
             {% for oneNews in news %}
                 <div class="col-4">
                     <div class="card">
@@ -75,7 +48,6 @@
             {% endfor %}
         </div>
     </div>
-    <!-- end table -->
 </div>
 </body>
 </html>

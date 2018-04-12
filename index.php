@@ -21,7 +21,7 @@ $app = new Application($_SERVER['HOME']);
 $publicController = new PublicController($app['publicService']);
 
 
-$mainController = new MainController($app['newsService'], $app['userService'], $app['volountieerService'], $app['imgur'], $app['twig'], $app['validationLibrary'], $app['albumService']);
+$mainController = new MainController($app['newsService'], $app['userService'], $app['volountieerService'], $app['imgur'], $app['twig'], $app['validationLibrary'], $app['albumService'],$app['imageService']);
 $middleware = $app['middleware'];
 
 /** @var RouteCollection $newsRouteCollection */

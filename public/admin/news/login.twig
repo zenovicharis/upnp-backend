@@ -2,17 +2,16 @@
 <html lang="en">
 {% include 'admin/news/parts/head.twig' %}
 <body>
-
 <div class="container-fluid">
-    <!-- form -->
     <div class="container">
+
         {% if message is defined %}
             <div class="alert alert-danger" role="alert">
                 <strong>Uporozenje!</strong> Molim vas ulogujte se
             </div>
         {% endif %}
+
         <div class="col-md-7 offset-2">
-            <!-- form  -->
             <div class="card card-outline-secondary login-top">
                 <div class="card-header">
                     <h3 class="mb-0 headingForm">Login</h3>
@@ -37,10 +36,8 @@
                 </div>
                 <!--/card-body-->
             </div>
-            <!-- /form -->
         </div>
     </div>
-    <!-- end form -->
 </div>
 </body>
 <script src="/public/admin/assets/validation.js"></script>

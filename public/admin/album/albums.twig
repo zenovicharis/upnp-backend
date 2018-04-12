@@ -2,12 +2,8 @@
 <html lang="en">
 {% include 'admin/news/parts/head.twig' %}
 <body>
-
 <div class="container-fluid">
     {% include 'admin/news/parts/header.twig' %}
-    <!-- navbar -->
-
-    <!-- form -->
     <div class="container">
         <div class="col-md-10 offset-1">
             <div class="jumbotron jumbotron headingForm">
@@ -16,7 +12,6 @@
                     <p>Ovde se nalaze svi albumi sa sajta</p>
                 </div>
             </div>
-            <!-- form  -->
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
                     <h3 class="mb-0 headingForm">Albums</h3>
@@ -46,20 +41,12 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        <div class="admin-buttons">
-                            {#<form action="#" method="post">
-                                <button type="submit" class="btn btn-danger float-right" role="button">Delete</button>
-                            </form>#}
-                        </div>
                     </form>
                 </div>
                 <!--/card-body-->
             </div>
-            <!-- /form -->
         </div>
     </div>
-    <!-- end form -->
-
 </div>
 </body>
 <script src="/public/admin/assets/validation.js"></script>

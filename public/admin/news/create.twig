@@ -2,10 +2,8 @@
 <html lang="en">
 {% include 'admin/news/parts/head.twig' %}
 <body>
-
 <div class="container-fluid">
     {% include 'admin/news/parts/header.twig' %}
-    <!-- navbar -->
 
     {% if message is defined %}
         <div {{ message ? 'class="alert alert-success"' : 'class="alert alert-danger"' }} role="alert">
@@ -19,11 +17,9 @@
         </div>
     {% endif %}
 
-    <!-- form -->
     <div class="container">
         <div class="col-md-7 offset-2">
             <a href="/news/" class="btn btn-light go-back" role="button">News</a>
-            <!-- form  -->
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
                     <h3 class="mb-0 headingForm">Kreiraj Vest</h3>
@@ -69,11 +65,8 @@
                 </div>
                 <!--/card-body-->
             </div>
-            <!-- /form -->
         </div>
     </div>
-    <!-- end form -->
-
 </div>
 </body>
 <script src="/public/admin/assets/validation.js"></script>

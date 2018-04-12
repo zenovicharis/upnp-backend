@@ -7,6 +7,7 @@ use Upnp\Services\AlbumService;
 use Upnp\Services\NewsService;
 use Upnp\Services\PublicService;
 use Upnp\Services\UserService;
+use Upnp\Services\ImageService;
 use Upnp\Clients\ImgurClient;
 use Upnp\Middleware\Authentication;
 use Upnp\Libraries\ValidationLibrary;
@@ -53,28 +54,30 @@ class Application extends \Cicada\Application
         };
     }
 
-
-
-    private function setUpServices(){
+    private function setUpServices()
+    {
         $imgurClient = $this['imgur'];
-        $this['newsService'] = function() use ($imgurClient) {
-            return new NewsService($imgurClient);
+        $this['imageService'] = function () use ($imgurClient) {
+            return new ImageService($imgurClient);
+        };
+
+        $this['newsService'] = function () {
+            return new NewsService();
         };
 
         $this['userService'] = function () {
             return new UserService();
         };
 
-
-        $this['volountieerService'] = function(){
+        $this['volountieerService'] = function () {
             return new VolountieerService();
         };
-      
-        $this['albumService'] = function(){
+
+        $this['albumService'] = function () {
             return new AlbumService();
         };
 
-        $this['publicService'] = function(){
+        $this['publicService'] = function () {
             return new PublicService();
         };
     }

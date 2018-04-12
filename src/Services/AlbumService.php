@@ -3,7 +3,6 @@
 namespace Upnp\Services;
 
 use Upnp\Models\Album;
-use Upnp\Models\Image;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class AlbumService

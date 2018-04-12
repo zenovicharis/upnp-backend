@@ -2,21 +2,18 @@
 <html lang="en">
 {% include 'admin/news/parts/head.twig' %}
 <body>
-
 <div class="container-fluid">
     {% include 'admin/news/parts/header.twig' %}
-    <!-- navbar -->
-
-    <!-- table -->
     <div class="container">
+
         {% if message is defined %}
             <div class="alert alert-success" role="alert">
                 <strong>Uporozenje!</strong> {{ message }}
             </div>
         {% endif %}
+
         <div class="col-md-7 offset-2">
             <a href="/news/" class="btn btn-light go-back" role="button">News</a>
-
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
                     <h3 class="mb-0 headingForm">Detalji Vesti</h3>
@@ -55,12 +52,8 @@
                 </div>
                 <!--/card-body-->
             </div>
-            <!--/card-body-->
         </div>
     </div>
-    <!-- end table -->
-
 </div>
-
 </body>
 </html>

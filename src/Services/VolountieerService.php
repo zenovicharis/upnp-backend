@@ -9,6 +9,7 @@
 namespace Upnp\Services;
 
 use Upnp\EntityModels\VolountieerEntityModel;
+use Upnp\Models\Volountieer;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class VolountieerService
@@ -17,9 +18,9 @@ class VolountieerService
     {
     }
 
-    public function createVolountieer(VolountieerEntityModel $entityModel){
-        try{
-            var_dump($entityModel);die();
+    public function createVolountieer(VolountieerEntityModel $entityModel)
+    {
+        try {
             $volountieer = Volountieer::create([
                 "ime_prezime" => $entityModel->ime_prezime,
                 "datum" => $entityModel->datum,
@@ -38,19 +39,19 @@ class VolountieerService
                 "dodatna_obuka" => $entityModel->dodatna_obuka
             ]);
             return (int)$volountieer->id;
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
 
-    public function getValountieers(){
-        try{
-            $volountieer = Volountieer::all()->get();
+    public function getValountieers()
+    {
+        try {
+            $volountieers = Volountieer::all()->toArray();
+            return $volountieers;
         } catch (Exception $e) {
-            var_dump($e->getMessage());die();
+            var_dump($e->getMessage());
+            die();
         }
-
     }
-
-
 }

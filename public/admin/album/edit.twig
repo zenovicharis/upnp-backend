@@ -2,16 +2,11 @@
 <html lang="en">
 {% include 'admin/news/parts/head.twig' %}
 <body>
-
 <div class="container-fluid">
     {% include 'admin/news/parts/header.twig' %}
-    <!-- navbar -->
-
-    <!-- form -->
     <div class="container">
         <div class="col-md-10 offset-1">
             <a href="/album/" class="btn btn-light go-back" role="button">Albums</a>
-            <!-- form  -->
             <div class="card card-outline-secondary NewsForm">
                 <div class="card-header">
                     <h3 class="mb-0 headingForm">{{ album.title }}</h3>
@@ -23,8 +18,6 @@
                         <div class="form-group">
                             <label for="title">Izmeni Naslov</label>
                             <input type="text" class="form-control" name="title" value="{{ album.title }}">
-                            <button type="submit" class="btn btn-success mt-1">Confirm
-                            </button>
                         </div>
                         <div class="form-group">
                             <label for="english_title">Izmeni Naslov Na Engleskom</label>
@@ -57,7 +50,6 @@
                             </div>
                         </div>
                     </div>
-                    </form>
                     <hr>
                     <div class="row mb-2">
                         {% for image in album.images %}
@@ -81,12 +73,10 @@
                     </div>
                     <!--/card-body-->
                 </div>
-                <!-- /form -->
             </div>
         </div>
-        <!-- end form -->
-
     </div>
+</div>
 </body>
 <script src="/public/admin/assets/validation.js"></script>
 </html>
