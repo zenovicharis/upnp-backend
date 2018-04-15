@@ -47,55 +47,68 @@ class PublicController
 
     public function volunteer()
     {
-//        $news = $this->publicService->getNews();
         return $this->twig->render('/volountieer-service/volountieer-service.html');//, ['news' => $news]
     }
 
     public function contact()
     {
-//        $news = $this->publicService->getNews();
         return $this->twig->render('/contact/contact.html');//, ['news' => $news]
     }
 
     public function gallery()
     {
-//        $news = $this->publicService->getNews();
         return $this->twig->render('/gallery/gallery.html');//, ['news' => $news]
     }
 
     public function news()
     {
-//        $news = $this->publicService->getNews();
         return $this->twig->render('/news/news.html');//, ['news' => $news]
     }
 
     public function patreon()
     {
-//        $news = $this->publicService->getNews();
         return $this->twig->render('/patreon/patreon.html');//, ['news' => $news]
     }
 
     public function aboutus()
     {
-//        $news = $this->publicService->getNews();
         return $this->twig->render('/about/about.html');//, ['news' => $news]
     }
-//    public function getAlbums()
-//    {
-//        $albums = $this->publicService->getAlbums();
-//        return new JsonResponse($albums);
-//    }
-//
-//
-//    public function getNews()
-//    {
-//        $news = $this->publicService->getNews();
-//        return new JsonResponse($news);
-//    }
-//
-//    public function getAlbums()
-//    {
-//        $albums = $this->publicService->getAlbums();
-//        return new JsonResponse($albums);
-//    }
+
+
+    public function landingEn()
+    {
+        $news = $this->publicService->getNews();
+        return $this->twig->render('/en-landing/en-landing.html');//, ['news' => $news]
+    }
+
+    public function volunteerEn()
+    {
+        return $this->twig->render('/en-volountieer-service/en-volountieer-service.html');//, ['news' => $news]
+    }
+
+    public function contactEn()
+    {
+        return $this->twig->render('/en-contact/en-contact.html');//, ['news' => $news]
+    }
+
+    public function galleryEn()
+    {
+        return $this->twig->render('/en-gallery/en-gallery.html');//, ['news' => $news]
+    }
+
+    public function newsEn()
+    {
+        return $this->twig->render('/en-news/en-news.html');//, ['news' => $news]
+    }
+
+    public function patreonEn()
+    {
+        return $this->twig->render('/en-patreon/en-patreon.html');//, ['news' => $news]
+    }
+
+    public function aboutusEn()
+    {
+        return $this->twig->render('/en-about/en-about.html');//, ['news' => $news]
+    }
 }

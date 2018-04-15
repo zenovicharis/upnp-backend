@@ -42,6 +42,9 @@ $albumRouteCollection = $app['collection_factory']->prefix('/album')->before(
         }
     });
 
+/** @var RouteCollection $englishRouteCollection */
+$englishRouteCollection = $app['collection_factory']->prefix('/en');
+
 // Albums routes
 $albumRouteCollection->post('/create',          [$mainController, 'createAlbumPost']);
 $albumRouteCollection->get('/create',           [$mainController, 'createAlbum']);
@@ -83,6 +86,16 @@ $app->get('/patreon',[$publicController, "patreon"]);
 $app->get('/aboutus',[$publicController, "aboutus"]);
 
 
+$englishRouteCollection->get('',[$publicController, "landingEn"]);
+$englishRouteCollection->get('/',[$publicController, "landingEn"]);
+$englishRouteCollection->get('/volunteer',[$publicController, "volunteerEn"]);
+$englishRouteCollection->get('/public/news',[$publicController, "newsEn"]);
+$englishRouteCollection->get('/gallery',[$publicController, "galleryEn"]);
+$englishRouteCollection->get('/contact',[$publicController, "contactEn"]);
+$englishRouteCollection->get('/patreon',[$publicController, "patreonEn"]);
+$englishRouteCollection->get('/aboutus',[$publicController, "aboutusEn"]);
+
+
 //$app->get('/dashboard',     [$mainController, "dashboard"]);
 $app->get('/logout',                            [$mainController, "logout"]);
 $app->get('/login',                             [$mainController, "login"]);
@@ -99,5 +112,6 @@ $app->post('/login',                            [$mainController, "loginValidate
     });
 
 $app->addRouteCollection($newsRouteCollection);
+$app->addRouteCollection($englishRouteCollection);
 $app->addRouteCollection($albumRouteCollection);
 $app->run();
