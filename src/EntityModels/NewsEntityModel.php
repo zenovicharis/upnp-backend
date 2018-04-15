@@ -11,7 +11,7 @@ class NewsEntityModel
     public $image_id;
     public $language;
 
-    public function __construct($title, $content,$category, $image_id, $language)
+    public function __construct($title = "", $content = "",$category = "", $image_id = "", $language = "")
     {
         $this->title = $title;
         $this->content = $content;

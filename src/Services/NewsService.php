@@ -25,7 +25,7 @@ class NewsService
             ]);
             return (int)$news->id;
         } catch (Exception $e) {
-            return false;
+            var_dump($e->getMessage());die();
         }
     }
 

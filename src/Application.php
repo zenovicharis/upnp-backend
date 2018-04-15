@@ -125,7 +125,7 @@ class Application extends \Cicada\Application
     private function setupTwig()
     {
         $this['twig'] = function () {
-            $loader = new \Twig_Loader_Filesystem('public');
+            $loader = new \Twig_Loader_Filesystem('dist');
             $twig = new  \Twig_Environment($loader, array(//
 //                'cache' => 'cache',
                 'debug' => true

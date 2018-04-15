@@ -18,7 +18,7 @@ use Cicada\Routing\RouteCollection;
 $app = new Application($_SERVER['HOME']);
 
 
-$publicController = new PublicController($app['publicService']);
+$publicController = new PublicController( $app['twig'],$app['publicService']);
 
 
 $mainController = new MainController($app['newsService'], $app['userService'], $app['volountieerService'], $app['imgur'], $app['twig'], $app['validationLibrary'], $app['albumService'],$app['imageService']);
@@ -43,40 +43,50 @@ $albumRouteCollection = $app['collection_factory']->prefix('/album')->before(
     });
 
 // Albums routes
-$albumRouteCollection->post('/create', [$mainController, 'createAlbumPost']);
-$albumRouteCollection->get('/create', [$mainController, 'createAlbum']);
-$albumRouteCollection->get('/info/{id}', [$mainController, 'infoAlbum']);
-$albumRouteCollection->get('/edit/{id}', [$mainController, 'editAlbum']);
-$albumRouteCollection->get('/', [$mainController, 'albums']);
-$albumRouteCollection->delete('/image/{id}', [$mainController, 'deleteAlbumImage']);
-$albumRouteCollection->post('/update/{id}', [$mainController, 'updateAlbum']);
-$albumRouteCollection->post('/upload/{id}', [$mainController, 'uploadImageToAlbum']);
+$albumRouteCollection->post('/create',          [$mainController, 'createAlbumPost']);
+$albumRouteCollection->get('/create',           [$mainController, 'createAlbum']);
+$albumRouteCollection->get('/info/{id}',        [$mainController, 'infoAlbum']);
+$albumRouteCollection->get('/edit/{id}',        [$mainController, 'editAlbum']);
+$albumRouteCollection->get('',                  [$mainController, 'albums']);
+$albumRouteCollection->delete('/image/{id}',    [$mainController, 'deleteAlbumImage']);
+$albumRouteCollection->post('/update/{id}',     [$mainController, 'updateAlbum']);
+$albumRouteCollection->post('/upload/{id}',     [$mainController, 'uploadImageToAlbum']);
+$albumRouteCollection->post('/delete/{id}',     [$mainController, 'deleteAlbum']);
 
 
 // News routes
-$newsRouteCollection->post('/create', [$mainController, "createNews"]);
-$newsRouteCollection->post('/update/{id}', [$mainController, "updateNews"]);
-$newsRouteCollection->post('/delete/{id}', [$mainController, "deleteNews"]);
-$newsRouteCollection->get('/', [$mainController, "news"]);
-$newsRouteCollection->get('/create', [$mainController, "create"]);
-$newsRouteCollection->get('/edit/{id}', [$mainController, "editNews"]);
-$newsRouteCollection->get('/{id}', [$mainController, "singleNews"]);
+$newsRouteCollection->post('/create',           [$mainController, "createNews"]);
+$newsRouteCollection->post('/update/{id}',      [$mainController, "updateNews"]);
+$newsRouteCollection->post('/delete/{id}',      [$mainController, "deleteNews"]);
+$newsRouteCollection->get('',                  [$mainController, "news"]);
+$newsRouteCollection->get('/create',            [$mainController, "getCreateNews"]);
+$newsRouteCollection->get('/edit/{id}',         [$mainController, "editNews"]);
+$newsRouteCollection->get('/{id}',              [$mainController, "singleNews"]);
 
 // Volountieer routes
-$app->post('/volountieer/create', [$mainController, "CreateVolountieer"]);
-$app->get('/volountieers', [$mainController, "getVolountieers"]);
+$app->post('/volountieer/create',               [$mainController, "CreateVolountieer"]);
+$app->get('/volountieers',                      [$mainController, "getVolountieers"]);
 
 
-$app->post('/image/delete/{id}', [$mainController, "deleteImage"]);
+$app->post('/image/delete/{id}',                [$mainController, "deleteImage"]);
 
-$app->get('/news', [$publicController, "getNews"]);
-$app->get('/albums', [$publicController, "getAlbums"]);
+$app->get('/api/news',                              [$publicController, "getNews"]);
+$app->get('/api/albums',                            [$publicController, "getAlbums"]);
+
+$app->get('',[$publicController, "landing"]);
+$app->get('/',[$publicController, "landing"]);
+$app->get('/volunteer',[$publicController, "volunteer"]);
+$app->get('/public/news',[$publicController, "news"]);
+$app->get('/gallery',[$publicController, "gallery"]);
+$app->get('/contact',[$publicController, "contact"]);
+$app->get('/patreon',[$publicController, "patreon"]);
+$app->get('/aboutus',[$publicController, "aboutus"]);
 
 
 //$app->get('/dashboard',     [$mainController, "dashboard"]);
-$app->get('/logout', [$mainController, "logout"]);
-$app->get('/login', [$mainController, "login"]);
-$app->post('/login', [$mainController, "loginValidate"])->before(
+$app->get('/logout',                            [$mainController, "logout"]);
+$app->get('/login',                             [$mainController, "login"]);
+$app->post('/login',                            [$mainController, "loginValidate"])->before(
     function (Application $app, Request $request) use ($middleware) {
 
         $user = $middleware->checkCredentials($app, $request);

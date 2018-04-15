@@ -36,10 +36,11 @@ class AlbumService
     public function readAlbumswithImages()
     {
         try {
+
             /** @var Album[] $albums */
             $albums = Album::get_album_with_images();
             return $albums;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             var_dump($e->getMessage());
             die();
         }
