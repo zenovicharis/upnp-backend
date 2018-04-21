@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 79);
+/******/ 	return __webpack_require__(__webpack_require__.s = 86);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,27 +10029,25 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 37:
+/***/ 45:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 79:
+/***/ 86:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(37);
+__webpack_require__(45);
 
 $(document).ready(function () {
   $("body").css("display", "block");
   $("#logo").on('click', function () {
-    var url = $(this).attr("data-url");
-    // console.log(url)
-    window.location = url;
+    window.location = '/';
   });
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

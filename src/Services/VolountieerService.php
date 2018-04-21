@@ -39,7 +39,8 @@ class VolountieerService
                 "dodatna_obuka" => $entityModel->dodatna_obuka
             ]);
             return (int)$volountieer->id;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());die();
             return false;
         }
     }

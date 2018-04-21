@@ -23,20 +23,20 @@ class VolountieerEntityModel
 
     public function __construct($ime_prezime, $datum, $adresa, $grad, $telefon, $email, $str_sprema, $zanimanje, $hobi, $iskustvo, $podrucje_rada, $poslovi, $nedeljni_sati, $vreme, $dodatna_obuka)
     {
-        $this->ime_prezime = $ime_prezime;
+        $this->hobi = $hobi;
+        $this->grad = $grad;
+        $this->email = $email;
         $this->datum = $datum;
         $this->adresa = $adresa;
-        $this->grad = $grad;
         $this->telefon = $telefon;
-        $this->email = $email;
-        $this->str_sprema = $str_sprema;
-        $this->zanimanje = $zanimanje;
-        $this->hobi = $hobi;
         $this->iskustvo = $iskustvo;
-        $this->podrucje_rada = $podrucje_rada;
-        $this->poslovi = $poslovi;
-        $this->nedeljni_sati = $nedeljni_sati;
-        $this->vreme = $vreme;
+        $this->zanimanje = $zanimanje;
+        $this->str_sprema = $str_sprema;
+        $this->ime_prezime = $ime_prezime;
         $this->dodatna_obuka = $dodatna_obuka;
+        $this->vreme = $vreme[0];
+        $this->poslovi = $poslovi[0];
+        $this->podrucje_rada = $podrucje_rada[0];
+        $this->nedeljni_sati = $nedeljni_sati[0];
     }
 }

@@ -18,7 +18,7 @@ class ValidationLibrary extends Valitron\Validator
     }
 
     private function VOLOUNTIEER_RULE(){
-        return ['ime_prezime', 'datum', 'adresa', 'grad', 'telefon', 'email', 'str_sprema', 'zanimanje', 'hobi', 'iskustvo', 'podrucje_rada', 'poslovi', 'nedeljni_sati', 'vreme', 'dodatna_obuka'];
+        return ['ime_prezime', 'datum', 'telefon', 'email', 'str_sprema', 'hobi', 'iskustvo', 'podrucje_rada', 'poslovi', 'nedeljni_sati', 'vreme', 'dodatna_obuka'];
     }
 
 /*    private static VOLOUNTIEER_RULE = ['ime_prezime', 'datum', 'adresa', 'grad', 'telefon', 'email', 'str_sprema', 'zanimanje', 'hobi', 'iskustvo', 'podrucje_rada', 'poslovi', 'nedeljni_sati', 'vreme', 'dodatna_obuka'];*/

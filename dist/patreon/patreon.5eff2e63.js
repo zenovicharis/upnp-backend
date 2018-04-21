@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 84);
+/******/ 	return __webpack_require__(__webpack_require__.s = 88);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,58 +10029,41 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 42:
+/***/ 47:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 84:
+/***/ 88:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(42);
+__webpack_require__(47);
 
 $(document).ready(function () {
   $("body").css("display", "block");
-  $("#upload-button").on('click', function () {
-    $("#upload").click();
-  });
   $("#logo").on('click', function () {
-    window.location = '/';
+    var url = $(this).attr("data-url");
+    // console.log(url)
+    window.location = url;
   });
 
-  // $("#volontieer-form").submit(function(e){
-  //   e.preventDefault();
-  //   var dataArray = $(this).serializeArray();
-
-  //   var data = dataArray.reduce(function(form, el){
-  //     form[el.name] =  el.value;
-  //     return form;
-  //   }, {});
-  //   console.log(data);
-  //   $.ajax({
-  //     type: "POST",
-  //     url: "http://upnp.ga/volountieer/create",
-  //     data: data,
-  //     success: function(response){
-  //       console.log(response);
-  //     },
-  //     contentType:false,
-  //     cache: false,
-  //     processData:false,
-  //     // dataType: dataType
-  //   });
-  //   // console.log(data);
-  //   // $.post("http://upnp.ga/volountieer/create", data, function(response){
-  //   //   console.log(response);
-  //   // }).fail(function(err){
-  //   //   console.log(err);
-  //   // })
-  // })
+  $(".hamburger").on("click", function () {
+    toggleMenu();
+  });
+  function toggleMenu() {
+    var rightPosition = parseInt($(".custom-showing").css('right'));
+    console.log(rightPosition);
+    if (rightPosition < 0) {
+      $(".custom-showing").css('right', '0%');
+    } else {
+      $(".custom-showing").css('right', '-33%');
+    }
+  }
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 

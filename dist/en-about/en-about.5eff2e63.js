@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 87);
+/******/ 	return __webpack_require__(__webpack_require__.s = 75);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,55 +10029,41 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 24:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.getNews = function (news) {
-  return "<div class=\"row news-sections\" >\n  <span class=\"date\">" + news.created + "</span>\n  <div class=\"col-6 news-picture\">\n    <img src=\"" + news.images.url + "\" alt=\"\">\n  </div>\n  <div class=\"col-6\">\n    <h4>" + news.title + "</h4>\n    <p class=\"text-justify\">\n    " + news.content + "\n    </p>\n    <button class=\"btn btn-default btn-custom\" onclick=\"toSingleNews(" + news.id + ")\">Procitaj jos</button>\n  </div>\n</div>\n";
-};
-
-/***/ }),
-
-/***/ 45:
+/***/ 34:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 87:
+/***/ 75:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(45);
-
-var news = __webpack_require__(24);
+__webpack_require__(34);
 
 $(document).ready(function () {
   $("body").css("display", "block");
-
   $("#logo").on('click', function () {
     var url = $(this).attr("data-url");
+    // console.log(url)
     window.location = url;
   });
-  $.ajax({
-    type: "get",
-    url: "http://upnp.ga/api/news",
-    success: function success(response) {
-      var newsList = response.map(function (el) {
-        return news.getNews(el);
-      });
-      $("div.main-container").append(newsList.join(""));
-    },
-    contentType: false,
-    cache: false,
-    processData: false
+  console.log("hell");
+  $(".hamburger").on("click", function () {
+    toggleMenu();
   });
+  function toggleMenu() {
+    var rightPosition = parseInt($(".custom-showing").css('right'));
+    console.log(rightPosition);
+    if (rightPosition < 0) {
+      $(".custom-showing").css('right', '0%');
+    } else {
+      $(".custom-showing").css('right', '-33%');
+    }
+  }
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 

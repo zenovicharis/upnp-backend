@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 70);
+/******/ 	return __webpack_require__(__webpack_require__.s = 78);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,30 +10029,70 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 28:
+/***/ 21:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.getNews = function (news) {
+  return "\n  <div class=\"col-md-4 col-12 p-0 \">\n    <img class=\"card-img-top no-radius\" src=\"" + news[0].images.url + "\" alt=\"Card image cap\">\n    <div class=\"card-body\">\n      <h5>" + news[0].title + "</h5>\n      <p class=\"card-text\">" + news[0].content + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0\">\n    <img class=\"card-img-top no-radius\" src=\"" + news[1].images.url + "\" alt=\"Card image cap\">\n    <div class=\"card-body\">\n      <h5>" + news[1].title + "</h5>\n      <p class=\"card-text\">" + news[1].content + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0\">\n    <img class=\"card-img-top no-radius\" src=\"" + news[2].images.url + "\" alt=\"Card image cap\">\n    <div class=\"card-body\">\n      <h5>" + news[2].title + "</h5>\n      <p class=\"card-text\">" + news[2].content + "</p>\n    </div>\n  </div>\n";
+};
+
+/***/ }),
+
+/***/ 37:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 70:
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(28);
+__webpack_require__(37);
+
+var newsSet = __webpack_require__(21);
 
 $(document).ready(function () {
   $("body").css("display", "block");
-  $("#upload-button").on('click', function () {
-    $("#upload").click();
-    return false;
-  });
   $("#logo").on('click', function () {
-    window.location = '/';
+    var url = $(this).attr("data-url");
+    // console.log(url)
+    window.location = url;
   });
+  $("#patreons").on("click", function () {
+    window.location = "patreon.html";
+  });
+
+  $.ajax({
+    type: "get",
+    url: "http://upnp.ga/api/news",
+    success: function success(response) {
+      var newsList = newsSet.getNews(response);
+      $("#news-block").append(newsList);
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+
+  $(".hamburger").on("click", function () {
+    toggleMenu();
+  });
+  function toggleMenu() {
+    var rightPosition = parseInt($(".custom-showing").css('right'));
+    console.log(rightPosition);
+    if (rightPosition < 0) {
+      $(".custom-showing").css('right', '0%');
+    } else {
+      $(".custom-showing").css('right', '-33%');
+    }
+  }
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 

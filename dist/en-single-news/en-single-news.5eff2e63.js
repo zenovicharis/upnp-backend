@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 68);
+/******/ 	return __webpack_require__(__webpack_require__.s = 81);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,26 +10029,27 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 49:
+/***/ 40:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 68:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(49);
+__webpack_require__(40);
 
 $(document).ready(function () {
   $("body").css("display", "block");
-
-  $("#patreons").on("click", function () {
-    window.location = "patreon.html";
+  $("#logo").on('click', function () {
+    var url = $(this).attr("data-url");
+    // console.log(url)
+    window.location = url;
   });
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

@@ -149,21 +149,19 @@ class MainController
     public function CreateVolountieer(Request $request)
     {
         $isValid = $this->validationLibrary->volountieerRules($request);
-//        var_dump($isValid->validate());die();
-        if (true) { //$isValid->validate()
-            if (true) {
-                var_dump($request);die();
-                $volountieer = $this->extractVolountieer($request);
-                $successfull = $this->volountieerService->createVolountieer($volountieer);
-                if ($successfull == false) {
-                    return new JsonResponse('', 500);
-                };
-                return new JsonResponse($successfull, 201);
-            }
-            $errors = $isValid->errors();
-            return new JsonResponse($errors, JsonResponse::HTTP_EXPECTATION_FAILED);
+        return new JsonResponse(3, 201);
+        if ($isValid->validate()) {
+            $volountieer = $this->extractVolountieer($request);
+            $successfull = $this->volountieerService->createVolountieer($volountieer);
+
+            if ($successfull == false) {
+                return new JsonResponse('', 500);
+            };
+            return new JsonResponse($successfull, 201);
         }
-        // if invalid create message
+
+        $errors = $isValid->errors();
+        return new JsonResponse($errors, JsonResponse::HTTP_EXPECTATION_FAILED);
 
     }
 
