@@ -96,6 +96,9 @@ p.strap:after {
   transform: rotateX(180deg);
   z-index: 10; }
 
+.heading-custom {
+  overflow: hidden; }
+
 header {
   box-shadow: 2px 2px 2px #ddd;
   overflow: hidden; }

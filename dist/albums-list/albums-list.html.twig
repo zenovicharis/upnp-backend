@@ -45,6 +45,13 @@
         </div>
       </div>
     </div>
+    <div class="container overflow-hidden">
+      {% if deletemessage is defined %}
+        <div class="alert alert-success" role="alert">
+          <strong>Uporozenje!</strong> {{ deletemessage }}
+        </div>
+      {% endif %}
+    </div>
     <div class="container main-container py-3">
       <div class="row gallery">
 
@@ -104,6 +111,6 @@
       window.location = '/album/create'
     }
   </script>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.6e595b70.js"></script><script type="text/javascript" src="/dist/albums-list/albums-list.6e595b70.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.1743c044.js"></script><script type="text/javascript" src="/dist/albums-list/albums-list.1743c044.js"></script></body>
 
 </html>

@@ -52,11 +52,15 @@ class MainController
         $this->imageService = $imageService;
     }
 
-    public function news()
+    public function news(Request $request)
     {
         $news = $this->newsService->readNews();
         $newsEng = $this->filterLanguage($news, "english");
         $newsSrb = $this->filterLanguage($news, "serbian");
+        $deletemessage = $request->query->get("deletemessage");
+        if (!empty($deletemessage)) {
+            return $this->twig->render('/news-list/news-list.html.twig', ['newsEn' => $newsEng, 'newsSrb' => $newsSrb, 'deletemessage' => $deletemessage]);
+        }
         return $this->twig->render('/news-list/news-list.html.twig', ['newsEn' => $newsEng, 'newsSrb' => $newsSrb]);
     }
 
@@ -75,7 +79,6 @@ class MainController
     {
 //        var_dump("heee");die();
         $isRedirected = $request->query->get("continue");
-
 //        if (!empty($isRedirected)) {
 //            return $this->twig->render('/news-list/news-list.html', ['message' => true]);
 //        }
@@ -125,7 +128,8 @@ class MainController
         return $this->twig->render('/news/create', ['error_message' => $error_string]);
     }
 
-    public function getCreateNews(){
+    public function getCreateNews()
+    {
         return $this->twig->render('/news-form/news-form.html.twig', ['news' => new NewsEntityModel(), 'edit' => false]);
     }
 
@@ -140,7 +144,7 @@ class MainController
         $newsModel = $this->extractNews($request);
         $newsEdited = $this->newsService->updateNews($newsModel, $id);
 
-        return new RedirectResponse("/news/".$id);
+        return new RedirectResponse("/news/" . $id . '?updatemessage=Vest je uspesno izmenjena');
     }
 
     public function deleteNews(Request $request, $id)
@@ -148,7 +152,7 @@ class MainController
         // if Succesful return message
 //        var_dump($id);die();
         $successfull = $this->newsService->deleteNews($id);
-        return new RedirectResponse('/news');
+        return new RedirectResponse('/news?deletemessage=Vest je uspesno izbrisana!');
     }
 
     public function singleNews(Request $request, $id)
@@ -156,8 +160,11 @@ class MainController
         // if no news return message
         $news = $this->newsService->NewsById($id);
         $message = $request->query->get("message");
+        $updatemessage = $request->query->get("updatemessage");
         if (!empty($message)) {
             return $this->twig->render("/news-form-info/news-form-info.html.twig", ['news' => $news, 'message' => $message]);
+        } elseif (!empty($updatemessage)) {
+            return $this->twig->render("/news-form-info/news-form-info.html.twig", ['news' => $news, 'updatemessage' => $updatemessage]);
         }
         return $this->twig->render("/news-form-info/news-form-info.html.twig", ['news' => $news]);
     }
@@ -226,9 +233,13 @@ class MainController
 
 
     //List All Albums
-    public function albums()
+    public function albums(Request $request)
     {
         $albums = $this->albumService->readAlbumswithImages();
+        $deletemessage = $request->query->get("deletemessage");
+        if (!empty($deletemessage)) {
+            return $this->twig->render("/albums-list/albums-list.html.twig", ['albums' => $albums, 'deletemessage' => $deletemessage]);
+        }
         return $this->twig->render("/albums-list/albums-list.html.twig", ['albums' => $albums]);
     }
 
@@ -247,7 +258,7 @@ class MainController
         $updatedAlbum = $this->albumService->updateAlbum($title, $english_title, $id);
 
         if ($updatedAlbum) {
-            return new RedirectResponse("/album/info/" . $id);
+            return new RedirectResponse("/album/info/" . $id . '?updatemessage=Album je uspesno izmenjen');
         } else {
             //implement message
         }
@@ -261,11 +272,13 @@ class MainController
     {
         $album = $this->albumService->readAlbumById($id);
         $message = $request->query->get("message");
+        $updatemessage = $request->query->get("updatemessage");
         if (!empty($message)) {
             return $this->twig->render("/album-form-info/album-form-info.html.twig", ['album' => $album, 'message' => $message]);
+        } elseif (!empty($updatemessage)) {
+            return $this->twig->render("/album-form-info/album-form-info.html.twig", ['album' => $album, 'updatemessage' => $updatemessage]);
         }
         return $this->twig->render("/album-form-info/album-form-info.html.twig", ['album' => $album]);
-
     }
 
 
@@ -308,7 +321,7 @@ class MainController
     {
         $album = Album::find($id);
         $album->delete();
-        return new RedirectResponse('/album');
+        return new RedirectResponse('/album?deletemessage=Album je uspesno izbrisan!');
     }
 
 

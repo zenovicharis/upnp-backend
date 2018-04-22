@@ -26,8 +26,8 @@
             </li>
             <li>/</li>
             <li>
-                <a href="/volonteri">Volonteri</a>
-              </li>
+              <a href="/volonteri">Volonteri</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -44,6 +44,16 @@
     <div class="container main-container py-3">
       <div class="row volountieer-form">
         <div class="col">
+          {% if message is defined %}
+          <div class="alert alert-success" role="alert">
+            <strong>Uporozenje!</strong> {{ message }}
+          </div>
+          {% endif %} {% if updatemessage is defined %}
+          <div class="alert alert-success" role="alert">
+            <strong>Uporozenje!</strong> {{ updatemessage }}
+          </div>
+          {% endif %}
+
           <h5>Vest</h5>
           <hr>
           <div class="col-12">
@@ -140,6 +150,6 @@
       </div>
     </div>
   </div>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.6e595b70.js"></script><script type="text/javascript" src="/dist/news-form-info/news-form-info.6e595b70.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.1743c044.js"></script><script type="text/javascript" src="/dist/news-form-info/news-form-info.1743c044.js"></script></body>
 
 </html>
