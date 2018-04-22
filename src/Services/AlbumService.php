@@ -69,4 +69,16 @@ class AlbumService
             die();
         }
     }
+
+    public function deleteAlbumImage($id)
+    {
+        try {
+            /** @var Album[] $albums */
+            $albums = Album::all()->toArray();
+            return $albums;
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
+        }
+    }
 }

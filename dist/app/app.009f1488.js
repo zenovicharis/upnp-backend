@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 87);
+/******/ 	return __webpack_require__(__webpack_require__.s = 71);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,50 +10029,49 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 26:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function($) {
 
 exports.getNews = function (news) {
-  return "<div class=\"row news-sections\" >\n  <span class=\"date\">" + news.created + "</span>\n  <div class=\"col-sm-6 col-12 news-picture\">\n    <img src=\"" + news.images.url + "\" alt=\"\">\n  </div>\n  <div class=\"col-sm-6 col-12\">\n    <h4>" + news.title + "</h4>\n    <p class=\"text-justify\">\n    " + news.content + "\n    </p>\n    <button class=\"btn btn-default btn-custom\" onclick=\"toSingleNews(" + news.id + ")\">Procitaj jos</button>\n  </div>\n</div>\n";
+  return "\n  <div class=\"col-md-4 col-12 p-0 \">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[0].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[0].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[0].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[1].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[1].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[1].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[2].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[2].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[2].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n";
 };
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 46:
+/***/ 52:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 87:
+/***/ 71:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(46);
+__webpack_require__(52);
 
-var news = __webpack_require__(26);
+var newsSet = __webpack_require__(14);
 
 $(document).ready(function () {
   $("body").css("display", "block");
 
-  $("#logo").on('click', function () {
-    var url = $(this).attr("data-url");
-    window.location = url;
+  $("#patreons").on("click", function () {
+    window.location = "patreon.html";
   });
+
   $.ajax({
     type: "get",
-    url: "http://upnp.ga/api/news",
+    url: "http://upnp.ga/api/news/serbian",
     success: function success(response) {
-      var newsList = response.map(function (el) {
-        return news.getNews(el);
-      });
-      $("div.main-container").append(newsList.join(""));
+      var newsList = newsSet.getNews(response);
+      $("#news-block").append(newsList);
     },
     contentType: false,
     cache: false,

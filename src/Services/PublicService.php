@@ -37,4 +37,29 @@ class PublicService
             die();
         }
     }
+
+    public function NewsById($id)
+    {
+        try {
+            $news = News::get_news_with_id($id);
+
+            return $news->toArray();
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    public function getThreeNewsSuggestions($lang){
+        try {
+            $news = News::with('images')
+                    ->orderBy('id', 'desc')
+                    ->where('language', '=', $lang)
+                    ->take(3)->get();
+            return $news->toArray();
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
+            return $e;
+        }
+    }
 }

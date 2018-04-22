@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 73);
+/******/ 	return __webpack_require__(__webpack_require__.s = 89);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,44 +10029,71 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 16:
+/***/ 26:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var gallery = exports.gallery = function gallery() {};
+exports.getNews = function (news) {
+  return "<div class=\"row news-sections\" >\n  <span class=\"date\">" + news.created + "</span>\n  <div class=\"col-sm-6 col-12 news-picture\">\n    <img src=\"" + news.images.url + "\" alt=\"\">\n  </div>\n  <div class=\"col-sm-6 col-12\">\n    <h4>" + news.title + "</h4>\n    <p class=\"text-justify news-content\">\n    " + news.content + "\n    </p>\n    <button class=\"btn btn-default btn-custom\" onclick=\"toOneNews(" + news.id + ")\">Procitaj jos</button>\n  </div>\n</div>\n";
+};
 
 /***/ }),
 
-/***/ 32:
+/***/ 46:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 73:
+/***/ 89:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(32);
+__webpack_require__(46);
 
-var gallery = __webpack_require__(16);
+var news = __webpack_require__(26);
 
 $(document).ready(function () {
   $("body").css("display", "block");
-  $("#logo").on('click', function () {
-    window.location = '/';
-  });
-});
 
-function Gallery() {}
+  $("#logo").on('click', function () {
+    var url = $(this).attr("data-url");
+    window.location = url;
+  });
+  $.get({
+    type: "get",
+    url: "http://upnp.ga/api/news/serbian",
+    success: function success(response) {
+      console.log(response);
+      var newsList = response.map(function (el) {
+        var text = $.parseHTML(el.content);
+        el.content = $(text).text().substring(0, 550);
+        return news.getNews(el);
+      });
+      $("div.main-container").append(newsList.join(""));
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+
+  $(".hamburger").on("click", function () {
+    toggleMenu();
+  });
+  function toggleMenu() {
+    var rightPosition = parseInt($(".custom-showing").css('right'));
+    if (rightPosition < 0) {
+      $(".custom-showing").css('right', '0%');
+    } else {
+      $(".custom-showing").css('right', '-33%');
+    }
+  }
+});
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })

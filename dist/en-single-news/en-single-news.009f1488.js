@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 70);
+/******/ 	return __webpack_require__(__webpack_require__.s = 83);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,20 +10029,20 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 29:
+/***/ 40:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 70:
+/***/ 83:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(29);
+__webpack_require__(40);
 
 $(document).ready(function () {
   $("body").css("display", "block");
@@ -10050,6 +10050,12 @@ $(document).ready(function () {
     var url = $(this).attr("data-url");
     // console.log(url)
     window.location = url;
+  });
+
+  $(".shortened").each(function (el, p) {
+    var text = $.parseHTML($(p).text());
+    var shortened = $(text).text().substring(0, 150);
+    $(p).text(shortened);
   });
 
   $(".hamburger").on("click", function () {

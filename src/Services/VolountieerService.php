@@ -55,4 +55,15 @@ class VolountieerService
             die();
         }
     }
+
+    public function getValountieer($id)
+    {
+        try {
+            $volountieer = Volountieer::find($id)->toArray();
+            return $volountieer;
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
+        }
+    }
 }

@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>UPNP Sponzori</title>
-<link href="/dist/assets/css/en-single-news.css" rel="stylesheet"></head>
+  <title>UPNP - {{album.title}}</title>
+<link href="/dist/assets/css/volountieer-form-info.css" rel="stylesheet"></head>
 
 <body style="display:none;">
   <header>
@@ -18,97 +18,139 @@
         <div class="col d-flex align-items-center justify-content-end">
           <ul>
             <li>
-              <a href="/public/news">Vesti</a>
+              <a href="/news">Vesti</a>
             </li>
             <li>/</li>
             <li>
-              <a href="https://http.cat/404">Projekti</a>
+              <a href="/album">Galerija</a>
             </li>
             <li>/</li>
             <li>
-              <a href="/volunteer">Volonterski Servis</a>
-            </li>
-            <li>/</li>
-            <li>
-              <a href="/patreon">Donatori i Partneri</a>
-            </li>
-            <li>/</li>
-            <li>
-              <a href="/gallery">Galerija</a>
-            </li>
-            <li>/</li>
-            <li>
-              <a href="/aboutus">O nama</a>
-            </li>
-            <li>/</li>
-            <li>
-              <a href="/contact">Kontakti</a>
+              <a href="/volonteri" class="active">Volonteri</a>
             </li>
           </ul>
-          <span class="lang">
-            <img src="/dist/assets/img/eng.png" alt="">
-            <a href="">ENG</a>
-          </span>
         </div>
       </nav>
     </div>
   </header>
   <main>
-    <div class="container main-container">
+    <div class="container overflow-hidden">
       <div class="row">
-        <div class="col main-pic px-0">
-          <h3>Main Title</h3>
-          <img src="http://via.placeholder.com/950x480" alt="">
+        <div class="col heading-custom">
+          <h2>Detalji Volontera</h2>
         </div>
       </div>
+    </div>
+    <div class="container main-container py-3">
+      <div class="row volountieer-form">
+        <div class="col">
+          <h5>Volonter</h5>
+          <hr>
+          <label for="title">Ime i Prezime</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.ime_prezime}}</p>
+          </div>
+          <label for="title">Datum Rodjenja</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.datum}}</p>
+          </div>
+
+          <label for="title">Adresa</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.adresa}}</p>
+          </div>
+
+          <label for="title">Grad</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.grad}}</p>
+          </div>
+
+          <label for="title">Telefon</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.telefon}}</p>
+          </div>
+
+          <label for="title">E-mail</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.email}}</p>
+          </div>
+
+          <label for="title">Strucna Sprema</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.str_sprema}}</p>
+          </div>
+
+          <label for="title">Zanimanje</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.zanimanje}}</p>
+          </div>
+
+          <label for="title">Hobi,interesi,veštine</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.hobi}}</p>
+          </div>
+
+          <label for="title">Dosadašnje volontersko iskustvo</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.iskustvo}}</p>
+          </div>
+
+          <label for="title">Za koje od navedenih područja volonterskog rada ste zainteresovani</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.podrucje_rada| join(',')}}</p>
+          </div>
+
+          <label for="title">Koje ste konkretne poslove spremni da obavljate</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.poslovi| join(',')}}</p>
+          </div>
+
+          <label for="title">Koliko sati nedeljno možete posvetiti volonterskom radu</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.nedeljni_sati| join(',')}}</p>
+          </div>
+
+          <label for="title">Koje vreme bi Vam odgovaralo za volontiranje? </label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.working_days | join(',') }}</p>
+          </div>
+
+          <label for="title">Da li ste spremni proći dodatnu obuku za volonterski rad?</label>
+          <div class="input-group">
+            <!-- <input type="text" id="title" name="title" class="form-control"> -->
+            <p class="font-italic">{{volonter.dodatna_obuka}}</p>
+          </div>
+          <div class="col-12 text-right">
+            <form action="/volonteri/delete/{{ volonter.id }}" method="POST" class="d-inline">
+              <button class="btn btn-default btn-custom btn-delete-custom" role="button" type="submit">Izbrisite</button>
+            </form>
+            <!-- <button onclick="window.location= '/album/edit/{{ album.id }}'" class="btn btn-default btn-custom btn-edit-custom" role="button">Izmeni</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container overflow-hidden">
       <div class="row">
-        <div class="col-8 py-5">
-          <h4>Some title not main one</h4>
-          <p class="text-justify">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis inventore maxime nam architecto odit optio beatae, excepturi
-            asperiores cupiditate modi quidem obcaecati neque veniam vitae nobis culpa repellat? Ad, ab. Lorem ipsum dolor
-            sit amet, consectetur adipisicing elit. Dolorum amet quod odio minus ab, corrupti ipsum non expedita! Quia, totam.
-            Culpa corporis unde repellendus accusantium illo beatae voluptate aliquam omnis.
-            <br>
-            <br> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis inventore maxime nam architecto odit optio
-            beatae, excepturi asperiores cupiditate modi quidem obcaecati neque veniam vitae nobis culpa repellat? Ad, ab.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum amet quod odio minus ab, corrupti ipsum non
-            expedita! Quia, totam. Culpa corporis unde repellendus accusantium illo beatae voluptate aliquam omnis.
-            <br>
-            <br> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis inventore maxime nam architecto odit optio
-            beatae, excepturi asperiores cupiditate modi quidem obcaecati neque veniam vitae nobis culpa repellat? Ad, ab.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum amet quod odio minus ab, corrupti ipsum non
-            expedita! Quia, totam. Culpa corporis unde repellendus accusantium illo beatae voluptate aliquam omnis.
+        <div class="col heading-custom-reverse">
+          <p class="col-5">Ukoliko zelite da postanete nas donator/ka i raspitajte se o nacinma da nam se pridruzite, javite na mail adresu
+            <strong>office@udruzenjepsihologanp.org</strong>
           </p>
         </div>
-        <div class="col-4 row m-0 p-0">
-          <div class="col-12 single-suggestion px-0">
-            <img src="http://via.placeholder.com/950x480" alt="">
-            <h5>This is subsections</h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti similique, officiis, quis sapiente vero quae incidunt qui!
-            </p>
-          </div>
-
-          <div class="col-12 single-suggestion px-0">
-            <img src="http://via.placeholder.com/950x480" alt="">
-            <h5>This is subsections</h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti similique, officiis, quis sapiente vero quae incidunt qui!
-            </p>
-          </div>
-
-          <div class="col-12 single-suggestion px-0">
-            <img src="http://via.placeholder.com/950x480" alt="">
-            <h5>This is subsections</h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti similique, officiis, quis sapiente vero quae incidunt qui!
-            </p>
-          </div>
-        </div>
       </div>
-
-
     </div>
   </main>
   <footer>
@@ -136,52 +178,6 @@
       </div>
     </div>
   </footer>
-  <script>
-    // Open the Modal
-    function openModal() {
-      document.getElementById('myModal').style.display = "block";
-    }
-
-    // Close the Modal
-    function closeModal() {
-      document.getElementById('myModal').style.display = "none";
-    }
-
-    var slideIndex = 1;
-    showSlides(slideIndex);
-
-    // Next/previous controls
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-
-    // Thumbnail image controls
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
-      var dots = document.getElementsByClassName("demo");
-      var captionText = document.getElementById("caption");
-      if (n > slides.length) {
-        slideIndex = 1
-      }
-      if (n < 1) {
-        slideIndex = slides.length
-      }
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex - 1].style.display = "block";
-      dots[slideIndex - 1].className += " active";
-      captionText.innerHTML = dots[slideIndex - 1].alt;
-    }
-  </script>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.5eff2e63.js"></script><script type="text/javascript" src="/dist/en-single-news/en-single-news.5eff2e63.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.009f1488.js"></script><script type="text/javascript" src="/dist/volountieer-form-info/volountieer-form-info.009f1488.js"></script></body>
 
 </html>

@@ -37,6 +37,7 @@ class ImgurClient
     {
          $rawImage = file_get_contents($image->getRealPath());
          $header = ['Authorization' => 'Client-ID '.$this->clientId];
+//         var_dump($rawImage);die();
         try {
             $response = $this->client->post('/3/image', [
                 'form_params' => [

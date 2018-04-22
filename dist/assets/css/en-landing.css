@@ -271,6 +271,10 @@ body {
   width: 100%;
   color: red; }
 
+.image-responsive-custom {
+  max-height: 13em;
+  overflow-y: hidden; }
+
 .donate-banner {
   background-color: #4C1B1B;
   color: #fff;

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 88);
+/******/ 	return __webpack_require__(__webpack_require__.s = 80);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,20 +10029,35 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 47:
+/***/ 21:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+exports.getNews = function (news) {
+  return "\n  <div class=\"col-md-4 col-12 p-0 \">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[0].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[0].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[0].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[1].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[1].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[1].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[2].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[2].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[2].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n";
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 37:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 88:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(47);
+__webpack_require__(37);
+
+var newsSet = __webpack_require__(21);
 
 $(document).ready(function () {
   $("body").css("display", "block");
@@ -10050,6 +10065,21 @@ $(document).ready(function () {
     var url = $(this).attr("data-url");
     // console.log(url)
     window.location = url;
+  });
+  $("#patreons").on("click", function () {
+    window.location = "patreon.html";
+  });
+
+  $.ajax({
+    type: "get",
+    url: "http://upnp.ga/api/news/english",
+    success: function success(response) {
+      var newsList = newsSet.getNews(response);
+      $("#news-block").append(newsList);
+    },
+    contentType: false,
+    cache: false,
+    processData: false
   });
 
   $(".hamburger").on("click", function () {

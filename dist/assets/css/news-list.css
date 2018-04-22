@@ -76,6 +76,7 @@ header {
   padding: 1em 0;
   position: relative; }
   .news-sections .news-picture {
+    max-height: 28em;
     border-top: 3px solid #4C1B1B;
     padding: 0; }
     .news-sections .news-picture img {

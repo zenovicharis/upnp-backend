@@ -56,7 +56,6 @@ class ImageService
         try {
             /** @var Image $image */
             $image = Image::find($id);
-//            var_dump($image);die();
             $image->delete();
             return true;
         } catch (Exception $e) {
@@ -64,4 +63,20 @@ class ImageService
             die();
         }
     }
+
+    public function deleteAlbumImage($id)
+    {
+        try {
+            /** @var Image $image */
+            $image = Image::find($id);
+            $albumId = $image->album_id;
+            $image->delete();
+            return $albumId;
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
+        }
+    }
+
+
 }

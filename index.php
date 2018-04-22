@@ -42,6 +42,18 @@ $albumRouteCollection = $app['collection_factory']->prefix('/album')->before(
         }
     });
 
+/** @var RouteCollection $volunteerRouteCollection */
+$volunteerRouteCollection = $app['collection_factory']->prefix('/volonteri')->before(
+    function (Application $app, Request $request) use ($middleware) {
+        if (!$middleware->isLoggedIn()) {
+            $continue = $request->getPathInfo();
+            return new RedirectResponse('/login?continue=' . $continue);
+        }
+    });
+
+$volunteerRouteCollection->get('',      [$mainController, 'getAllVolunteer']);
+$volunteerRouteCollection->get('/{id}', [$mainController, 'getVolunteer']);
+
 /** @var RouteCollection $englishRouteCollection */
 $englishRouteCollection = $app['collection_factory']->prefix('/en');
 
@@ -51,7 +63,7 @@ $albumRouteCollection->get('/create',           [$mainController, 'createAlbum']
 $albumRouteCollection->get('/info/{id}',        [$mainController, 'infoAlbum']);
 $albumRouteCollection->get('/edit/{id}',        [$mainController, 'editAlbum']);
 $albumRouteCollection->get('',                  [$mainController, 'albums']);
-$albumRouteCollection->delete('/image/{id}',    [$mainController, 'deleteAlbumImage']);
+$albumRouteCollection->post('/image/{id}',    [$mainController, 'deleteAlbumImage']);
 $albumRouteCollection->post('/update/{id}',     [$mainController, 'updateAlbum']);
 $albumRouteCollection->post('/upload/{id}',     [$mainController, 'uploadImageToAlbum']);
 $albumRouteCollection->post('/delete/{id}',     [$mainController, 'deleteAlbum']);
@@ -61,6 +73,8 @@ $albumRouteCollection->post('/delete/{id}',     [$mainController, 'deleteAlbum']
 $newsRouteCollection->post('/create',           [$mainController, "createNews"]);
 $newsRouteCollection->post('/update/{id}',      [$mainController, "updateNews"]);
 $newsRouteCollection->post('/delete/{id}',      [$mainController, "deleteNews"]);
+$newsRouteCollection->post('/image/{id}',       [$mainController, "changeNewsImage"]);
+
 $newsRouteCollection->get('',                  [$mainController, "news"]);
 $newsRouteCollection->get('/create',            [$mainController, "getCreateNews"]);
 $newsRouteCollection->get('/edit/{id}',         [$mainController, "editNews"]);
@@ -73,13 +87,14 @@ $app->get('/volountieers',                      [$mainController, "getVolountiee
 
 $app->post('/image/delete/{id}',                [$mainController, "deleteImage"]);
 
-$app->get('/api/news',                              [$publicController, "getNews"]);
+$app->get('/api/news/{lang}',                              [$publicController, "getNews"]);
 $app->get('/api/albums',                            [$publicController, "getAlbums"]);
 
 $app->get('',[$publicController, "landing"]);
 $app->get('/',[$publicController, "landing"]);
 $app->get('/volunteer',[$publicController, "volunteer"]);
 $app->get('/public/news',[$publicController, "news"]);
+$app->get('/public/news/{id}',[$publicController, "getSingleNews"]);
 $app->get('/gallery',[$publicController, "gallery"]);
 $app->get('/contact',[$publicController, "contact"]);
 $app->get('/patreon',[$publicController, "patreon"]);
@@ -90,6 +105,7 @@ $englishRouteCollection->get('',[$publicController, "landingEn"]);
 $englishRouteCollection->get('/',[$publicController, "landingEn"]);
 $englishRouteCollection->get('/volunteer',[$publicController, "volunteerEn"]);
 $englishRouteCollection->get('/public/news',[$publicController, "newsEn"]);
+$englishRouteCollection->get('/public/news/{id}',[$publicController, "getSingleNewsEn"]);
 $englishRouteCollection->get('/gallery',[$publicController, "galleryEn"]);
 $englishRouteCollection->get('/contact',[$publicController, "contactEn"]);
 $englishRouteCollection->get('/patreon',[$publicController, "patreonEn"]);
@@ -112,6 +128,7 @@ $app->post('/login',                            [$mainController, "loginValidate
     });
 
 $app->addRouteCollection($newsRouteCollection);
-$app->addRouteCollection($englishRouteCollection);
 $app->addRouteCollection($albumRouteCollection);
+$app->addRouteCollection($englishRouteCollection);
+$app->addRouteCollection($volunteerRouteCollection);
 $app->run();

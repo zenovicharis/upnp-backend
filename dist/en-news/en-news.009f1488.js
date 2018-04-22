@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 75);
+/******/ 	return __webpack_require__(__webpack_require__.s = 81);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,20 +10029,34 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 34:
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.getNews = function (news) {
+  return "<div class=\"row news-sections\" >\n  <span class=\"date\">" + news.created + "</span>\n  <div class=\"col-sm-6 col-12 news-picture\">\n    <img src=\"" + news.images.url + "\" alt=\"\">\n  </div>\n  <div class=\"col-sm-6 col-12\">\n    <h4>" + news.title + "</h4>\n    <p class=\"text-justify\">\n    " + news.content + "\n    </p>\n    <button class=\"btn btn-default btn-custom\" onclick=\"toOneNews(" + news.id + ")\">Read More</button>\n  </div>\n</div>\n";
+};
+
+/***/ }),
+
+/***/ 38:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 75:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(34);
+__webpack_require__(38);
+
+var news = __webpack_require__(22);
 
 $(document).ready(function () {
   $("body").css("display", "block");
@@ -10051,7 +10065,25 @@ $(document).ready(function () {
     // console.log(url)
     window.location = url;
   });
-  console.log("hell");
+
+  $.ajax({
+    type: "get",
+    url: "http://upnp.ga/api/news/english",
+    // data: data,
+    success: function success(response) {
+      var newsList = response.map(function (el) {
+        var text = $.parseHTML(el.content);
+        el.content = $(text).text().substring(0, 550);
+        return news.getNews(el);
+      });
+      $("div.main-container").append(newsList.join(""));
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+    // dataType: dataType
+  });
+
   $(".hamburger").on("click", function () {
     toggleMenu();
   });

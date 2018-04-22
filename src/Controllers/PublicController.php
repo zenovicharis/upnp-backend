@@ -26,9 +26,10 @@ class PublicController
         $this->publicService = $publicService;
     }
 
-    public function getNews()
+    public function getNews($lang)
     {
         $news = $this->publicService->getNews();
+        $news = $this->filterLanguage($news, $lang);
         return new JsonResponse($news);
     }
 
@@ -99,7 +100,7 @@ class PublicController
 
     public function newsEn()
     {
-        return $this->twig->render('/en-news/en-news.html');//, ['news' => $news]
+        return $this->twig->render('/en-news/en-news.html');
     }
 
     public function patreonEn()
@@ -110,5 +111,30 @@ class PublicController
     public function aboutusEn()
     {
         return $this->twig->render('/en-about/en-about.html');//, ['news' => $news]
+    }
+
+    public function getSingleNews($id)
+    {
+        $news = $this->publicService->NewsById($id);
+        $newsSuggestions = $this->publicService->getThreeNewsSuggestions('serbian');
+//        var_dump($news);die();
+        return $this->twig->render('/single-news/single-news.html.twig', ['news' => $news, 'suggestions' => $newsSuggestions]);
+    }
+
+    public function getSingleNewsEn($id)
+    {
+        $news = $this->publicService->NewsById($id);
+        $newsSuggestions = $this->publicService->getThreeNewsSuggestions('english');
+        return $this->twig->render('/en-single-news/en-single-news.html.twig', ['news' => $news, 'suggestions' => $newsSuggestions]);
+    }
+
+    protected function filterLanguage($array, $lang){
+        $container  = [];
+        foreach($array as $el){
+            if($el['language'] == $lang){
+                $container[] = $el;
+            }
+        }
+        return $container;
     }
 }

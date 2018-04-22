@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 79);
+/******/ 	return __webpack_require__(__webpack_require__.s = 92);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,75 +10029,30 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 22:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.getNews = function (news) {
-  return "<div class=\"row news-sections\" >\n  <span class=\"date\">" + news.created + "</span>\n  <div class=\"col-sm-6 col-12 news-picture\">\n    <img src=\"" + news.images.url + "\" alt=\"\">\n  </div>\n  <div class=\"col-sm-6 col-12\">\n    <h4>" + news.title + "</h4>\n    <p class=\"text-justify\">\n    " + news.content + "\n    </p>\n    <button class=\"btn btn-default btn-custom\" onclick=\"toSingleNews(" + news.id + ")\">Procitaj jos</button>\n  </div>\n</div>\n";
-};
-
-/***/ }),
-
-/***/ 38:
+/***/ 49:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 79:
+/***/ 92:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(38);
-
-var news = __webpack_require__(22);
+__webpack_require__(49);
 
 $(document).ready(function () {
   $("body").css("display", "block");
+  $("#upload-button").on('click', function () {
+    $("#upload").click();
+    return false;
+  });
   $("#logo").on('click', function () {
-    var url = $(this).attr("data-url");
-    // console.log(url)
-    window.location = url;
+    window.location = '/';
   });
-
-  $.ajax({
-    type: "get",
-    url: "http://upnp.ga/api/news",
-    // data: data,
-    success: function success(response) {
-      // self.newsList = response;
-      // self.getNews()
-      console.log(response);
-      var newsList = response.map(function (el) {
-        return news.getNews(el);
-      });
-      $("div.main-container").append(newsList.join(""));
-      console.log(newsList);
-    },
-    contentType: false,
-    cache: false,
-    processData: false
-    // dataType: dataType
-  });
-
-  $(".hamburger").on("click", function () {
-    toggleMenu();
-  });
-  function toggleMenu() {
-    var rightPosition = parseInt($(".custom-showing").css('right'));
-    console.log(rightPosition);
-    if (rightPosition < 0) {
-      $(".custom-showing").css('right', '0%');
-    } else {
-      $(".custom-showing").css('right', '-33%');
-    }
-  }
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
