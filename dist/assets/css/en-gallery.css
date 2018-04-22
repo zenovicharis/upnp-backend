@@ -165,14 +165,16 @@ header {
     header nav.row img#logo {
       width: 7em;
       transition: all 1s ease 0s; }
-      header nav.row img#logo:hover {
-        transform: rotateX(150deg); }
     header nav.row .custom-showing {
+      position: relative;
+      border-left: 1px solid #fff !important;
       margin-top: -3%;
       transition: all .7s ease 0s;
       position: fixed;
       padding: 0;
-      background-color: #ddd;
+      background-color: #4C1B1B;
+      border-left: #fff;
+      color: #fff;
       z-index: 82;
       right: -33%;
       height: 100%; }
@@ -189,16 +191,28 @@ header {
           header nav.row .custom-showing ul.mobile-menu li.hamburger {
             display: block;
             text-align: center;
-            font-size: 3em; }
+            font-size: 1.9em;
+            padding: 10% 0%; }
           header nav.row .custom-showing ul.mobile-menu li a {
-            padding: 2% 2%;
+            padding: 6% 2%;
             display: block;
-            color: #4C1B1B; }
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold !important;
+            color: #fff;
+            text-align: #fff; }
             header nav.row .custom-showing ul.mobile-menu li a:hover {
-              color: #F6E497;
-              background-color: #000; }
+              color: #4C1B1B;
+              background-color: #fff; }
             header nav.row .custom-showing ul.mobile-menu li a.active {
               color: #F6E497; }
+          header nav.row .custom-showing ul.mobile-menu li.lang-tab {
+            width: 100%;
+            position: absolute;
+            bottom: 4%; }
+            header nav.row .custom-showing ul.mobile-menu li.lang-tab a img {
+              width: 1.5em; }
 
 body {
   overflow-x: hidden; }

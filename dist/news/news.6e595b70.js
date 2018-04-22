@@ -10069,7 +10069,6 @@ $(document).ready(function () {
     type: "get",
     url: "http://upnp.ga/api/news/serbian",
     success: function success(response) {
-      console.log(response);
       var newsList = response.map(function (el) {
         var text = $.parseHTML(el.content);
         el.content = $(text).text().substring(0, 550);

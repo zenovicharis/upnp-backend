@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>UPNP - Vest</title>
+  <title>UPNP - News</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
     crossorigin="anonymous" />
-<link href="/dist/assets/css/single-news.css" rel="stylesheet"></head>
+<link href="/dist/assets/css/en-single-news.css" rel="stylesheet"></head>
 
 <body style="display:none;">
   <header>
@@ -96,7 +96,7 @@
     <div class="container main-container">
       <div class="row">
         <div class="col main-pic px-0">
-          <h3>"{{news.created|date("M/d/Y") }}"</h3>
+          <h3>{{news.created |date("M/d/Y") }}</h3>
           <img src="{{news.images.url}}" alt="">
         </div>
       </div>
@@ -104,7 +104,7 @@
         <div class="col-md-8 col-12 py-5">
           <h4>{{news.title}}</h4>
           <p class="text-justify">
-            {{news.content | raw }}
+            {{news.content | raw}}
           </p>
         </div>
         <div class="col-md-4 col-12 row m-0 p-0">
@@ -116,7 +116,7 @@
               {{ sug.content | raw }}
             </div>
             <div>
-              <a href="/public/news/{{sug.id}}">Vise</a>
+              <a href="/en/public/news/{{sug.id}}">Vise</a>
             </div>
           </div>
           {% endfor %}
@@ -133,22 +133,22 @@
         <div class="col-md-6 col-12 menu d-flex justify-content-md-end justify-content-center">
           <ul class="p-0">
             <li>
-              <a href="/">Pocetna</a>
+              <a href="/en">Landing</a>
             </li>
             <li>
-              <a href="/contact">O nama</a>
+              <a href="/en/about">About Us</a>
             </li>
             <li>
-              <a href="/gallery">Galerija</a>
+              <a href="/en/gallery">Gallery</a>
             </li>
             <li>
-              <a href="/contact">Kontakt</a>
+              <a href="/en/contact">Contact</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </footer>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.6e595b70.js"></script><script type="text/javascript" src="/dist/single-news/single-news.6e595b70.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.6e595b70.js"></script><script type="text/javascript" src="/dist/en-single-news/en-single-news.6e595b70.js"></script></body>
 
 </html>

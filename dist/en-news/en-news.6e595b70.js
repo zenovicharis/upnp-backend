@@ -10071,6 +10071,7 @@ $(document).ready(function () {
     url: "http://upnp.ga/api/news/english",
     // data: data,
     success: function success(response) {
+      console.log(response);
       var newsList = response.map(function (el) {
         var text = $.parseHTML(el.content);
         el.content = $(text).text().substring(0, 550);
