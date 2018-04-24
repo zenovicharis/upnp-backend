@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 71);
+/******/ 	return __webpack_require__(__webpack_require__.s = 80);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10029,7 +10029,7 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 14:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10042,33 +10042,37 @@ exports.getNews = function (news) {
 
 /***/ }),
 
-/***/ 52:
+/***/ 37:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 71:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(52);
+__webpack_require__(37);
 
-var newsSet = __webpack_require__(14);
+var newsSet = __webpack_require__(21);
 
 $(document).ready(function () {
   $("body").css("display", "block");
-
+  $("#logo").on('click', function () {
+    var url = $(this).attr("data-url");
+    // console.log(url)
+    window.location = url;
+  });
   $("#patreons").on("click", function () {
-    window.location = "patreon.html";
+    window.location = "/en/patreon";
   });
 
   $.ajax({
     type: "get",
-    url: "/api/news/serbian",
+    url: "/api/news/english",
     success: function success(response) {
       var newsList = newsSet.getNews(response);
       $("#news-block").append(newsList);
