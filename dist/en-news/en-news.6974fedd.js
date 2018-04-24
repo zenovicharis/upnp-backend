@@ -10068,7 +10068,7 @@ $(document).ready(function () {
 
   $.ajax({
     type: "get",
-    url: "http://upnp.ga/api/news/english",
+    url: "/api/news/english",
     // data: data,
     success: function success(response) {
       console.log(response);

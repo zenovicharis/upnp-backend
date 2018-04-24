@@ -28,6 +28,10 @@
             <li>
               <a href="/volonteri">Volonteri</a>
             </li>
+            <li>/</li>
+            <li class="logout">
+              <a href="/logout"> <i class="fas fa-sign-out-alt"></i>Logout</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -72,9 +76,9 @@
               <div class="col">
                 <button onclick="window.location= '/news/edit/{{ oneNews.id }}'" class="btn btn-default btn-custom btn-info-custom" role="button">Edit</button>
                 <button onclick="window.location= '/news/{{ oneNews.id }}'" class="btn btn-default btn-custom btn-info-custom" role="button">Info</button>
-                <form action="/news/delete/{{ oneNews.id }}" method="post" class="d-inline">
+                <!-- <form action="/news/delete/{{ oneNews.id }}" method="post" class="d-inline">
                   <button class="btn btn-default btn-custom btn-delete-custom" type="submit">Izbrisi</button>
-                </form>
+                </form> -->
               </div>
             </div>
           </div>
@@ -96,9 +100,9 @@
               <div class="col">
                 <button onclick="window.location= '/news/edit/{{ oneNews.id }}'" class="btn btn-default btn-custom btn-info-custom" role="button">Edit</button>
                 <button onclick="window.location= '/news/{{ oneNews.id }}'" class="btn btn-default btn-custom btn-info-custom" role="button">Info</button>
-                <form action="/news/delete/{{ oneNews.id }}" method="post" class="d-inline">
+                <!-- <form action="/news/delete/{{ oneNews.id }}" method="post" class="d-inline">
                   <button class="btn btn-default btn-custom btn-delete-custom" type="submit">Izbrisi</button>
-                </form>
+                </form> -->
               </div>
             </div>
           </div>
@@ -134,6 +138,6 @@
       </div>
     </div>
   </footer>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.1743c044.js"></script><script type="text/javascript" src="/dist/news-list/news-list.1743c044.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.6974fedd.js"></script><script type="text/javascript" src="/dist/news-list/news-list.6974fedd.js"></script></body>
 
 </html>
