@@ -64,6 +64,18 @@ class MainController
         return $this->twig->render('/news-list/news-list.html.twig', ['newsEn' => $newsEng, 'newsSrb' => $newsSrb]);
     }
 
+    public function projects(Request $request)
+    {
+        $proj = $this->newsService->readProjects();
+        $projEng = $this->filterLanguage($proj, "english");
+        $projSrb = $this->filterLanguage($proj, "serbian");
+        $deletemessage = $request->query->get("deletemessage");
+        if (!empty($deletemessage)) {
+            return $this->twig->render('/projects-list/projects-list.html.twig', ['newsEn' => $projEng, 'newsSrb' => $projSrb, 'deletemessage' => $deletemessage]);
+        }
+        return $this->twig->render('/projects-list/projects-list.html.twig', ['newsEn' => $projEng, 'newsSrb' => $projSrb]);
+    }
+
     public function create()
     {
         $albums = $this->albumService->readAlbums();

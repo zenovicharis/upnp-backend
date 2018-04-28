@@ -327,6 +327,11 @@ hr.custom-hr {
 
 .about-us {
   background-color: #BD8D46;
+  background-image: url(/dist/assets/img/volonter.png);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-size: 18em;
+  background-position-y: bottom;
   color: #fff;
   font-style: italic;
   text-justify: both;
@@ -334,12 +339,16 @@ hr.custom-hr {
   .about-us p {
     vertical-align: middle;
     display: table-cell;
-    padding-top: 2em; }
+    padding-top: 0em; }
   .about-us .highlighted {
     color: #4C1B1B; }
+  @media (min-width: 992px) {
+    .about-us .logo-beli {
+      height: 1em; } }
   .about-us .logo-beli img {
     width: auto;
-    margin: auto; }
+    margin: auto;
+    margin-top: 1.5em; }
     @media (min-width: 768px) {
       .about-us .logo-beli img {
         width: 75%; } }
@@ -354,6 +363,18 @@ hr.custom-hr {
       @media (min-width: 992px) {
         .about-us .bout-text-container .relative {
           top: 6em; } }
+    .about-us .bout-text-container .about-strap:before {
+      transform: skew(10deg) !important; }
+  .about-us .social-container {
+    padding-top: 2.1em;
+    text-align: left; }
+    .about-us .social-container .social-pik {
+      transition: all .4s ease 0s; }
+      .about-us .social-container .social-pik:hover {
+        transform: translateY(-5px); }
+    .about-us .social-container #insta {
+      position: relative;
+      left: -3.5em; }
 
 .info {
   text-align: right;

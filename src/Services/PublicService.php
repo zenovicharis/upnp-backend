@@ -18,7 +18,19 @@ class PublicService
     {
         try {
             /** @var News[] $news */
-            $news = News::with('images')->get()->toArray();
+            $news = News::with('images')->where('category', 'vest')->get()->toArray();
+            return $news;
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
+        }
+    }
+
+    public function getProjects()
+    {
+        try {
+            /** @var News[] $news */
+            $news = News::with('images')->where('category', 'projekt')->get()->toArray();
             return $news;
         } catch (Exception $e) {
             var_dump($e->getMessage());

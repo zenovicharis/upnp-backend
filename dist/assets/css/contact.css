@@ -226,7 +226,7 @@ body {
   .main-container #map .info {
     background: linear-gradient(to right, white 50%, rgba(255, 255, 255, 0));
     position: absolute;
-    bottom: 4em;
+    bottom: 3.2em;
     color: #4C1B1B;
     font-size: 145%; }
     .main-container #map .info h1 {
@@ -245,6 +245,8 @@ body {
       font-weight: 600; }
     .main-container #map .info strong {
       font-weight: 800; }
+  .main-container .spec {
+    color: #B9121B; }
 
 .contact-form label {
   margin-bottom: 1px; }

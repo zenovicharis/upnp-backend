@@ -25,8 +25,15 @@ class News extends Model
     public static function get_images_with_news()
     {
 
-        $news = News::orderByDesc('created')->with('images')->get()->toArray();
+        $news = News::orderByDesc('created')->where('category', 'vest')->with('images')->get()->toArray();
         return $news;
+    }
+
+    public static function get_images_with_projects()
+    {
+
+        $projects = News::orderByDesc('created')->where('category', 'projekt')->with('images')->get()->toArray();
+        return $projects;
     }
 
 

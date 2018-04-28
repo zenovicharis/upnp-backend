@@ -54,6 +54,18 @@ class NewsService
         }
     }
 
+    public function readProjects()
+    {
+        try {
+            /** @var News[] $projs */
+            $projs = News::get_images_with_projects();
+            return $projs;
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+            die();
+        }
+    }
+
     public function deleteNews($id)
     {
         try {

@@ -266,6 +266,9 @@ main .main-container {
   margin-bottom: -8px;
   margin-top: -8px; }
 
+main .overflow-hidden {
+  overflow: hidden !important; }
+
 .patrions .col-md-3.col-4 {
   z-index: 2; }
 

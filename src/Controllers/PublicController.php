@@ -33,6 +33,13 @@ class PublicController
         return new JsonResponse($news);
     }
 
+    public function getProjects($lang)
+    {
+        $news = $this->publicService->getProjects();
+        $news = $this->filterLanguage($news, $lang);
+        return new JsonResponse($news);
+    }
+
     public function getAlbums()
     {
         $albums = $this->publicService->getAlbums();
@@ -64,6 +71,11 @@ class PublicController
     public function news()
     {
         return $this->twig->render('/news/news.html');//, ['news' => $news]
+    }
+
+    public function projects()
+    {
+        return $this->twig->render('/projects/projects.html');//, ['news' => $news]
     }
 
     public function patreon()
@@ -102,6 +114,12 @@ class PublicController
     {
         return $this->twig->render('/en-news/en-news.html');
     }
+
+    public function projectEn()
+    {
+        return $this->twig->render('/en-projects/en-projects.html');//, ['news' => $news]
+    }
+
 
     public function patreonEn()
     {

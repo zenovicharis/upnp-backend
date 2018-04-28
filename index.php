@@ -75,7 +75,7 @@ $newsRouteCollection->post('/update/{id}',      [$mainController, "updateNews"])
 $newsRouteCollection->post('/delete/{id}',      [$mainController, "deleteNews"]);
 $newsRouteCollection->post('/image/{id}',       [$mainController, "changeNewsImage"]);
 
-$newsRouteCollection->get('',                  [$mainController, "news"]);
+$newsRouteCollection->get('',                   [$mainController, "news"]);
 $newsRouteCollection->get('/create',            [$mainController, "getCreateNews"]);
 $newsRouteCollection->get('/edit/{id}',         [$mainController, "editNews"]);
 $newsRouteCollection->get('/{id}',              [$mainController, "singleNews"]);
@@ -88,12 +88,15 @@ $app->get('/volountieers',                      [$mainController, "getVolountiee
 $app->post('/image/delete/{id}',                [$mainController, "deleteImage"]);
 
 $app->get('/api/news/{lang}',                              [$publicController, "getNews"]);
+$app->get('/api/projects/{lang}',                          [$publicController, "getProjects"]);
 $app->get('/api/albums',                            [$publicController, "getAlbums"]);
 
 $app->get('',[$publicController, "landing"]);
 $app->get('/',[$publicController, "landing"]);
 $app->get('/volunteer',[$publicController, "volunteer"]);
 $app->get('/public/news',[$publicController, "news"]);
+$app->get('/projects',[$mainController, "projects"]);
+$app->get('/public/projects',[$publicController, "projects"]);
 $app->get('/public/news/{id}',[$publicController, "getSingleNews"]);
 $app->get('/gallery',[$publicController, "gallery"]);
 $app->get('/contact',[$publicController, "contact"]);
@@ -105,6 +108,7 @@ $englishRouteCollection->get('',[$publicController, "landingEn"]);
 $englishRouteCollection->get('/',[$publicController, "landingEn"]);
 $englishRouteCollection->get('/volunteer',[$publicController, "volunteerEn"]);
 $englishRouteCollection->get('/public/news',[$publicController, "newsEn"]);
+$englishRouteCollection->get('/public/projects',[$publicController, "projectEn"]);
 $englishRouteCollection->get('/public/news/{id}',[$publicController, "getSingleNewsEn"]);
 $englishRouteCollection->get('/gallery',[$publicController, "galleryEn"]);
 $englishRouteCollection->get('/contact',[$publicController, "contactEn"]);
