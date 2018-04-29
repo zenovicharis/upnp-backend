@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 206);
+/******/ 	return __webpack_require__(__webpack_require__.s = 201);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9998,7 +9998,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 161:
+/***/ 156:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -10036,13 +10036,13 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 206:
+/***/ 201:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(161);
+__webpack_require__(156);
 
 __webpack_require__(4);
 
@@ -10050,12 +10050,13 @@ $(document).ready(function () {
   $("body").css("display", "block");
   $("#logo").on('click', function () {
     var url = $(this).attr("data-url");
+    // console.log(url)
     window.location = url;
   });
 
   $.ajax({
     type: "get",
-    url: "/api/projects/english",
+    url: "/api/projects/serbian",
     success: function success(response) {
       var dropDownList = response.map(function (el) {
         var btn = $('<a href="#" class="list-group-item list-group-item-action">');
@@ -10077,6 +10078,7 @@ $(document).ready(function () {
   $(".hamburger").on("click", function () {
     toggleMenu();
   });
+
   function toggleMenu() {
     var rightPosition = parseInt($(".custom-showing").css('right'));
     console.log(rightPosition);

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 225);
+/******/ 	return __webpack_require__(__webpack_require__.s = 207);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9998,7 +9998,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 138:
+/***/ 136:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10372,7 +10372,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 154:
+/***/ 143:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10384,7 +10384,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * https://jqueryvalidation.org/
  * Copyright (c) 2017 Jörn Zaefferer; Licensed MIT */
 !function (a) {
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(138)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(136)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && module.exports ? module.exports = a(require("jquery")) : a(jQuery);
@@ -10621,7 +10621,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 180:
+/***/ 162:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -10659,25 +10659,30 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 225:
+/***/ 207:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(180);
+__webpack_require__(162);
 
-__webpack_require__(138);
+__webpack_require__(136);
 
-__webpack_require__(154);
+__webpack_require__(143);
 
 __webpack_require__(4);
 
 $(document).ready(function () {
+  $("body").css("display", "block");
+  $("#logo").on("click", function () {
+    var url = $(this).attr("data-url");
+    window.location = url;
+  });
 
   $.ajax({
     type: "get",
-    url: "/api/projects/serbian",
+    url: "/api/projects/english",
     success: function success(response) {
       var dropDownList = response.map(function (el) {
         var btn = $('<a href="#" class="list-group-item list-group-item-action">');
@@ -10701,90 +10706,40 @@ $(document).ready(function () {
   });
 
   function toggleMenu() {
-    var rightPosition = parseInt($(".custom-showing").css('right'));
-    console.log(rightPosition);
+    var rightPosition = parseInt($(".custom-showing").css("right"));
     if (rightPosition < 0) {
-      $(".custom-showing").css('right', '0%');
+      $(".custom-showing").css("right", "0%");
     } else {
-      $(".custom-showing").css('right', '-33%');
+      $(".custom-showing").css("right", "-33%");
     }
   }
 
-  $("body").css("display", "block");
-  $("#logo").on('click', function () {
-    var url = $(this).attr("data-url");
-    // console.log(url)
-    window.location = url;
-  });
-
-  $("#volontieer-form").submit(function (e) {
-    e.preventDefault();
-    var data = '';
-    $.post("/volountieer/create", data, function (response) {
-      console.log(response);
-      $("#myModal").modal();
-    });
-  });
-
-  $("#volontieer-form").validate({
+  $("#contact-form").validate({
     rules: {
-      ime_prezime: {
+      name: {
         required: true
       },
       email: {
-        required: true,
-        email: true
-      },
-      telefon: {
         required: true
       },
-      datum: {
+      title: {
         required: true
       },
-      str_sprema: {
-        required: true
-      },
-      hobi: {
-        required: true
-      },
-      iskustvo: {
-        required: true
-      },
-      podrucje_rada: {
-        required: true
-      },
-      poslovi: {
-        required: true
-      },
-      nedeljni_sati: {
+      message: {
         required: true
       }
     },
     messages: {
-      ime_prezime: "Unesite vase ime i prezime",
-      datum: "Unesite datum vaseg rodjenja",
-      str_sprema: "Odaberite nivo vase strucne spreme",
+      name: "Please enter your name",
       email: {
-        required: "Unesite vasu e-mail adresu",
-        email: "Unesite tacnu e-mail adresu"
+        required: "Please enter your E-mail address",
+        email: "Please enter valid E-mail address"
       },
-      telefon: {
-        required: "Unesite vas kontakt telefon"
+      title: {
+        required: "Please enter the title of your message"
       },
-      hobi: {
-        required: "Unesite vas hobi"
-      },
-      iskustvo: {
-        required: "Unesite vase iskustvo"
-      },
-      podrucje_rada: {
-        required: "Odaberite podrucije vaseg rada"
-      },
-      poslovi: {
-        required: "Unesite poslove kojim ste se bavili"
-      },
-      nedeljni_sati: {
-        required: "Odaberite broj slobodnih sati"
+      message: {
+        required: "Please enter your message"
       }
     }
   });

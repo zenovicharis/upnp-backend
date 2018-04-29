@@ -33417,7 +33417,6 @@ $(document).ready(function () {
 
   $("#logo").on('click', function () {
     var url = $(this).attr("data-url");
-    // console.log(url)
     window.location = url;
   });
 
@@ -33447,7 +33446,6 @@ $(document).ready(function () {
     url: "/api/news/english",
     // data: data,
     success: function success(response) {
-      console.log(response);
       var newsList = response.map(function (el) {
         var text = $.parseHTML(el.content);
         el.content = $(text).text().substring(0, 550);
@@ -33466,7 +33464,6 @@ $(document).ready(function () {
 
   function toggleMenu() {
     var rightPosition = parseInt($(".custom-showing").css('right'));
-    console.log(rightPosition);
     if (rightPosition < 0) {
       $(".custom-showing").css('right', '0%');
     } else {
