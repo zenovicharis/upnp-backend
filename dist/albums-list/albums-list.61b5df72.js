@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 76);
+/******/ 	return __webpack_require__(__webpack_require__.s = 204);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 0:
+/***/ 1:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9994,11 +9994,31 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ }),
 
-/***/ 1:
+/***/ 141:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var gallery = exports.gallery = function gallery() {};
+
+/***/ }),
+
+/***/ 159:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10029,69 +10049,25 @@ module.exports = function (module) {
 
 /***/ }),
 
-/***/ 14:
+/***/ 204:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-exports.getNews = function (news) {
-  return "\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[0].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[0].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[0].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[1].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[1].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[1].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[2].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <h5>" + news[2].title + "</h5>\n      <p class=\"card-text\">" + $($.parseHTML(news[2].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n";
-};
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+__webpack_require__(159);
 
-/***/ }),
-
-/***/ 57:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 76:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-__webpack_require__(57);
-
-var newsSet = __webpack_require__(14);
+var gallery = __webpack_require__(141);
 
 $(document).ready(function () {
   $("body").css("display", "block");
-
-  $("#patreons").on("click", function () {
-    window.location = "/patreon";
+  $("#logo").on('click', function () {
+    window.location = '/';
   });
-
-  $.ajax({
-    type: "get",
-    url: "/api/news/serbian",
-    success: function success(response) {
-      var newsList = newsSet.getNews(response);
-      $("#news-block").append(newsList);
-    },
-    contentType: false,
-    cache: false,
-    processData: false
-  });
-
-  $(".hamburger").on("click", function () {
-    toggleMenu();
-  });
-  function toggleMenu() {
-    var rightPosition = parseInt($(".custom-showing").css('right'));
-    console.log(rightPosition);
-    if (rightPosition < 0) {
-      $(".custom-showing").css('right', '0%');
-    } else {
-      $(".custom-showing").css('right', '-33%');
-    }
-  }
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+function Gallery() {}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ })
 

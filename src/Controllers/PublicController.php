@@ -135,7 +135,6 @@ class PublicController
     {
         $news = $this->publicService->NewsById($id);
         $newsSuggestions = $this->publicService->getThreeNewsSuggestions('serbian');
-//        var_dump($news);die();
         return $this->twig->render('/single-news/single-news.html.twig', ['news' => $news, 'suggestions' => $newsSuggestions]);
     }
 

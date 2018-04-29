@@ -66,11 +66,11 @@ class PublicService
             $news = News::with('images')
                     ->orderBy('id', 'desc')
                     ->where('language', '=', $lang)
+                    ->where('category', 'vest')
                     ->take(3)->get();
             return $news->toArray();
         } catch (Exception $e) {
-            var_dump($e->getMessage());
-            die();
+            var_dump($e->getMessage());die();
             return $e;
         }
     }

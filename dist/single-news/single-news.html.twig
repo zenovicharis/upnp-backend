@@ -24,8 +24,8 @@
               <a href="/public/news">Vesti</a>
             </li>
             <li>/</li>
-            <li>
-              <a href="https://http.cat/404">Projekti</a>
+            <li id="proj" data-toggle="tooltip" title="Projects Dropdown">
+              <a href="#">Projekti</a>
             </li>
             <li>/</li>
             <li>
@@ -67,7 +67,7 @@
               <a href="/public/news">Vesti</a>
             </li>
             <li>
-              <a href="https://http.cat/404">Projekti</a>
+              <a href="/projects">Projekti</a>
             </li>
             <li>
               <a href="/volunteer">Volonterski Servis</a>
@@ -106,13 +106,9 @@
               <a href="/en/public/news">News</a>
             </li>
             <li>/</li>
-            <li>
+            <li id="proj" data-toggle="tooltip" title="Projects Dropdown">
               <a href="/en/projects">Projects</a>
             </li>
-            <!-- <li>/</li>
-            <li>
-              <a href="/en/volunteer">Volonterski Servis</a>
-            </li> -->
             <li>/</li>
             <li>
               <a href="/en/patreon">DONORS AND PARTNERS</a>
@@ -131,8 +127,8 @@
             </li>
           </ul>
           <span class="lang d-md-block d-none">
-            <img src="/dist/assets/img/eng.png" alt="" />
-            <a href="/en">ENG</a>
+            <img src="/dist/assets/img/srb.png" alt="" />
+            <a href="/">SRB</a>
           </span>
           <span class="hamburger">
             <a href="#">
@@ -180,7 +176,7 @@
     <div class="container main-container">
       <div class="row">
         <div class="col main-pic px-0">
-          <h3>"{{news.created|date("M/d/Y") }}"</h3>
+          <h3>{{news.created|date('d M Y') }}</h3>
           <img src="{{news.images.url}}" alt="">
         </div>
       </div>
@@ -193,14 +189,18 @@
         </div>
         <div class="col-md-4 col-12 row m-0 p-0">
           {% for sug in suggestions %}
-          <div class="col-md-12 col-4 single-suggestion px-0">
-            <img src="{{sug.images.url}}" alt="">
-            <h5>{{ sug.title }}</h5>
-            <div class="shortened">
-              {{ sug.content | raw }}
+          <div class="col-md-12 col-4 single-suggestion news-single px-0">
+            <div class="image-responsive-custom">
+              <img src="{{sug.images.url}}" alt="">
             </div>
-            <div>
-              <a href="/public/news/{{sug.id}}">Vise</a>
+            <div class="card-body">
+              <a href="/public/news/{{ sug.id }}">
+                <h5>{{ sug.title }} <i class="fas fa-angle-right"></i></h5> 
+              </a>
+              <div class="shortened">
+                {{ sug.content | raw }}
+              </div>
+              <a href="/public/news/{{sug.id}}" class="link">Vise <i class="fas fa-angle-right"></i></a>
             </div>
           </div>
           {% endfor %}
@@ -233,6 +233,6 @@
       </div>
     </div>
   </footer>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.b5fc869f.js"></script><script type="text/javascript" src="/dist/single-news/single-news.b5fc869f.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.61b5df72.js"></script><script type="text/javascript" src="/dist/single-news/single-news.61b5df72.js"></script></body>
 
 </html>

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,500i,700,700i);header nav.row ul.main-navigation li a:hover, header nav.row .custom-showing ul.mobile-menu li a:hover, footer .menu ul li a:hover {
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,500i,700,700i);header nav.row ul.main-navigation li a:hover, header nav.row .custom-showing ul.mobile-menu li a:hover, .single-news .card-body a:hover, footer .menu ul li a:hover {
   text-decoration: none; }
 
 p.strap {
@@ -167,7 +167,10 @@ header {
           display: none; } }
     header nav.row img#logo {
       width: 7em;
-      transition: all 1s ease 0s; }
+      transition: all 1s ease 0s;
+      cursor: pointer; }
+      header nav.row img#logo:hover {
+        width: 8em; }
     header nav.row .custom-showing {
       position: relative;
       border-left: 1px solid #fff !important;
@@ -219,6 +222,16 @@ header {
 
 body {
   overflow-x: hidden; }
+
+.list-group {
+  z-index: 999; }
+  .list-group a.list-group-item {
+    z-index: 999;
+    text-transform: uppercase;
+    text-align: center; }
+    .list-group a.list-group-item:hover {
+      background-color: #4C1B1B;
+      color: #fff; }
 
 #slider ul.custom-indicators {
   margin: 1em 1.5em; }
@@ -282,15 +295,43 @@ body {
     color: #BD8D46;
     text-decoration: none; }
 
+.single-news {
+  cursor: pointer; }
+  .single-news .card-body {
+    padding: 0; }
+    .single-news .card-body a {
+      display: block; }
+    .single-news .card-body h5 {
+      color: #4C1B1B;
+      text-decoration: none;
+      border-top: 1px solid #4C1B1B;
+      border-bottom: 1px solid #4C1B1B;
+      padding: .6em;
+      transition: all .7s solid 0; }
+      .single-news .card-body h5 i {
+        float: right; }
+    .single-news .card-body p {
+      padding: .6em; }
+  .single-news img {
+    position: relative;
+    top: -3em;
+    transition: all .7s ease 0s; }
+  .single-news:hover img {
+    transform: scale(1.4, 1.4); }
+  .single-news:hover h5 {
+    background-color: #4C1B1B;
+    text-decoration: none;
+    color: #fff; }
+  .single-news .image-responsive-custom {
+    border-top: 1px solid #4C1B1B;
+    max-height: 11em;
+    overflow: hidden; }
+
 .error {
   display: block;
   font-size: 75%;
   width: 100%;
   color: red; }
-
-.image-responsive-custom {
-  max-height: 13em;
-  overflow-y: hidden; }
 
 .donate-banner {
   background-color: #4C1B1B;

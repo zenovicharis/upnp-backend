@@ -24,11 +24,10 @@ class Application extends \Cicada\Application
     {
         parent::__construct();
         $this->configure($configPath);
-        $this->setupLibraries();
-//        $this->configureDatabase();
-        $this->configureEloquentDatabase();
         $this->configureMiddleware();
+        $this->configureDatabase();
         $this->configureClients();
+        $this->setupLibraries();
         $this->setUpServices();
         $this->setupTwig();
     }
@@ -90,21 +89,8 @@ class Application extends \Cicada\Application
         };
     }
 
-    protected function configureDatabase()
-    {
-        $dbConfig = $this['config']->getDbConfig();
-        \ActiveRecord\Config::initialize(function (\ActiveRecord\Config $cfg) use ($dbConfig) {
-            $cfg->set_model_directory('src/Models');
-            $cfg->set_connections([
-                'main' => sprintf('mysql://%s:%s@%s/%s',
-                    $dbConfig['user'], $dbConfig['password'], $dbConfig['host'], $dbConfig['name']
-                )
-            ]);
-            $cfg->set_default_connection('main');
-        });
-    }
 
-    protected function configureEloquentDatabase()
+    protected function configureDatabase()
     {
         $dbConfig = $this['config']->getDbConfig();
         $capsule = new Capsule;

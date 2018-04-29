@@ -167,7 +167,10 @@ header {
           display: none; } }
     header nav.row img#logo {
       width: 7em;
-      transition: all 1s ease 0s; }
+      transition: all 1s ease 0s;
+      cursor: pointer; }
+      header nav.row img#logo:hover {
+        width: 8em; }
     header nav.row .custom-showing {
       position: relative;
       border-left: 1px solid #fff !important;
@@ -219,6 +222,16 @@ header {
 
 body {
   overflow-x: hidden; }
+
+.list-group {
+  z-index: 999; }
+  .list-group a.list-group-item {
+    z-index: 999;
+    text-transform: uppercase;
+    text-align: center; }
+    .list-group a.list-group-item:hover {
+      background-color: #4C1B1B;
+      color: #fff; }
 
 .heading-custom {
   padding: 2.8em 3em 3.5em !important;
