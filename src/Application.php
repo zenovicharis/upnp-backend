@@ -2,8 +2,12 @@
 
 namespace Upnp;
 
+use Upnp\Router;
+use Symfony\Component\HttpFoundation\Request;
 use Twig_SimpleFunction;
+use Upnp\Libraries\ExceptionHandler;
 use Upnp\Services\AlbumService;
+use Upnp\Services\MailService;
 use Upnp\Services\NewsService;
 use Upnp\Services\PublicService;
 use Upnp\Services\UserService;
@@ -30,6 +34,7 @@ class Application extends \Cicada\Application
         $this->setupLibraries();
         $this->setUpServices();
         $this->setupTwig();
+
     }
 
     protected function configure($configPath)
@@ -79,6 +84,10 @@ class Application extends \Cicada\Application
         $this['publicService'] = function () {
             return new PublicService();
         };
+
+        $this['mailService'] = function () {
+            return new MailService();
+        };
     }
 
     protected function configureClients()
@@ -106,7 +115,6 @@ class Application extends \Cicada\Application
         ]);
         $capsule->bootEloquent();
     }
-
 
     private function setupTwig()
     {

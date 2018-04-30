@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 200);
+/******/ 	return __webpack_require__(__webpack_require__.s = 203);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9994,7 +9994,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
 
 /***/ }),
 
@@ -10011,7 +10011,7 @@ exports.getNews = function (news) {
 
 /***/ }),
 
-/***/ 181:
+/***/ 184:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -10019,120 +10019,6 @@ exports.getNews = function (news) {
 /***/ }),
 
 /***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-
-/***/ 200:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-__webpack_require__(181);
-
-__webpack_require__(4);
-
-var newsSet = __webpack_require__(139);
-
-$("#patreons").on("click", function () {
-  window.location = "/patreon";
-});
-
-$.ajax({
-  type: "get",
-  url: "/api/news/serbian",
-  success: function success(response) {
-    var newsList = newsSet.getNews(response);
-    $("#news-block").append(newsList);
-  },
-  contentType: false,
-  cache: false,
-  processData: false
-});
-
-$.ajax({
-  type: "get",
-  url: "/api/projects/serbian",
-  success: function success(response) {
-    var dropDownList = response.map(function (el) {
-      var btn = $('<a href="#" class="list-group-item list-group-item-action">');
-      $(btn).text(el.title);
-      $(btn).attr('href', '/public/news/' + el.id);
-      return btn[0];
-    });
-
-    var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
-    $("#proj").tooltip({
-      template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
-    });
-  },
-  contentType: false,
-  cache: false,
-  processData: false
-});
-
-$(".hamburger").on("click", function () {
-  toggleMenu();
-});
-
-function toggleMenu() {
-  var rightPosition = parseInt($(".custom-showing").css('right'));
-  console.log(rightPosition);
-  if (rightPosition < 0) {
-    $(".custom-showing").css('right', '0%');
-  } else {
-    $(".custom-showing").css('right', '-33%');
-  }
-}
-
-$(document).ready(function () {
-  $("#slider").on('swiperight', function () {
-    $(this).carousel('prev');
-  });
-  $("#slider").on('swipeleft', function () {
-    $(this).carousel('next');
-  });
-  $(".single-news").click(function () {
-    var link = $(this).find('a');
-    link[0].click();
-  });
-});
-
-$('html').bind("load", function () {
-  $("body").css("display", "block");
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-
-/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12579,6 +12465,123 @@ exports.default = Popper;
 
 /***/ }),
 
+/***/ 203:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+__webpack_require__(184);
+
+__webpack_require__(4);
+
+var newsSet = __webpack_require__(139);
+
+$("#patreons").on("click", function () {
+  window.location = "/patreon";
+});
+
+$.ajax({
+  type: "get",
+  url: "/api/news/serbian",
+  success: function success(response) {
+    var newsList = newsSet.getNews(response);
+    $("#news-block").append(newsList);
+  },
+  contentType: false,
+  cache: false,
+  processData: false
+});
+
+$.ajax({
+  type: "get",
+  url: "/api/projects/serbian",
+  success: function success(response) {
+    var dropDownList = response.map(function (el) {
+      var btn = $('<a href="#" class="list-group-item list-group-item-action">');
+      $(btn).text(el.title);
+      $(btn).attr('href', '/public/news/' + el.id);
+      return btn[0];
+    });
+
+    var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
+    $("#proj").tooltip({
+      template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
+    });
+    $("#proj").on('mouseover', function () {
+      $(this).focus();
+    });
+  },
+  contentType: false,
+  cache: false,
+  processData: false
+});
+
+$(".hamburger").on("click", function () {
+  toggleMenu();
+});
+
+function toggleMenu() {
+  var rightPosition = parseInt($(".custom-showing").css('right'));
+  console.log(rightPosition);
+  if (rightPosition < 0) {
+    $(".custom-showing").css('right', '0%');
+  } else {
+    $(".custom-showing").css('right', '-33%');
+  }
+}
+
+$(document).ready(function () {
+  $("#slider").on('swiperight', function () {
+    $(this).carousel('prev');
+  });
+  $("#slider").on('swipeleft', function () {
+    $(this).carousel('next');
+  });
+  $(".single-news").click(function () {
+    var link = $(this).find('a');
+    link[0].click();
+  });
+});
+
+$('html').bind("load", function () {
+  $("body").css("display", "block");
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+/***/ }),
+
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12593,7 +12596,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(1), __webpack_require__(3)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(1), __webpack_require__(2)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : factory(global.bootstrap = {}, global.jQuery, global.Popper);

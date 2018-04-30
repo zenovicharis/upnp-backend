@@ -272,27 +272,23 @@ body {
     background-color: #4C1B1B;
     color: #fff; }
   .news-sections .news-picture {
-    border-top: 3px solid #4C1B1B;
+    border-top: 2px solid #4C1B1B;
     padding: 0;
     height: 17em;
     overflow: hidden; }
     .news-sections .news-picture img {
       width: 100%; }
   .news-sections .news-text {
-    border-top: 3px solid #4C1B1B;
+    border-top: 2px solid #4C1B1B;
     padding: 0; }
     .news-sections .news-text h4 {
       border-bottom: 3px solid #4C1B1B;
       padding: 0 2%; }
     .news-sections .news-text p {
       padding: 0 2%; }
-  .news-sections button {
-    position: absolute;
-    right: 3%;
-    bottom: 0; }
-    .news-sections button:hover {
-      background-color: #4C1B1B;
-      color: #fff; }
+  .news-sections button:hover {
+    background-color: #4C1B1B;
+    color: #fff; }
   .news-sections .date {
     position: absolute;
     left: 0;

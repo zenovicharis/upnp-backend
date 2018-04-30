@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 222);
+/******/ 	return __webpack_require__(__webpack_require__.s = 214);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9994,11 +9994,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
 
 /***/ }),
 
-/***/ 177:
+/***/ 168:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -10006,105 +10006,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /***/ }),
 
 /***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-
-/***/ 222:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-__webpack_require__(177);
-
-__webpack_require__(4);
-
-$(document).ready(function () {
-  $("body").css("display", "block");
-  $("#logo").on('click', function () {
-    var url = $(this).attr("data-url");
-    window.location = url;
-  });
-  var urlArray = window.location.href.split('/');
-  var lang = urlArray[urlArray.length - 1];
-
-  $.ajax({
-    type: "get",
-    url: lang == "english" ? "/api/projects/english" : "/api/projects/serbian",
-    success: function success(response) {
-      var dropDownList = response.map(function (el) {
-        var btn = $('<a href="#" class="list-group-item list-group-item-action">');
-        $(btn).text(el.title);
-        $(btn).attr('href', '/public/news/' + el.id);
-        return btn[0];
-      });
-
-      var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
-      $("#proj").tooltip({
-        template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
-      });
-    },
-    contentType: false,
-    cache: false,
-    processData: false
-  });
-
-  $(".single-news").click(function () {
-    var link = $(this).find('a');
-    link[0].click();
-  });
-
-  $(".shortened").each(function (el, p) {
-    var text = $.parseHTML($(p).text());
-    var shortened = $(text).text().substring(0, 100);
-    $(p).text(shortened);
-  });
-
-  $(".hamburger").on("click", function () {
-    toggleMenu();
-  });
-
-  function toggleMenu() {
-    var rightPosition = parseInt($(".custom-showing").css('right'));
-    if (rightPosition < 0) {
-      $(".custom-showing").css('right', '0%');
-    } else {
-      $(".custom-showing").css('right', '-33%');
-    }
-  }
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-
-/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12551,6 +12452,96 @@ exports.default = Popper;
 
 /***/ }),
 
+/***/ 214:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+__webpack_require__(168);
+
+__webpack_require__(4);
+
+$(document).ready(function () {
+  $("body").css("display", "block");
+
+  $("#logo").on('click', function () {
+    var url = $(this).attr("data-url");
+    window.location = url;
+  });
+
+  $.ajax({
+    type: "get",
+    url: "/api/projects/english",
+    success: function success(response) {
+      var dropDownList = response.map(function (el) {
+        var btn = $('<a href="#" class="list-group-item list-group-item-action">');
+        $(btn).text(el.title);
+        $(btn).attr('href', '/public/news/' + el.id);
+        return btn[0];
+      });
+
+      var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
+      $("#proj").tooltip({
+        template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
+      });
+      $("#proj").on('mouseover', function () {
+        $(this).focus();
+      });
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+
+  $(".hamburger").on("click", function () {
+    toggleMenu();
+  });
+
+  function toggleMenu() {
+    var rightPosition = parseInt($(".custom-showing").css('right'));
+    if (rightPosition < 0) {
+      $(".custom-showing").css('right', '0%');
+    } else {
+      $(".custom-showing").css('right', '-33%');
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+/***/ }),
+
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12565,7 +12556,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(1), __webpack_require__(3)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(1), __webpack_require__(2)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : factory(global.bootstrap = {}, global.jQuery, global.Popper);

@@ -8,6 +8,7 @@
 
 namespace Upnp\Controllers;
 
+use GuzzleHttp\Psr7\Response;
 use Upnp\Services\PublicService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -129,6 +130,12 @@ class PublicController
     public function aboutusEn()
     {
         return $this->twig->render('/en-about/en-about.html');//, ['news' => $news]
+    }
+
+    public function error()
+    {
+        //var_dump('error');die();
+        return $this->twig->render('/error/error.html');//, ['news' => $news]
     }
 
     public function getSingleNews($id)

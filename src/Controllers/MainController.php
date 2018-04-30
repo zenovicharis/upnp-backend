@@ -7,6 +7,7 @@ use Upnp\Clients\ImgurClient;
 use Upnp\Models\Album;
 use Upnp\Models\Image;
 use Upnp\Services\AlbumService;
+use Upnp\Services\MailService;
 use Upnp\Services\NewsService;
 use Upnp\Services\VolountieerService;
 use Upnp\Services\ImageService;
@@ -39,17 +40,21 @@ class MainController
     /** @var ValidationLibrary $validationLibrary * */
     public $validationLibrary;
 
-    public function __construct($newsService, $userService, $volountieerService, $imgurClient, $twig, $validationLibrary, $albumService, $imageService)
+    /** @var MailService $mailService * */
+    public $mailService;
+
+    public function __construct($newsService, $userService, $volountieerService, $imgurClient, $twig, $validationLibrary, $albumService, $imageService, $mailService)
 
     {
         $this->twig = $twig;
+        $this->mailService = $mailService;
         $this->imgurClient = $imgurClient;
         $this->userService = $userService;
         $this->newsService = $newsService;
         $this->albumService = $albumService;
+        $this->imageService = $imageService;
         $this->validationLibrary = $validationLibrary;
         $this->volountieerService = $volountieerService;
-        $this->imageService = $imageService;
     }
 
     public function news(Request $request)
@@ -334,6 +339,19 @@ class MainController
         $album = Album::find($id);
         $album->delete();
         return new RedirectResponse('/album?deletemessage=Album je uspesno izbrisan!');
+    }
+
+    public function sendMail(Application $app, Request $request)
+    {
+        $phone = $request->request->get('phone');
+        $subject = $request->request->get('subject');
+        $content = $request->request->get('content');
+        $company = $request->request->get('company');
+        $clientName = $request->request->get('name');
+        $clientMail = $request->request->get('senderEmail');
+
+        $isSent = $this->mailService->sendMail($clientMail, $clientName, $subject, $content);
+        return new Response();
     }
 
 

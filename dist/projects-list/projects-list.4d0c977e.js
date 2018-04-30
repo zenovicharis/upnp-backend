@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 220);
+/******/ 	return __webpack_require__(__webpack_require__.s = 224);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9994,18 +9994,42 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
 
 /***/ }),
 
-/***/ 175:
+/***/ 178:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 2:
+/***/ 224:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+__webpack_require__(178);
+
+$(document).ready(function () {
+
+  $("body").css("display", "block");
+  $("#logo").on('click', function () {
+    window.location = '/';
+  });
+  $(".shortened").each(function (el, p) {
+    var text = $.parseHTML($(p).text());
+    var shortened = $(text).text().substring(0, 550);
+    $(p).text(shortened);
+  });
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10033,30 +10057,6 @@ module.exports = function (module) {
 	}
 	return module;
 };
-
-/***/ }),
-
-/***/ 220:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-__webpack_require__(175);
-
-$(document).ready(function () {
-
-  $("body").css("display", "block");
-  $("#logo").on('click', function () {
-    window.location = '/';
-  });
-  $(".shortened").each(function (el, p) {
-    var text = $.parseHTML($(p).text());
-    var shortened = $(text).text().substring(0, 550);
-    $(p).text(shortened);
-  });
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ })
 

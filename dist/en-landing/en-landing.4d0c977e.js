@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 201);
+/******/ 	return __webpack_require__(__webpack_require__.s = 212);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9994,11 +9994,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
 
 /***/ }),
 
-/***/ 156:
+/***/ 146:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+exports.getNews = function (news) {
+  return "\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[0].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[0].id + "\">\n        <h5>" + news[0].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[0].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[1].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[1].id + "\">\n        <h5>" + news[1].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[1].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[2].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[2].id + "\">\n        <h5>" + news[2].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[2].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n";
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 166:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -10006,94 +10019,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /***/ }),
 
 /***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-
-/***/ 201:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-__webpack_require__(156);
-
-__webpack_require__(4);
-
-$(document).ready(function () {
-  $("body").css("display", "block");
-  $("#logo").on('click', function () {
-    var url = $(this).attr("data-url");
-    // console.log(url)
-    window.location = url;
-  });
-
-  $.ajax({
-    type: "get",
-    url: "/api/projects/serbian",
-    success: function success(response) {
-      var dropDownList = response.map(function (el) {
-        var btn = $('<a href="#" class="list-group-item list-group-item-action">');
-        $(btn).text(el.title);
-        $(btn).attr('href', '/public/news/' + el.id);
-        return btn[0];
-      });
-
-      var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
-      $("#proj").tooltip({
-        template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
-      });
-    },
-    contentType: false,
-    cache: false,
-    processData: false
-  });
-
-  $(".hamburger").on("click", function () {
-    toggleMenu();
-  });
-
-  function toggleMenu() {
-    var rightPosition = parseInt($(".custom-showing").css('right'));
-    console.log(rightPosition);
-    if (rightPosition < 0) {
-      $(".custom-showing").css('right', '0%');
-    } else {
-      $(".custom-showing").css('right', '-33%');
-    }
-  }
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-
-/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12540,6 +12465,141 @@ exports.default = Popper;
 
 /***/ }),
 
+/***/ 212:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+__webpack_require__(166);
+
+__webpack_require__(4);
+
+var newsSet = __webpack_require__(146);
+
+
+$(document).ready(function () {
+
+  $("body").css("display", "block");
+  $("#logo").on('click', function () {
+    var url = $(this).attr("data-url");
+    window.location = url;
+  });
+  $("#patreons").on("click", function () {
+    window.location = "/en/patreon";
+  });
+
+  $.ajax({
+    type: "get",
+    url: "/api/projects/english",
+    success: function success(response) {
+      var dropDownList = response.map(function (el) {
+        var btn = $('<a href="#" class="list-group-item list-group-item-action">');
+        $(btn).text(el.title);
+        $(btn).attr('href', '/public/news/' + el.id);
+        return btn[0];
+      });
+
+      var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
+      $("#proj").tooltip({
+        template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
+      });
+      $("#proj").on('mouseover', function () {
+        $(this).focus();
+      });
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+
+  $.ajax({
+    type: "get",
+    url: "/api/news/english",
+    success: function success(response) {
+      var newsList = newsSet.getNews(response);
+      $("#news-block").append(newsList);
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+
+  $.ajax({
+    type: "get",
+    url: "/api/projects/english",
+    success: function success(response) {
+      var dropDownList = response.map(function (el) {
+        var btn = $('<a href="#" class="list-group-item list-group-item-action">');
+        $(btn).text(el.title);
+        $(btn).attr('href', '/public/news/' + el.id);
+        return btn[0];
+      });
+
+      var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
+      $("#proj").tooltip({
+        template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
+      });
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+
+  $(".hamburger").on("click", function () {
+    toggleMenu();
+  });
+
+  function toggleMenu() {
+    var rightPosition = parseInt($(".custom-showing").css('right'));
+
+    if (rightPosition < 0) {
+      $(".custom-showing").css('right', '0%');
+    } else {
+      $(".custom-showing").css('right', '-33%');
+    }
+  }
+
+  $(".single-news").click(function () {
+    var link = $(this).find('a');
+    link[0].click();
+  });
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+/***/ }),
+
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12554,7 +12614,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(1), __webpack_require__(3)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(1), __webpack_require__(2)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : factory(global.bootstrap = {}, global.jQuery, global.Popper);

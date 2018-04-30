@@ -7,6 +7,7 @@ require 'vendor/autoload.php';
 
 header("Access-Control-Allow-Origin: *");
 
+use Symfony\Component\HttpFoundation\Response;
 use Upnp\Application;
 use Upnp\Controllers\MainController;
 use Upnp\Controllers\PublicController;
@@ -18,7 +19,7 @@ $app = new Application($_SERVER['HOME']);
 
 // Controllers
 $publicController = new PublicController( $app['twig'],$app['publicService']);
-$mainController = new MainController($app['newsService'], $app['userService'], $app['volountieerService'], $app['imgur'], $app['twig'], $app['validationLibrary'], $app['albumService'],$app['imageService']);
+$mainController = new MainController($app['newsService'], $app['userService'], $app['volountieerService'], $app['imgur'], $app['twig'], $app['validationLibrary'], $app['albumService'],$app['imageService'], $app['mailService']);
 $middleware = $app['middleware'];
 
 
@@ -117,6 +118,7 @@ $app->get('/public/news',                     [$publicController, "news"]);
 $app->get('/public/news/{id}',                [$publicController, "getSingleNews"]);
 $app->get('/public/projects',                 [$publicController, "projects"]);
 $app->get('/projects',                        [$mainController, "projects"]);
+$app->get('/error',                        [$publicController, "error"]);
 
 
 $englishRouteCollection->get('',                [$publicController, "landingEn"]);
@@ -130,9 +132,12 @@ $englishRouteCollection->get('/contact',        [$publicController, "contactEn"]
 $englishRouteCollection->get('/patreon',        [$publicController, "patreonEn"]);
 $englishRouteCollection->get('/aboutus',        [$publicController, "aboutusEn"]);
 
-
 $app->addRouteCollection($newsRouteCollection);
 $app->addRouteCollection($albumRouteCollection);
 $app->addRouteCollection($englishRouteCollection);
 $app->addRouteCollection($volunteerRouteCollection);
+
+
 $app->run();
+
+

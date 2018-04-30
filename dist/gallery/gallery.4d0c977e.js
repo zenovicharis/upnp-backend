@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 213);
+/******/ 	return __webpack_require__(__webpack_require__.s = 217);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9994,11 +9994,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
 
 /***/ }),
 
-/***/ 131:
+/***/ 130:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10523,14 +10523,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 132:
+/***/ 131:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 149:
+/***/ 151:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10542,7 +10542,7 @@ exports.getImage = function (image) {
 
 /***/ }),
 
-/***/ 150:
+/***/ 152:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10554,7 +10554,7 @@ exports.getShell = function (album) {
 
 /***/ }),
 
-/***/ 168:
+/***/ 171:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -10562,128 +10562,6 @@ exports.getShell = function (album) {
 /***/ }),
 
 /***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-
-/***/ 213:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-__webpack_require__(168);
-
-__webpack_require__(132);
-
-__webpack_require__(131);
-
-__webpack_require__(4);
-
-var albumShell = __webpack_require__(150);
-var albumImage = __webpack_require__(149);
-
-
-$(document).ready(function () {
-  $("body").css("display", "block");
-  $("#logo").on('click', function () {
-    var url = $(this).attr("data-url");
-    window.location = url;
-  });
-
-  $.ajax({
-    type: "get",
-    url: "/api/albums",
-    success: function success(response) {
-      var albums = response.forEach(function (el) {
-        var images = el.images.map(function (img) {
-          return albumImage.getImage(img);
-        });
-        var albumShellContainer = albumShell.getShell(el);
-        $(".gallery").append(albumShellContainer);
-        var id = $(albumShellContainer).attr('id');
-
-        $("#" + id).append(images.join(''));
-      });
-    },
-    contentType: false,
-    cache: false,
-    processData: false
-    // dataType: dataType
-  });
-
-  $.ajax({
-    type: "get",
-    url: "/api/projects/serbian",
-    success: function success(response) {
-      var dropDownList = response.map(function (el) {
-        var btn = $('<a href="#" class="list-group-item list-group-item-action">');
-        $(btn).text(el.title);
-        $(btn).attr('href', '/public/news/' + el.id);
-        return btn[0];
-      });
-
-      var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
-      $("#proj").tooltip({
-        template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
-      });
-    },
-    contentType: false,
-    cache: false,
-    processData: false
-  });
-
-  $(".hamburger").on("click", function () {
-    toggleMenu();
-  });
-
-  function toggleMenu() {
-    var rightPosition = parseInt($(".custom-showing").css('right'));
-    if (rightPosition < 0) {
-      $(".custom-showing").css('right', '0%');
-    } else {
-      $(".custom-showing").css('right', '-33%');
-    }
-  }
-
-  $(document).on("click", "div.column", function () {
-    var id = $(this).attr("id");
-    var link = $("#" + id).find('a');
-    $(link[0]).click();
-    // return false;
-  });
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-
-/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13130,6 +13008,131 @@ exports.default = Popper;
 
 /***/ }),
 
+/***/ 217:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+__webpack_require__(171);
+
+__webpack_require__(131);
+
+__webpack_require__(130);
+
+__webpack_require__(4);
+
+var albumShell = __webpack_require__(152);
+var albumImage = __webpack_require__(151);
+
+
+$(document).ready(function () {
+  $("body").css("display", "block");
+  $("#logo").on('click', function () {
+    var url = $(this).attr("data-url");
+    window.location = url;
+  });
+
+  $.ajax({
+    type: "get",
+    url: "/api/albums",
+    success: function success(response) {
+      var albums = response.forEach(function (el) {
+        var images = el.images.map(function (img) {
+          return albumImage.getImage(img);
+        });
+        var albumShellContainer = albumShell.getShell(el);
+        $(".gallery").append(albumShellContainer);
+        var id = $(albumShellContainer).attr('id');
+
+        $("#" + id).append(images.join(''));
+      });
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+    // dataType: dataType
+  });
+
+  $.ajax({
+    type: "get",
+    url: "/api/projects/serbian",
+    success: function success(response) {
+      var dropDownList = response.map(function (el) {
+        var btn = $('<a href="#" class="list-group-item list-group-item-action">');
+        $(btn).text(el.title);
+        $(btn).attr('href', '/public/news/' + el.id);
+        return btn[0];
+      });
+
+      var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
+      $("#proj").tooltip({
+        template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
+      });
+      $("#proj").on('mouseover', function () {
+        $(this).focus();
+      });
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+
+  $(".hamburger").on("click", function () {
+    toggleMenu();
+  });
+
+  function toggleMenu() {
+    var rightPosition = parseInt($(".custom-showing").css('right'));
+    if (rightPosition < 0) {
+      $(".custom-showing").css('right', '0%');
+    } else {
+      $(".custom-showing").css('right', '-33%');
+    }
+  }
+
+  $(document).on("click", "div.column", function () {
+    var id = $(this).attr("id");
+    var link = $("#" + id).find('a');
+    $(link[0]).click();
+    // return false;
+  });
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+/***/ }),
+
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13144,7 +13147,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(1), __webpack_require__(3)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(1), __webpack_require__(2)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : factory(global.bootstrap = {}, global.jQuery, global.Popper);
