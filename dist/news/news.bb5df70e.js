@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 213);
+/******/ 	return __webpack_require__(__webpack_require__.s = 222);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -33315,7 +33315,14 @@ webpackContext.id = 132;
 /* 144 */,
 /* 145 */,
 /* 146 */,
-/* 147 */
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33328,17 +33335,10 @@ var _moment2 = _interopRequireDefault(_moment);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.getNews = function (news) {
-  return '<div class="row news-sections" >\n  <span class="date">' + (0, _moment2.default)(news.created).format('DD MMM YYYY') + '</span>\n  <div class="col-sm-6 col-12 news-picture">\n    <img src="' + news.images.url + '" alt="">\n  </div>\n  <div class="col-sm-6 col-12 news-text">\n    <h4>' + news.title + '</h4>\n    <p class="text-justify">\n    ' + news.content + '\n    </p>\n    <p class="text-right"> \n      <button class="btn btn-default btn-custom" onclick="toOneNews(' + news.id + ')">Read More</button>\n    </p>\n  </div>\n</div>\n';
+  return '<div class="row news-sections" >\n  <span class="date">' + (0, _moment2.default)(news.created).format('DD MMM YYYY') + '</span>\n  <div class="col-sm-6 col-12 news-picture">\n    <img src="' + news.images.url + '" alt="">\n  </div>\n  <div class="col-sm-6 col-12 news-text">\n    <h4>' + news.title + '</h4>\n    <p class="text-justify news-content">\n    ' + news.content + '\n    </p>\n    <p class="text-right"> \n      <button class="btn btn-default btn-custom" onclick="toOneNews(' + news.id + ')">Vise</button>\n    </p>\n  </div>\n</div>\n';
 };
 
 /***/ }),
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
-/* 154 */,
 /* 155 */,
 /* 156 */,
 /* 157 */,
@@ -33351,12 +33351,7 @@ exports.getNews = function (news) {
 /* 164 */,
 /* 165 */,
 /* 166 */,
-/* 167 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
+/* 167 */,
 /* 168 */,
 /* 169 */,
 /* 170 */,
@@ -33365,7 +33360,12 @@ exports.getNews = function (news) {
 /* 173 */,
 /* 174 */,
 /* 175 */,
-/* 176 */,
+/* 176 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
 /* 177 */,
 /* 178 */,
 /* 179 */,
@@ -33402,18 +33402,26 @@ exports.getNews = function (news) {
 /* 210 */,
 /* 211 */,
 /* 212 */,
-/* 213 */
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(167);
+__webpack_require__(176);
 
 __webpack_require__(4);
 
-var news = __webpack_require__(147);
-
+var news = __webpack_require__(154);
 
 $(document).ready(function () {
   $("body").css("display", "block");
@@ -33425,7 +33433,23 @@ $(document).ready(function () {
 
   $.ajax({
     type: "get",
-    url: "/api/projects/english",
+    url: "/api/news/serbian",
+    success: function success(response) {
+      var newsList = response.map(function (el) {
+        var text = $.parseHTML(el.content);
+        el.content = $(text).text().substring(0, 400);
+        return news.getNews(el);
+      });
+      $("div.main-container").append(newsList.join(""));
+    },
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+
+  $.ajax({
+    type: "get",
+    url: "/api/projects/serbian",
     success: function success(response) {
       var dropDownList = response.map(function (el) {
         var btn = $('<a href="#" class="list-group-item list-group-item-action">');
@@ -33438,26 +33462,9 @@ $(document).ready(function () {
       $("#proj").tooltip({
         template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
       });
-      $("#proj").on('mouseover', function () {
-        $(this).focus();
+      $("#proj").mouseover(function () {
+        $(this).click();
       });
-    },
-    contentType: false,
-    cache: false,
-    processData: false
-  });
-
-  $.ajax({
-    type: "get",
-    url: "/api/news/english",
-    // data: data,
-    success: function success(response) {
-      var newsList = response.map(function (el) {
-        var text = $.parseHTML(el.content);
-        el.content = $(text).text().substring(0, 550);
-        return news.getNews(el);
-      });
-      $("div.main-container").append(newsList.join(""));
     },
     contentType: false,
     cache: false,
@@ -33467,7 +33474,6 @@ $(document).ready(function () {
   $(".hamburger").on("click", function () {
     toggleMenu();
   });
-
   function toggleMenu() {
     var rightPosition = parseInt($(".custom-showing").css('right'));
     if (rightPosition < 0) {

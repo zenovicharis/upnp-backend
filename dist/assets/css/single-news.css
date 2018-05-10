@@ -336,9 +336,9 @@ body {
   color: red; }
 
 .single-suggestion {
-  cursor: pointer; }
+  cursor: pointer;
+  border-left: 1px solid #4C1B1B; }
   .single-suggestion .card-body {
-    border-left: 1px solid #4C1B1B;
     padding: 0; }
     .single-suggestion .card-body a {
       display: block; }
@@ -371,7 +371,6 @@ body {
     color: #fff; }
   .single-suggestion .image-responsive-custom {
     border-top: 1px solid #4C1B1B;
-    border-left: 1px solid #4C1B1B;
     max-height: 11em;
     overflow: hidden; }
 

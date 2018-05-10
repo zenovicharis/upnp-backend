@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 226);
+/******/ 	return __webpack_require__(__webpack_require__.s = 203);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9998,7 +9998,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 180:
+/***/ 139:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+exports.getNews = function (news) {
+  return "\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[0].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[0].id + "\">\n        <h5>" + news[0].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[0].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[1].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[1].id + "\">\n        <h5>" + news[1].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[1].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[2].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[2].id + "\">\n        <h5>" + news[2].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[2].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n";
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 184:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -12452,72 +12465,87 @@ exports.default = Popper;
 
 /***/ }),
 
-/***/ 226:
+/***/ 203:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(180);
+__webpack_require__(184);
 
 __webpack_require__(4);
 
+var newsSet = __webpack_require__(139);
+
+$("#patreons").on("click", function () {
+  window.location = "/patreon";
+});
+
+$.ajax({
+  type: "get",
+  url: "/api/news/serbian",
+  success: function success(response) {
+    var newsList = newsSet.getNews(response);
+    $("#news-block").append(newsList);
+  },
+  contentType: false,
+  cache: false,
+  processData: false
+});
+
+$.ajax({
+  type: "get",
+  url: "/api/projects/serbian",
+  success: function success(response) {
+    var dropDownList = response.map(function (el) {
+      var btn = $('<a href="#" class="list-group-item list-group-item-action">');
+      $(btn).text(el.title);
+      $(btn).attr('href', '/public/news/' + el.id);
+      return btn[0];
+    });
+
+    var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
+    $("#proj").tooltip({
+      template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
+    });
+    $("#proj").mouseover(function () {
+      $(this).click();
+    });
+  },
+  contentType: false,
+  cache: false,
+  processData: false
+});
+
+$(".hamburger").on("click", function () {
+  toggleMenu();
+});
+
+function toggleMenu() {
+  var rightPosition = parseInt($(".custom-showing").css('right'));
+  console.log(rightPosition);
+  if (rightPosition < 0) {
+    $(".custom-showing").css('right', '0%');
+  } else {
+    $(".custom-showing").css('right', '-33%');
+  }
+}
+
 $(document).ready(function () {
-  $("body").css("display", "block");
-  $("#logo").on('click', function () {
-    var url = $(this).attr("data-url");
-    window.location = url;
+  $("#slider").on('swiperight', function () {
+    $(this).carousel('prev');
   });
-  var urlArray = window.location.href.split('/');
-  var lang = urlArray[urlArray.length - 1];
-
-  $.ajax({
-    type: "get",
-    url: lang == "english" ? "/api/projects/english" : "/api/projects/serbian",
-    success: function success(response) {
-      var dropDownList = response.map(function (el) {
-        var btn = $('<a href="#" class="list-group-item list-group-item-action">');
-        $(btn).text(el.title);
-        $(btn).attr('href', '/public/news/' + el.id);
-        return btn[0];
-      });
-
-      var temp = $('<div class="list-group" id="custom-dropdown">').append(dropDownList);
-      $("#proj").tooltip({
-        template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
-      });
-      $("#proj").on('mouseover', function () {
-        $(this).focus();
-      });
-    },
-    contentType: false,
-    cache: false,
-    processData: false
+  $("#slider").on('swipeleft', function () {
+    $(this).carousel('next');
   });
-
   $(".single-news").click(function () {
     var link = $(this).find('a');
     link[0].click();
   });
+});
 
-  $(".shortened").each(function (el, p) {
-    var text = $.parseHTML($(p).text());
-    var shortened = $(text).text().substring(0, 100);
-    $(p).text(shortened);
-  });
-
-  $(".hamburger").on("click", function () {
-    toggleMenu();
-  });
-
-  function toggleMenu() {
-    var rightPosition = parseInt($(".custom-showing").css('right'));
-    if (rightPosition < 0) {
-      $(".custom-showing").css('right', '0%');
-    } else {
-      $(".custom-showing").css('right', '-33%');
-    }
-  }
+$('html').bind("load", function () {
+  $("body").css("display", "block");
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 

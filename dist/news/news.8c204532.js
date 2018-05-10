@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 225);
+/******/ 	return __webpack_require__(__webpack_require__.s = 222);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -33322,8 +33322,7 @@ webpackContext.id = 132;
 /* 151 */,
 /* 152 */,
 /* 153 */,
-/* 154 */,
-/* 155 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33340,6 +33339,7 @@ exports.getNews = function (news) {
 };
 
 /***/ }),
+/* 155 */,
 /* 156 */,
 /* 157 */,
 /* 158 */,
@@ -33360,15 +33360,15 @@ exports.getNews = function (news) {
 /* 173 */,
 /* 174 */,
 /* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */
+/* 176 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
+/* 177 */,
+/* 178 */,
+/* 179 */,
 /* 180 */,
 /* 181 */,
 /* 182 */,
@@ -33411,21 +33411,17 @@ exports.getNews = function (news) {
 /* 219 */,
 /* 220 */,
 /* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(179);
+__webpack_require__(176);
 
 __webpack_require__(4);
 
-var news = __webpack_require__(155);
-
+var news = __webpack_require__(154);
 
 $(document).ready(function () {
   $("body").css("display", "block");
@@ -33434,13 +33430,14 @@ $(document).ready(function () {
     var url = $(this).attr("data-url");
     window.location = url;
   });
-  $.get({
+
+  $.ajax({
     type: "get",
-    url: "/api/projects/serbian",
+    url: "/api/news/serbian",
     success: function success(response) {
       var newsList = response.map(function (el) {
         var text = $.parseHTML(el.content);
-        el.content = $(text).text().substring(0, 550);
+        el.content = $(text).text().substring(0, 400);
         return news.getNews(el);
       });
       $("div.main-container").append(newsList.join(""));
@@ -33465,8 +33462,8 @@ $(document).ready(function () {
       $("#proj").tooltip({
         template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
       });
-      $("#proj").on('mouseover', function () {
-        $(this).focus();
+      $("#proj").mouseover(function () {
+        $(this).click();
       });
     },
     contentType: false,
@@ -33477,7 +33474,6 @@ $(document).ready(function () {
   $(".hamburger").on("click", function () {
     toggleMenu();
   });
-
   function toggleMenu() {
     var rightPosition = parseInt($(".custom-showing").css('right'));
     if (rightPosition < 0) {

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 214);
+/******/ 	return __webpack_require__(__webpack_require__.s = 209);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9998,7 +9998,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 168:
+/***/ 163:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -12452,19 +12452,18 @@ exports.default = Popper;
 
 /***/ }),
 
-/***/ 214:
+/***/ 209:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(168);
+__webpack_require__(163);
 
 __webpack_require__(4);
 
 $(document).ready(function () {
   $("body").css("display", "block");
-
   $("#logo").on('click', function () {
     var url = $(this).attr("data-url");
     window.location = url;
@@ -12485,8 +12484,8 @@ $(document).ready(function () {
       $("#proj").tooltip({
         template: '<div class="list-group" id="custom-dropdown">' + temp.html() + '</div>'
       });
-      $("#proj").on('mouseover', function () {
-        $(this).focus();
+      $("#proj").mouseover(function () {
+        $(this).click();
       });
     },
     contentType: false,
@@ -12497,7 +12496,6 @@ $(document).ready(function () {
   $(".hamburger").on("click", function () {
     toggleMenu();
   });
-
   function toggleMenu() {
     var rightPosition = parseInt($(".custom-showing").css('right'));
     if (rightPosition < 0) {

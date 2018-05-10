@@ -200,7 +200,7 @@
               <div class="shortened">
                 {{ sug.content | raw }}
               </div>
-              <a href="/public/news/{{sug.id}}" class="link">Vise <i class="fas fa-angle-right"></i></a>
+              <a href="/public/news/{{sug.id}}" class="link">{{ news.language == 'serbian' ? 'Više' : 'More' }} <i class="fas fa-angle-right"></i></a>
             </div>
           </div>
           {% endfor %}
@@ -233,6 +233,6 @@
       </div>
     </div>
   </footer>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.4d0c977e.js"></script><script type="text/javascript" src="/dist/single-news/single-news.4d0c977e.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.bb5df70e.js"></script><script type="text/javascript" src="/dist/single-news/single-news.bb5df70e.js"></script></body>
 
 </html>
