@@ -33,6 +33,7 @@ class Application extends \Cicada\Application
         $this->configureClients();
         $this->setupLibraries();
         $this->setUpServices();
+        $this->setUpRouter();
         $this->setupTwig();
 
     }
@@ -85,8 +86,9 @@ class Application extends \Cicada\Application
             return new PublicService();
         };
 
-        $this['mailService'] = function () {
-            return new MailService();
+        $mailCredentials = $this['config']->getMailCredentials();
+        $this['mailService'] = function () use ($mailCredentials) {
+            return new MailService($mailCredentials);
         };
     }
 
@@ -133,6 +135,13 @@ class Application extends \Cicada\Application
             $twig->addFunction(new Twig_SimpleFunction('path', $pathFunction));
 
             return $twig;
+        };
+    }
+
+    private function setUpRouter()
+    {
+        $this['router'] = function () {
+            return new Router();
         };
     }
 }

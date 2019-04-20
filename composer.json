@@ -7,8 +7,7 @@
     "twig/twig": "^2.0",
     "guzzlehttp/guzzle": "^6.3",
     "vlucas/valitron": "^1.4",
-    "illuminate/database": "^5.6",
-    "php": "~7.0.10 | ^7.2.4"
+    "illuminate/database": "^5.6"
   },
   "autoload": {
     "psr-4": {

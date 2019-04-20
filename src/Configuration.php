@@ -23,4 +23,9 @@ class Configuration
     {
         return $this->config['imgur'];
     }
+
+    public function getMailCredentials()
+    {
+        return $this->config['mail'];
+    }
 }

@@ -94,11 +94,10 @@ class MainController
 
     public function login(Application $app, Request $request)
     {
-//        var_dump("heee");die();
         $isRedirected = $request->query->get("continue");
-//        if (!empty($isRedirected)) {
-//            return $this->twig->render('/news-list/news-list.html', ['message' => true]);
-//        }
+        if (!empty($isRedirected)) {
+            return $this->twig->render('/news-list/news-list.html', ['message' => true]);
+        }
         return $this->twig->render('/login/login.html');
     }
 
@@ -348,10 +347,10 @@ class MainController
         $content = $request->request->get('content');
         $company = $request->request->get('company');
         $clientName = $request->request->get('name');
-        $clientMail = $request->request->get('senderEmail');
+        $clientMail = $request->request->get('email');
 
         $isSent = $this->mailService->sendMail($clientMail, $clientName, $subject, $content);
-        return new Response();
+        return $this->twig->render('/contact/contact.html');
     }
 
 
@@ -405,7 +404,7 @@ class MainController
             $_SESSION['user'] = $user->toArray();
             return new RedirectResponse('/news');
         }
-        return new RedirectResponse('/login?continue=failed');
+        return new RedirectResponse('/login');
     }
 
     public function logout()

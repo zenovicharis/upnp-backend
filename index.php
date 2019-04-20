@@ -58,14 +58,14 @@ $englishRouteCollection = $app['collection_factory']->prefix('/en');
 //Routes
 $app->get('/logout',                            [$mainController, "logout"]);
 $app->get('/login',                             [$mainController, "login"]);
+$app->post('/send-mail',                        [$mainController, "sendMail"]);
 $app->post('/login',                            [$mainController, "loginValidate"])->before(
     function (Application $app, Request $request) use ($middleware) {
 
         $user = $middleware->checkCredentials($app, $request);
-
         if (empty($user)) {
             $continue = $request->getPathInfo();
-            return new RedirectResponse('/login?continue=' . $continue);
+            return new RedirectResponse('/login');
         }
         $request->request->set('user', $user);
     });

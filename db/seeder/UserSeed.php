@@ -18,8 +18,8 @@ class UserSeed extends AbstractSeed
         $data = [
             [
                 "name" => "Admin",
-                "email" => "admin@upnp.org",
-                "password" => password_hash("asd", PASSWORD_DEFAULT)
+                "email" => "admin",
+                "password" => password_hash("admin@123", PASSWORD_DEFAULT)
             ]
         ];
         $user = $this->table('user');
