@@ -29,7 +29,7 @@ $newsRouteCollection = $app['collection_factory']->prefix('/news')->before(
     function (Application $app, Request $request) use ($middleware) {
         if (!$middleware->isLoggedIn()) {
             $continue = $request->getPathInfo();
-            return new RedirectResponse('/login?continue=' . $continue);
+            return new RedirectResponse('/login');
         }
     });
 
