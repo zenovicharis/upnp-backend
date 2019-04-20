@@ -38,7 +38,7 @@ $albumRouteCollection = $app['collection_factory']->prefix('/album')->before(
     function (Application $app, Request $request) use ($middleware) {
         if (!$middleware->isLoggedIn()) {
             $continue = $request->getPathInfo();
-            return new RedirectResponse('/login?continue=' . $continue);
+            return new RedirectResponse('/login');
         }
     });
 
@@ -47,7 +47,7 @@ $volunteerRouteCollection = $app['collection_factory']->prefix('/volonteri')->be
     function (Application $app, Request $request) use ($middleware) {
         if (!$middleware->isLoggedIn()) {
             $continue = $request->getPathInfo();
-            return new RedirectResponse('/login?continue=' . $continue);
+            return new RedirectResponse('/login');
         }
     });
 
