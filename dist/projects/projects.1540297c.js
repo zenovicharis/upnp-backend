@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 222);
+/******/ 	return __webpack_require__(__webpack_require__.s = 225);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -33322,7 +33322,8 @@ webpackContext.id = 132;
 /* 151 */,
 /* 152 */,
 /* 153 */,
-/* 154 */
+/* 154 */,
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33335,11 +33336,10 @@ var _moment2 = _interopRequireDefault(_moment);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.getNews = function (news) {
-  return '<div class="row news-sections" >\n  <span class="date">' + (0, _moment2.default)(news.created).format('DD MMM YYYY') + '</span>\n  <div class="col-sm-6 col-12 news-picture">\n    <img src="' + news.images.url + '" alt="">\n  </div>\n  <div class="col-sm-6 col-12 news-text">\n    <h4>' + news.title + '</h4>\n    <p class="text-justify news-content">\n    ' + news.content + '\n    </p>\n    <p class="text-right"> \n      <button class="btn btn-default btn-custom" onclick="toOneNews(' + news.id + ')">Vise</button>\n    </p>\n  </div>\n</div>\n';
+  return '<div class="row news-sections" >\n  <span class="date">' + (0, _moment2.default)(news.created).format('DD MMM YYYY') + '</span>\n  <div class="col-sm-6 col-12 news-picture">\n    <img src="' + news.images.url + '" alt="">\n  </div>\n  <div class="col-sm-6 col-12 news-text">\n    <h4>' + news.title + '</h4>\n    <p class="text-justify news-content">\n    ' + news.content + '\n    </p>\n    <p class="text-right"> \n      <button class="btn btn-default btn-custom" onclick="toOneNews(' + news.id + ')">Vi\u0161e</button>\n    </p>\n  </div>\n</div>\n';
 };
 
 /***/ }),
-/* 155 */,
 /* 156 */,
 /* 157 */,
 /* 158 */,
@@ -33361,15 +33361,15 @@ exports.getNews = function (news) {
 /* 174 */,
 /* 175 */,
 /* 176 */,
-/* 177 */
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 178 */,
-/* 179 */,
-/* 180 */,
 /* 181 */,
 /* 182 */,
 /* 183 */,
@@ -33411,17 +33411,21 @@ exports.getNews = function (news) {
 /* 219 */,
 /* 220 */,
 /* 221 */,
-/* 222 */
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-__webpack_require__(177);
+__webpack_require__(180);
 
 __webpack_require__(4);
 
-var news = __webpack_require__(154);
+var news = __webpack_require__(155);
+
 
 $(document).ready(function () {
   $("body").css("display", "block");
@@ -33430,14 +33434,13 @@ $(document).ready(function () {
     var url = $(this).attr("data-url");
     window.location = url;
   });
-
-  $.ajax({
+  $.get({
     type: "get",
-    url: "/api/news/serbian",
+    url: "/api/projects/serbian",
     success: function success(response) {
       var newsList = response.map(function (el) {
         var text = $.parseHTML(el.content);
-        el.content = $(text).text().substring(0, 400);
+        el.content = $(text).text().substring(0, 550);
         return news.getNews(el);
       });
       $("div.main-container").append(newsList.join(""));
@@ -33474,6 +33477,7 @@ $(document).ready(function () {
   $(".hamburger").on("click", function () {
     toggleMenu();
   });
+
   function toggleMenu() {
     var rightPosition = parseInt($(".custom-showing").css('right'));
     if (rightPosition < 0) {

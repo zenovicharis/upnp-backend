@@ -18,7 +18,11 @@ class PublicService
     {
         try {
             /** @var News[] $news */
-            $news = News::with('images')->where('category', 'vest')->get()->toArray();
+            $news = News::with('images')
+                ->where('category', 'vest')
+                ->orderBy('id', 'desc')
+                ->get()
+                ->toArray();
             return $news;
         } catch (Exception $e) {
             var_dump($e->getMessage());
@@ -30,7 +34,11 @@ class PublicService
     {
         try {
             /** @var News[] $news */
-            $news = News::with('images')->where('category', 'projekt')->get()->toArray();
+            $news = News::with('images')
+                ->where('category', 'projekt')
+                ->orderBy('id', 'desc')
+                ->get()
+                ->toArray();
             return $news;
         } catch (Exception $e) {
             var_dump($e->getMessage());
@@ -42,7 +50,10 @@ class PublicService
     {
         try {
             /** @var Album[] $albums */
-            $albums = Album::with('images')->get()->toArray();
+            $albums = Album::with('images')
+                ->orderBy('id', 'desc')
+                ->get()
+                ->toArray();
             return $albums;
         } catch (Exception $e) {
             var_dump($e->getMessage());
