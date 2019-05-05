@@ -10005,7 +10005,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* WEBPACK VAR INJECTION */(function($) {
 
 exports.getNews = function (news) {
-  return "\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[0].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[0].id + "\">\n        <h5>" + news[0].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[0].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[1].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[1].id + "\">\n        <h5>" + news[1].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[1].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[2].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/public/news/" + news[2].id + "\">\n        <h5>" + news[2].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[2].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n";
+  return "\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[0].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/en/public/news/" + news[0].id + "\">\n        <h5>" + news[0].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[0].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[1].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/en/public/news/" + news[1].id + "\">\n        <h5>" + news[1].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[1].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n\n  <div class=\"col-md-4 col-12 p-0 single-news\">\n    <div class=\"image-responsive-custom\">\n      <img class=\"card-img-top no-radius\" src=\"" + news[2].images.url + "\" alt=\"Card image cap\">\n    </div>\n    <div class=\"card-body\">\n      <a href=\"/en/public/news/" + news[2].id + "\">\n        <h5>" + news[2].title + " <i class=\"fas fa-angle-right\"></i></h5>\n      </a>\n      <p class=\"card-text\">" + $($.parseHTML(news[2].content)).text().substring(0, 250) + "</p>\n    </div>\n  </div>\n";
 };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
@@ -12496,7 +12496,7 @@ $(document).ready(function () {
       var dropDownList = response.map(function (el) {
         var btn = $('<a href="#" class="list-group-item list-group-item-action">');
         $(btn).text(el.title);
-        $(btn).attr('href', '/public/news/' + el.id);
+        $(btn).attr('href', '/en/public/news/' + el.id);
         return btn[0];
       });
 
@@ -12532,7 +12532,7 @@ $(document).ready(function () {
       var dropDownList = response.map(function (el) {
         var btn = $('<a href="#" class="list-group-item list-group-item-action">');
         $(btn).text(el.title);
-        $(btn).attr('href', '/public/news/' + el.id);
+        $(btn).attr('href', '/en/public/news/' + el.id);
         return btn[0];
       });
 

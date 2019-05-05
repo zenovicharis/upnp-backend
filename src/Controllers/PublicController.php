@@ -8,6 +8,7 @@
 
 namespace Upnp\Controllers;
 
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Upnp\Services\PublicService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -149,7 +150,7 @@ class PublicController
     {
         $news = $this->publicService->NewsById($id);
         $newsSuggestions = $this->publicService->getThreeNewsSuggestions('english');
-        return $this->twig->render('/en-single-news/en-single-news.html.twig', ['news' => $news, 'suggestions' => $newsSuggestions]);
+        return $this->twig->render('/single-news/single-news.html.twig', ['news' => $news, 'suggestions' => $newsSuggestions]);
     }
 
     protected function filterLanguage($array, $lang){

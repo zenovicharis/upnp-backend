@@ -10,7 +10,11 @@
     crossorigin="anonymous" />
   <meta property="og:image" content="{{news.images.url}}" />
   <meta property="og:type" content="article" /> 
+  {% if news.language == 'serbian' %}
   <meta property="og:url" content="https://upnp.rs/public/news/{{news.id}}" />
+  {% else %}
+  <meta property="og:url" content="https://upnp.rs/en/public/news/{{news.id}}" />
+  {% endif %}
   <meta property="og:title" content="{{news.title}}" />
 <link href="/dist/assets/css/single-news.css" rel="stylesheet"></head>
 
@@ -204,7 +208,11 @@
               <div class="shortened">
                 {{ sug.content | raw }}
               </div>
-              <a href="/public/news/{{sug.id}}" class="link">{{ news.language == 'serbian' ? 'Više' : 'More' }} <i class="fas fa-angle-right"></i></a>
+              {% if news.language == 'serbian' %}
+              <a href="/public/news/{{sug.id}}" class="link">Više<i class="fas fa-angle-right"></i></a>
+              {% else %}
+              <a href="/en/public/news/{{sug.id}}" class="link">More<i class="fas fa-angle-right"></i></a>
+              {% endif %}
             </div>
           </div>
           {% endfor %}
@@ -237,6 +245,6 @@
       </div>
     </div>
   </footer>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.d239c081.js"></script><script type="text/javascript" src="/dist/single-news/single-news.d239c081.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.3a40169f.js"></script><script type="text/javascript" src="/dist/single-news/single-news.3a40169f.js"></script></body>
 
 </html>

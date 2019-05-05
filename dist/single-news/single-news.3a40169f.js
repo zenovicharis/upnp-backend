@@ -12478,7 +12478,8 @@ $(document).ready(function () {
       var dropDownList = response.map(function (el) {
         var btn = $('<a href="#" class="list-group-item list-group-item-action">');
         $(btn).text(el.title);
-        $(btn).attr('href', '/public/news/' + el.id);
+        var href = lang == "english" ? "/en/public/news/" : "/public/news/";
+        $(btn).attr('href', href + el.id);
         return btn[0];
       });
 
