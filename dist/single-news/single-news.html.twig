@@ -202,9 +202,15 @@
               <img src="{{sug.images.url}}" alt="">
             </div>
             <div class="card-body">
+              {% if news.language == 'serbian' %}
               <a href="/public/news/{{ sug.id }}">
                 <h5>{{ sug.title }} <i class="fas fa-angle-right"></i></h5> 
               </a>
+              {% else %}
+              <a href="/en/public/news/{{ sug.id }}">
+                <h5>{{ sug.title }} <i class="fas fa-angle-right"></i></h5> 
+              </a>
+              {% endif %}
               <div class="shortened">
                 {{ sug.content | raw }}
               </div>
@@ -245,6 +251,6 @@
       </div>
     </div>
   </footer>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.7f283392.js"></script><script type="text/javascript" src="/dist/single-news/single-news.7f283392.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.b5b4cef2.js"></script><script type="text/javascript" src="/dist/single-news/single-news.b5b4cef2.js"></script></body>
 
 </html>
