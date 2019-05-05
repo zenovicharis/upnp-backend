@@ -12,7 +12,7 @@
   <meta property="og:type" content="article" /> 
   <meta property="og:url" content="https://upnp.rs/public/news/{{news.id}}" />
   <meta property="og:title" content="{{news.title}}" />
-  <meta property="og:description" content="{{news.content | escape }}" />
+  <meta property="og:description" content="{{news.content | raw | escape('html') }}" />
 <link href="/dist/assets/css/single-news.css" rel="stylesheet"></head>
 
 <body style="display:none;">
@@ -238,6 +238,6 @@
       </div>
     </div>
   </footer>
-<script type="text/javascript" src="/dist/bootstrap/bootstrap.c2581cca.js"></script><script type="text/javascript" src="/dist/single-news/single-news.c2581cca.js"></script></body>
+<script type="text/javascript" src="/dist/bootstrap/bootstrap.b7475937.js"></script><script type="text/javascript" src="/dist/single-news/single-news.b7475937.js"></script></body>
 
 </html>
