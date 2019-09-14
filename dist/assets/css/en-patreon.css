@@ -99,23 +99,6 @@ p.strap:after {
 .heading-custom {
   overflow: hidden; }
 
-#backdrop {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-  transition: all .8s ease 0s;
-  opacity: 1; }
-
-.hidden {
-  opacity: 0 !important;
-  display: none !important; }
-
 header {
   box-shadow: 2px 2px 2px #ddd;
   overflow: hidden; }
@@ -250,22 +233,6 @@ body {
       background-color: #4C1B1B;
       color: #fff; }
 
-footer {
-  background-color: #4C1B1B;
-  padding: 2% 0;
-  width: 100%;
-  color: #fff; }
-  footer .menu ul {
-    list-style-type: none; }
-    footer .menu ul li {
-      display: inline-block;
-      padding: 0 5px; }
-      footer .menu ul li a {
-        color: inherit; }
-
-* {
-  font-family: 'Ubuntu', sans-serif; }
-
 .heading-custom {
   padding: 2.8em 3em 3.5em !important;
   background-color: #4C1B1B;
@@ -279,7 +246,7 @@ footer {
     background-color: #fff;
     transform: rotate(-2deg);
     width: 101%;
-    height: 100%;
+    height: 110%;
     top: 73%;
     left: 0%; }
 
@@ -287,7 +254,7 @@ footer {
   padding: 5.8em 3em 3.5em !important;
   background-color: #4C1B1B;
   color: #fff;
-  z-index: -2; }
+  z-index: 0; }
   .heading-custom-reverse h2 {
     font-size: 1.2rem; }
   .heading-custom-reverse:before {
@@ -315,12 +282,6 @@ main .main-container {
 main .overflow-hidden {
   overflow: hidden !important; }
 
-main .gallery-container {
-  display: flex;
-  flex-wrap: wrap; }
-  main .gallery-container div img {
-    width: 100%; }
-
 .patrions .col-md-3.col-4 {
   z-index: 2; }
 
@@ -328,6 +289,19 @@ main .gallery-container {
   width: 89%;
   margin: auto;
   display: block; }
+
+footer {
+  background-color: #4C1B1B;
+  padding: 2% 0;
+  width: 100%;
+  color: #fff; }
+  footer .menu ul {
+    list-style-type: none; }
+    footer .menu ul li {
+      display: inline-block;
+      padding: 0 5px; }
+      footer .menu ul li a {
+        color: inherit; }
 
 * {
   font-family: 'Ubuntu', sans-serif; }

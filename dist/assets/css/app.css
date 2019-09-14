@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,500i,700,700i);header nav.row ul.main-navigation li a:hover, header nav.row .custom-showing ul.mobile-menu li a:hover, footer .menu ul li a:hover, .single-news .card-body a:hover {
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,500i,700,700i);header nav.row ul.main-navigation li a:hover, header nav.row .custom-showing ul.mobile-menu li a:hover, .single-news .card-body a:hover, footer .menu ul li a:hover {
   text-decoration: none; }
 
 p.strap {
@@ -98,23 +98,6 @@ p.strap:after {
 
 .heading-custom {
   overflow: hidden; }
-
-#backdrop {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-  transition: all .8s ease 0s;
-  opacity: 1; }
-
-.hidden {
-  opacity: 0 !important;
-  display: none !important; }
 
 header {
   box-shadow: 2px 2px 2px #ddd;
@@ -249,22 +232,6 @@ body {
     .list-group a.list-group-item:hover {
       background-color: #4C1B1B;
       color: #fff; }
-
-footer {
-  background-color: #4C1B1B;
-  padding: 2% 0;
-  width: 100%;
-  color: #fff; }
-  footer .menu ul {
-    list-style-type: none; }
-    footer .menu ul li {
-      display: inline-block;
-      padding: 0 5px; }
-      footer .menu ul li a {
-        color: inherit; }
-
-* {
-  font-family: 'Ubuntu', sans-serif; }
 
 #slider ul.custom-indicators {
   margin: 1em 1.5em; }
@@ -466,3 +433,19 @@ hr.custom-hr {
 
 .map {
   max-height: 260px; }
+
+footer {
+  background-color: #4C1B1B;
+  padding: 2% 0;
+  width: 100%;
+  color: #fff; }
+  footer .menu ul {
+    list-style-type: none; }
+    footer .menu ul li {
+      display: inline-block;
+      padding: 0 5px; }
+      footer .menu ul li a {
+        color: inherit; }
+
+* {
+  font-family: 'Ubuntu', sans-serif; }
