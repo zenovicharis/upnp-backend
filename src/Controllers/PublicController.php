@@ -7,10 +7,9 @@
  */
 
 namespace Upnp\Controllers;
-
-use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Upnp\Services\PublicService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PublicController

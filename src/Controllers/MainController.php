@@ -342,15 +342,19 @@ class MainController
 
     public function sendMail(Application $app, Request $request)
     {
+        $uri = parse_url($request->headers->get('referer'));
+        $path = $uri['path'];
         $phone = $request->request->get('phone');
-        $subject = $request->request->get('subject');
-        $content = $request->request->get('content');
+        $subject = $request->request->get('title');
+        $content = $request->request->get('message');
         $company = $request->request->get('company');
         $clientName = $request->request->get('name');
         $clientMail = $request->request->get('email');
-
-        $isSent = $this->mailService->sendMail($clientMail, $clientName, $subject, $content);
-        return $this->twig->render('/contact/contact.html');
+        $contentGenerated = $this->mailService->generateContent($clientName, $clientMail, $phone, $company, $content);
+        $isSent = $this->mailService->sendMail($clientMail, $clientName, $subject, $contentGenerated);
+        $message = $this->generateMailMessage($isSent, $path);
+        $redirect = $path.'?'.$message;
+        return new RedirectResponse($redirect);
     }
 
 
@@ -440,5 +444,15 @@ class MainController
             }
         }
         return $container;
+    }
+
+    protected function generateMailMessage ($isSent, $uri) {
+        if ($isSent) {
+            $message = strpos($uri, '/en') !== false ? 'Message sent succesfully, we will reach you as soon as we can' : 'Poruka uspesno poslata, ocekujte nas odgovor'; 
+            return 'message='.urlencode($message);
+        } else {
+            $message = strpos($uri, '/en') !== false ? 'Message has not been send, please try again later' : 'Poruka nije poslata, pokusajte ponovo kasnije. Hvala na razumevanju';
+            return 'errormessage='.urlencode($message);
+        }
     }
 }
