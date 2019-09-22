@@ -20,6 +20,7 @@ class MailService
         $this->username = $credentials['address'];
         $this->password = $credentials['password'];
         $this->reciever = $credentials['reciever'];
+        $this->recieverName = $credentials['recieverName'];
 
     }
     
@@ -42,7 +43,7 @@ class MailService
         $this->mail->Subject = $subject;
         $this->mail->Body    = $mailContent;
         $this->mail->AltBody = htmlentities($content);
-        $this->mail->addAddress($this->reciever, "Haris Zenovic");     // Add a recipient
+        $this->mail->addAddress($this->reciever, $this->recieverName);     // Add a recipient
         $isSent = $this->mail->Send();
         if(!$isSent) {
             return false;
